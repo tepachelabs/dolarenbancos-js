@@ -1,7 +1,8 @@
 const Discord = require('discord.js');
-const client = new Discord.Client();
-const auth = require('../../auth.json');
+const auth = require('../auth.json');
 const data = require('../data');
+
+const client = new Discord.Client();
 
 client.on('ready', () => {
   console.log('* Discord bot [ONLINE]');

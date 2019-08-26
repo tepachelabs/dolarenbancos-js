@@ -1,5 +1,5 @@
 const axios = require('axios');
-const auth = require('../../auth.json');
+const auth = require('../auth.json');
 
 const BANXICO_DOLLAR = 'https://www.banxico.org.mx/SieAPIRest/service/v1/series/SF43718/datos/oportuno';
 
