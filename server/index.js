@@ -14,7 +14,7 @@ const sysRun = new Promise(function (resolve) {
 
 sysRun.then(() => {
   console.log('> Starting services');
-  require('./scheduler');
-  require('./discord');
   require('./web');
+  require('./discord');
+  require('./scheduler');
 });
