@@ -3,6 +3,7 @@ const data = {
   banks: {
     banamex: { buy: 0, sell: 0},
     inbursa: { buy: 0, sell: 0},
+    bbva: { buy: 0, sell: 0},
   }
 };
 
