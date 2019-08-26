@@ -1,0 +1,29 @@
+html
+    head
+        title Dollar-Bot
+        link(rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous")
+        style.
+            .capitalize {
+                text-transform: capitalize;
+            }
+    body
+        .container
+            .row
+                .col-12
+                    h1 Precio Dolar en MXN al dia de hoy
+                .col-12
+                    span Referencia: Precio Banxico&nbsp;
+                        b= data.banxico
+                .col-6
+                    table.table.table-bordered
+                        thead
+                            tr
+                                th Banco
+                                th Compra
+                                th Venta
+                        tbody
+                            each bank in Object.keys(data.banks)
+                                tr
+                                    td.capitalize= bank
+                                    td= data.banks[bank]['buy']
+                                    td= data.banks[bank]['sell']
