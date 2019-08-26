@@ -3,7 +3,7 @@ const path = require('path');
 const data = require('../data');
 
 const app = express();
-const port = 8080;
+const port = 80;
 
 app.set('view engine', 'pug');
 app.set('views', path.join(__dirname, './views'));
