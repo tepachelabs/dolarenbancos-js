@@ -1,19 +1,18 @@
-require('./tracking');
-
+const logger = require('./logger');
 const fetcher = require('./fetcher');
 
 const sysRun = new Promise(function (resolve) {
-  console.log('=== Starting DOLLAR-BOT suite ===');
-  console.log('> Starting initial fetch');
+  logger.info('=== Starting DOLLAR-BOT suite ===');
+  logger.info('> Starting initial fetch');
 
   fetcher.fetchAll().then(() => {
-    console.log('> Initial fetch done');
+    logger.info('> Initial fetch done');
     resolve();
   });
 });
 
 sysRun.then(() => {
-  console.log('> Starting services');
+  logger.info('> Starting services');
   require('./web');
   require('./discord');
   require('./scheduler');

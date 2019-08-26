@@ -10,3 +10,9 @@ winston.add(new Loggly({
   tags: ["Winston-NodeJS"],
   json: true
 }));
+
+const logger = {
+  info: message => winston.log('info', message)
+};
+
+module.exports = logger;

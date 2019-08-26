@@ -1,3 +1,4 @@
+const logger = require('../logger');
 const Discord = require('discord.js');
 const auth = require('../auth.json');
 const data = require('../data');
@@ -5,7 +6,7 @@ const data = require('../data');
 const client = new Discord.Client();
 
 client.on('ready', () => {
-  console.log('* Discord bot [ONLINE]');
+  logger.info('* Discord bot [ONLINE]');
 });
 
 client.on('message', msg => {
