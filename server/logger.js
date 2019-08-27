@@ -11,7 +11,8 @@ const winstonLogger = new winston.transports.Papertrail({
 });
 
 const logger = {
-  info: message => winstonLogger.log('info', message)
+  info: message => winstonLogger.log('info', message),
+  error: message => winstonLogger.log('error', message)
 };
 
 module.exports = logger;
