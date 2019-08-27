@@ -19,7 +19,7 @@ client.on('message', msg => {
       lines.unshift(`\nPrecio al dia BANXICO: ${data.banxico} MXN`);
 
       lines.push('---');
-      lines.push('Source: http://dollar.tonymtz.com/');
+      lines.push('Source: https://dolarenbancos.com');
 
       msg.reply(lines.join('\n'));
       break;
