@@ -24,8 +24,6 @@ client.on('message', msg => {
 
 const tokenDiscord = process.env['TOKEN_DISCORD'];
 
-logger.info(tokenDiscord);
-
 if (!tokenDiscord) {
   logger.error('TOKEN_DISCORD not available');
 }

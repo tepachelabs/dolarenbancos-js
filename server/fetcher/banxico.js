@@ -1,11 +1,15 @@
 const axios = require('axios');
-const auth = require('../auth.json');
+const tokenBmx = process.env['TOKEN_BMX'];
+
+if (!tokenBmx) {
+  logger.error('TOKEN_BMX not available');
+}
 
 const BANXICO_DOLLAR = 'https://www.banxico.org.mx/SieAPIRest/service/v1/series/SF43718/datos/oportuno';
 
 module.exports = () => axios.get(BANXICO_DOLLAR, {
   headers: {
-    "Bmx-Token": auth['token-bmx']
+    "Bmx-Token": tokenBmx
   }
 })
   .then(function (response) {
