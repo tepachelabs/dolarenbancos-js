@@ -1,9 +1,10 @@
 const data = {
   banxico: 0,
   banks: {
-    banamex: { buy: 0, sell: 0},
     inbursa: { buy: 0, sell: 0},
+    banamex: { buy: 0, sell: 0},
     bbva: { buy: 0, sell: 0},
+    monex: { buy: 0, sell: 0},
   }
 };
 

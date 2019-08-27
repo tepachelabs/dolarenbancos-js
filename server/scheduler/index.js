@@ -3,7 +3,7 @@ const schedule = require('node-schedule');
 const fetcher = require('../fetcher');
 
 // second | minute | hour | day-of-month | month | day of week
-const job = schedule.scheduleJob('* 10 * * *', function () {
+const job = schedule.scheduleJob('* * 1 * * *', function () {
   logger.info('> Running scheduled fetch');
   fetcher.fetchAll();
 });

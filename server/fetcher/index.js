@@ -2,6 +2,7 @@ const fetchBanamex = require('./banamex');
 const fetchBanxico = require('./banxico');
 const fetchInbursa = require('./inbursa');
 const fetchBbva = require('./bbva');
+const fetchMonex = require('./monex');
 
 const data = require('../data');
 
@@ -10,21 +11,18 @@ const fetcher = {
     fetchBanxico(),
     fetchBanamex(),
     fetchInbursa(),
-    fetchBbva()
+    fetchBbva(),
+    fetchMonex(),
   ]).then(values => {
-    data.banxico = values[0].buy.toFixed(2);
-    data.banks.banamex = {
-      buy: values[1].buy.toFixed(2),
-      sell: values[1].sell.toFixed(2)
-    };
-    data.banks.inbursa = {
-      buy: values[2].buy.toFixed(2),
-      sell: values[2].sell.toFixed(2)
-    };
-    data.banks.bbva = {
-      buy: values[3].buy.toFixed(2),
-      sell: values[3].sell.toFixed(2)
-    };
+    const banxico = values.shift();
+    data.banxico = banxico.buy.toFixed(2);
+
+    values.forEach(value => {
+      data.banks[value.key] = {
+        buy: value.buy.toFixed(2),
+        sell: value.sell.toFixed(2),
+      };
+    });
   }).catch(err => console.error(err))
 };
 

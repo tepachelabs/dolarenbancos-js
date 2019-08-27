@@ -3,19 +3,27 @@ html
         title Dollar-Bot
         link(rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous")
         style.
+            .wide {
+                margin: 0 auto;
+                max-width: 600px;
+            }
+
             .capitalize {
                 text-transform: capitalize;
             }
     body
         .container
-            .row
+            .row.wide
                 .col-12
-                    h1 Precio Dolar en MXN al dia de hoy
+                    span &nbsp;
                 .col-12
-                    span Referencia: Precio Banxico&nbsp;
-                        b= data.banxico
-                .col-6
-                    table.table.table-bordered
+                    .jumbotron.text-center
+                        h1 Precio del d&oacute;lar al dia
+                .col-12
+                    h4 Precio Banxico:
+                        b  $#{data.banxico}
+                .col-12
+                    table.table.table-bordered.table-hover
                         thead
                             tr
                                 th Banco
