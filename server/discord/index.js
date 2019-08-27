@@ -22,10 +22,10 @@ client.on('message', msg => {
   }
 });
 
-const tokenDiscord = process.env['token-discord'];
+const tokenDiscord = process.env['tokendiscord'];
 
 if (!tokenDiscord) {
-  throw 'token-discord not available';
+  throw 'tokendiscord not available';
 }
 
 client.login(tokenDiscord);
