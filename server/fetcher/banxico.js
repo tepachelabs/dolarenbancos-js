@@ -1,5 +1,6 @@
 const axios = require('axios');
-const tokenBmx = process.env['TOKEN_BMX'];
+const logger = require('./logger');
+const tokenBmx = process.env.TOKEN_BMX;
 
 if (!tokenBmx) {
   logger.error('TOKEN_BMX not available');

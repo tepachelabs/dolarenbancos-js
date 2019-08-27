@@ -1,6 +1,8 @@
 const logger = require('./logger');
 const fetcher = require('./fetcher');
 
+logger.info(process.env);
+
 const sysRun = new Promise(function (resolve) {
   logger.info('=== Starting DOLLAR-BOT suite ===');
   logger.info('> Starting initial fetch');
