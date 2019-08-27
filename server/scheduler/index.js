@@ -3,7 +3,8 @@ const schedule = require('node-schedule');
 const fetcher = require('../fetcher');
 
 // second | minute | hour | day-of-month | month | day of week
-const job = schedule.scheduleJob('* * 1 * * *', function () {
+// https://crontab.guru/#0_*/1_*_*_*
+const job = schedule.scheduleJob('0 */1 * * *', function () {
   logger.info('> Running scheduled fetch');
   fetcher.fetchAll();
 });
