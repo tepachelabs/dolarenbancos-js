@@ -6,7 +6,7 @@ const fetcher = require('../fetcher');
 // https://crontab.guru/#0_*/1_*_*_*
 const job = schedule.scheduleJob('0 */1 * * *', function () {
   logger.info('> Running scheduled fetch');
-  fetcher.fetchAll();
+  fetcher.fetchAll(undefined, data => data.save());
 });
 
 if (job) {

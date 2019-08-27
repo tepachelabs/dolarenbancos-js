@@ -16,7 +16,7 @@ client.on('message', msg => {
         `* ${bank.toUpperCase()}\t Compra: ${data.banks[bank]['buy'].toFixed(2)}\t Venta: ${data.banks[bank]['sell'].toFixed(2)}\t`);
 
       lines.unshift('---');
-      lines.unshift(`\nPrecio al dia BANXICO: ${data.banxico} MXN`);
+      lines.unshift(`\nPrecio al dia BANXICO: ${data.banxico.fix} MXN`);
 
       lines.push('---');
       lines.push('Source: https://dolarenbancos.com');

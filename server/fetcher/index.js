@@ -6,9 +6,11 @@ const fetchMonex = require('./monex');
 const fetchBanorte = require('./banorte');
 
 const data = require('../data');
+const noop = () => {
+};
 
 const fetcher = {
-  fetchAll: () => Promise.all([
+  fetchAll: (before = noop, after = noop) => Promise.all([
     fetchBanxico(),
     fetchBanamex(),
     fetchInbursa(),
@@ -16,8 +18,10 @@ const fetcher = {
     fetchMonex(),
     fetchBanorte(),
   ]).then(values => {
+    before(data);
+
     const banxico = values.shift();
-    data.banxico = banxico.buy.toFixed(2);
+    data.banxico.fix = banxico.buy.toFixed(2);
 
     values.forEach(value => {
       data.banks[value.key] = {
@@ -33,6 +37,8 @@ const fetcher = {
       acc.highestBuy = !acc.highestBuy || data.banks[bank].buy > acc.highestBuy ? data.banks[bank].buy : acc.highestBuy;
       return acc;
     }, {});
+
+    after(data);
   }).catch(err => console.error(err))
 };
 
