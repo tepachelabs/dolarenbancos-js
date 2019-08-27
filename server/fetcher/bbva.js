@@ -1,7 +1,7 @@
 const axios = require('axios');
 const cheerio = require('cheerio');
 
-const BBVA_DOLLAR = 'https://www.bbva.mx/personas/informacion-financiera-al-dia.html';
+const BBVA_DOLLAR = 'https://bbv.infosel.com/bancomerindicators/indexv8.aspx';
 
 module.exports = () => axios.get(BBVA_DOLLAR)
   .then(function (response) {
