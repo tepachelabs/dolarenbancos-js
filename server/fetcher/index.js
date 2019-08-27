@@ -21,7 +21,7 @@ const fetcher = {
     before(data);
 
     const banxico = values.shift();
-    data.banxico.fix = banxico.buy.toFixed(2);
+    data.banxico.fix = banxico.buy;
 
     values.forEach(value => {
       data.banks[value.key] = {
