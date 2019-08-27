@@ -18,6 +18,9 @@ client.on('message', msg => {
       lines.unshift('---');
       lines.unshift(`\nPrecio al dia BANXICO: ${data.banxico} MXN`);
 
+      lines.push('---');
+      lines.push('Source: http://dollar.tonymtz.com/');
+
       msg.reply(lines.join('\n'));
       break;
     default:
