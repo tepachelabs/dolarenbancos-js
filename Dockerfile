@@ -6,5 +6,5 @@ ARG PORT=$PORT
 ENV TOKEN_DISCORD=$TOKEN_DISCORD
 RUN npm install
 COPY . .
-EXPOSE 80
+EXPOSE $PORT
 CMD [ "node", "index.js" ]
