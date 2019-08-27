@@ -1,6 +1,5 @@
 const logger = require('../logger');
 const Discord = require('discord.js');
-const auth = require('../auth.json');
 const data = require('../data');
 
 const client = new Discord.Client();
@@ -23,4 +22,10 @@ client.on('message', msg => {
   }
 });
 
-client.login(auth['token-discord']);
+const tokenDiscord = process.env['token-discord'];
+
+if (!tokenDiscord) {
+  throw 'token-discord not available';
+}
+
+client.login(tokenDiscord);

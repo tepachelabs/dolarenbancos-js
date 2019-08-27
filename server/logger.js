@@ -4,13 +4,14 @@ Sentry.init({ dsn: 'https://b1f48cd0c85a4bf6b951bcb0f780cc55@sentry.io/1542244' 
 const winston = require('winston');
 require('winston-papertrail').Papertrail;
 
-var logger = new winston.transports.Papertrail({
-  host: 'logs4.papertrailapp.com', // you get this from papertrail account
-  port: 48158, //you get this from papertrail account
+const winstonLogger = new winston.transports.Papertrail({
+  host: 'logs4.papertrailapp.com',
+  port: 48158,
+  handleExceptions: true
 });
 
-const obj = {
-  info: message => logger.log('info', message)
+const logger = {
+  info: message => winstonLogger.log('info', message)
 };
 
-module.exports = obj;
+module.exports = logger;
