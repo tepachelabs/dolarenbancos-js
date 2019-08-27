@@ -17,7 +17,7 @@ var winstonLogger = new winston.Logger({
   transports: [winstonPapertrail]
 });
 
-winstonLogger.info('TEST ?');
+winstonLogger.info('Hello from colorized winston', winstonLogger);
 
 const logger = {
   info: message => winstonLogger.log('info', message),
