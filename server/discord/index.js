@@ -25,7 +25,7 @@ client.on('message', msg => {
 const tokenDiscord = process.env['tokendiscord'];
 
 if (!tokenDiscord) {
-  throw 'tokendiscord not available';
+  console.error('tokendiscord not available');
 }
 
 client.login(tokenDiscord);
