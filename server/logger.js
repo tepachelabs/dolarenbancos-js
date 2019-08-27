@@ -13,7 +13,7 @@ winstonPapertrail.on('error', function (err) {
   // Handle, report, or silently ignore connection errors and failures
 });
 
-var winstonLogger = new winston.Logger({
+var winstonLogger = winston.createLogger({
   transports: [winstonPapertrail]
 });
 
