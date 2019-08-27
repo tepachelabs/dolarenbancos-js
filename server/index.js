@@ -1,10 +1,7 @@
 const logger = require('./logger');
-const fetcher = require('./fetcher');
+// const fetcher = require('./fetcher');
 
-logger.info("YOLO");
-logger.info(process.env);
-logger.info(process.env.PORT);
-logger.info("YOLO 2");
+logger.info("YOLO " + process.env.PORT);
 
 // const sysRun = new Promise(function (resolve) {
 //   logger.info('=== Starting DOLLAR-BOT suite ===');
