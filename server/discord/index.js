@@ -12,10 +12,13 @@ client.on('message', msg => {
   switch (msg.content) {
     case 'dolar':
     case 'dollar':
-      const banks = Object.keys(data.banks).map(bank =>
-        `* ${bank.toUpperCase()}; Compra: ${data.banks[bank]['buy']}; Venta: ${data.banks[bank]['sell']}`);
-      const message = `Precio al dia de hoy\n* BANXICO: ${data.banxico} MXN\n\n${banks.join('\n')}`;
-      msg.reply(message);
+      const lines = Object.keys(data.banks).map(bank =>
+        `* ${bank.toUpperCase()}\t Compra: ${data.banks[bank]['buy'].toFixed(2)}\t Venta: ${data.banks[bank]['sell'].toFixed(2)}\t`);
+
+      lines.unshift('---');
+      lines.unshift(`\nPrecio al dia BANXICO: ${data.banxico} MXN`);
+
+      msg.reply(lines.join('\n'));
       break;
     default:
       break

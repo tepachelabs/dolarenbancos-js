@@ -1,6 +1,7 @@
 html
     head
         title Dollar-Bot
+        meta(name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no")
         link(rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous")
         style.
             .wide {
@@ -11,6 +12,16 @@ html
             .capitalize {
                 text-transform: capitalize;
             }
+
+            .green {
+                background: #ddffd6;
+                font-weight: bold;
+            }
+
+            .red {
+                background: #ffd9cc;
+                font-weight: bold;
+            }
     body
         .container
             .row.wide
@@ -18,10 +29,10 @@ html
                     span &nbsp;
                 .col-12
                     .jumbotron.text-center
-                        h1 Precio del d&oacute;lar al dia
+                        h1 Precio del D&oacute;lar al Dia
                 .col-12
                     h4 Precio Banxico:
-                        b  $#{data.banxico}
+                        b  $ #{data.banxico} MXN
                 .col-12
                     table.table.table-bordered.table-hover
                         thead
@@ -31,7 +42,11 @@ html
                                 th Venta
                         tbody
                             each bank in Object.keys(data.banks)
+                                - const buy = data.banks[bank]['buy'];
+                                - const sell = data.banks[bank]['sell'];
                                 tr
                                     td.capitalize= bank
-                                    td= data.banks[bank]['buy']
-                                    td= data.banks[bank]['sell']
+                                    td(class=buy === data.meta.lowestBuy ? "red" : "" || buy === data.meta.highestBuy ? "green" : "") $ #{buy.toFixed(2)}
+                                    td(class=sell === data.meta.lowestSell ? "red" : "" || sell === data.meta.highestSell ? "green" : "") $ #{sell.toFixed(2)}
+                .col-12
+                    small Retraso: 60 minutos.

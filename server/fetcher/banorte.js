@@ -1,25 +1,23 @@
 const axios = require('axios');
 const cheerio = require('cheerio');
 
-const MONEX_DOLLAR = 'https://www.monex.com.mx/portal/';
+const BANORTE_DOLLAR = 'https://www.banorte.com/wps/portal/ixe/Home/indicadores/tipo-de-cambio';
 
-module.exports = () => axios.get(MONEX_DOLLAR)
+module.exports = () => axios.get(BANORTE_DOLLAR)
   .then(function (response) {
     // handle success
     const $ = cheerio.load(response.data);
-    const data = [];
 
-    $('#tablaDolar').last().find('td').each((index, item) => {
-      console.log(item);
-      if (index === 0) return;
-      const value = $(item).text().replace('$', '').trim();
-      data.push(value - 0);
-    });
-    console.log($('#tablaDolar'));
+    let script = $('#indicadores_financieros_wrapper script').last().get()[0].children[0].data;
+    script = /var\svalor\s\=\s\'\{.*\}\'/g.exec(script);
+    script = script[0].replace('var valor = \'', '').replace(/\'$/, '');
+
+    const values = JSON.parse(script);
+
     return {
       key: 'banorte',
-      buy: data[0],
-      sell: data[1],
+      buy: values.tablaDolar[0].compra - 0,
+      sell: values.tablaDolar[0].venta - 0,
     };
   })
   .catch(function (error) {
