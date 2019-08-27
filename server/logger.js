@@ -19,7 +19,7 @@ var winstonLogger = winston.createLogger({
 
 const logger = {
   info: message => winstonLogger.log('info', message),
-  error: message => winstonLogger.log('error', message)
+  error: message => winstonLogger.log('info', message)
 };
 
 module.exports = logger;
