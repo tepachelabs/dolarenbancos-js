@@ -1,6 +1,7 @@
 const logger = require('./logger');
 const fetcher = require('./fetcher');
 
+logger.info('DEMO');
 require('./web');
 
 // const sysRun = new Promise(function (resolve) {
