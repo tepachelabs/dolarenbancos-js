@@ -27,39 +27,41 @@ html(lang="es")
         meta(http-equiv="Pragma" content="no-cache")
         meta(http-equiv="Cache-Control" content="no-cache")
 
-        link(rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous")
-        style.
-            .wide {
-                margin: 0 auto;
-                max-width: 600px;
-            }
+        link(rel="shortcut icon" href="public/favicon.ico")
+        link(rel="stylesheet" href="//fonts.googleapis.com/css?family=Open+Sans:300,300italic,700,700italic")
+        link(rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.css")
+        link(rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/milligram/1.3.0/milligram.min.css" integrity="sha256-Ro/wP8uUi8LR71kwIdilf78atpu8bTEwrK5ZotZo+Zc=" crossorigin="anonymous")
+        link(rel="stylesheet" href="public/style.css")
 
-            .capitalize {
-                text-transform: capitalize;
-            }
-
-            .green {
-                background: #ddffd6;
-                font-weight: bold;
-            }
-
-            .red {
-                background: #ffd9cc;
-                font-weight: bold;
-            }
     body
-        .container
-            .row.wide
-                .col-12
-                    span &nbsp;
-                .col-12
-                    .jumbotron.text-center
-                        h1 Precio del D&oacute;lar al D&iacute;a
-                .col-12
+        nav.navigation
+            .container
+                a.navigation-title(href="/" title="Precio del D&oacute;lar al D&iacute;a")
+                    img(src="public/dolarenbancos_100.png" alt="Website's logo")
+                    h1.title D&oacute;lar en Bancos
+                ul.navigation-list.float-right
+                    li.navigation-item
+                        a.navigation-link(href="#" onclick="scrollIt('#start'); return false;") Inicio
+                    li.navigation-item
+                        a.navigation-link(href="#" onclick="scrollIt('#bot-discord'); return false;") Bot Discord
+                    li.navigation-item
+                        a.navigation-link(href="#" onclick="scrollIt('#bot-telegram'); return false;") Bot Telegram
+                    //li.navigation-item
+                    //    a.navigation-link(href="/") Acerca
+
+        .container.wide#start
+            .row
+                .column
+                    h1 Precio del D&oacute;lar al D&iacute;a
+
+            .row
+                .column
                     h4 Precio Banxico:
                         b  $ #{data.banxico.fix.toFixed(2)} MXN
-                .col-12
-                    table.table.table-bordered.table-hover
+
+            .row
+                .column
+                    table
                         thead
                             tr
                                 th Banco
@@ -73,6 +75,54 @@ html(lang="es")
                                     td.capitalize= bank
                                     td(class=buy === data.meta.lowestBuy ? "red" : "" || buy === data.meta.highestBuy ? "green" : "") $ #{buy.toFixed(2)}
                                     td(class=sell === data.meta.lowestSell ? "green" : "" || sell === data.meta.highestSell ? "red" : "") $ #{sell.toFixed(2)}
-                .col-12
+
+            .row
+                .column
                     small Retraso: 60 minutos.
-                        a(href="https://github.com/tonymtz/dollar-bot" target="_blank" rel="noopener noreferrer")  Open source.
+
+        .split
+
+        .container.wide#bot-discord
+            .row
+                .column
+                    h1 Bot Discord
+            .row
+                .column
+                    p Obt&eacute;n la informaci&oacute;n mas r&aacute;pidamente desde tu Discord. Agrega nuestro bot de Discord, env&iacute;a la palabra "dolar" y recibe el resumen en segundos.
+            .row
+                .column
+                    p
+                        a.button.button-green(href="https://discordapp.com/oauth2/authorize?client_id=615622507222925461&permissions=67584&scope=bot" target="_blank" rel="noopener noreferrer") Agregar a servidor
+
+        .split
+
+        .container.wide#bot-telegram
+            .row
+                .column
+                    h1 Bot Telegram
+            .row
+                .column
+                    p Recibe el resumen directo a tu smartphone o computador sin tener que instalar nada extra. Consulta nuestro bot de Telegram, s&oacute;lo env&iacute;a el texto "/dolar" y recibe el resumen en segundos.
+            .row
+                .column
+                    p
+                        a.button.button-green(href="https://telegram.me/dolarenbancos_bot" target="_blank" rel="noopener noreferrer") Agregar bot
+
+        .split
+
+        footer
+            .container
+                p.copyright Publicado bajo licencia
+                    a(href="https://github.com/tonymtz/dolarenbancos/blob/master/LICENSE" target="_blank" rel="noopener noreferrer")  GPL-3.0
+                    | .
+                    a(href="https://github.com/tonymtz/dolarenbancos" target="_blank" rel="noopener noreferrer")  Open source.
+
+        script.
+          function scrollIt(selector) {
+            const element = document.querySelector(selector);
+            window.scrollTo({
+              'behavior': 'smooth',
+              'left': 0,
+              'top': element.offsetTop - 60
+            });
+          };
