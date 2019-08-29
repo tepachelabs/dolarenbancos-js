@@ -18,4 +18,5 @@ sysRun.then(() => {
   require('./web');
   require('./discord');
   require('./scheduler');
+  require('./telegram');
 });

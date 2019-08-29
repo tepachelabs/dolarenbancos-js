@@ -44,5 +44,17 @@ module.exports = {
     };
     return db.collection('historic').add(record);
   },
+  getBotMessage: () => {
+    const lines = Object.keys(store.banks).map(bank =>
+      `* ${bank.toUpperCase()}\t Compra: ${store.banks[bank]['buy'].toFixed(2)}\t Venta: ${store.banks[bank]['sell'].toFixed(2)}\t`);
+
+    lines.unshift('---');
+    lines.unshift(`\nPrecio al dia BANXICO: ${store.banxico.fix.toFixed(2)} MXN`);
+
+    lines.push('---');
+    lines.push('Source: https://dolarenbancos.com');
+
+    return lines.join('\n');
+  },
   ...store
 };
