@@ -30,8 +30,8 @@ client.on('message', msg => {
 
 const tokenDiscord = process.env['TOKEN_DISCORD'];
 
-if (!tokenDiscord) {
+if (tokenDiscord) {
+  client.login(tokenDiscord);
+} else {
   logger.error('TOKEN_DISCORD not available');
 }
-
-client.login(tokenDiscord);

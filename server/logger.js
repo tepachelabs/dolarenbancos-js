@@ -1,25 +1,39 @@
 const Sentry = require('@sentry/node');
-Sentry.init({ dsn: 'https://b1f48cd0c85a4bf6b951bcb0f780cc55@sentry.io/1542244' });
+const winston = require('winston');
 
-var winston = require('winston');
-require('winston-papertrail').Papertrail;
+const sentryUrl = process.env.SENTRY_URL;
+const papertrailUrl = process.env.PAPERTRAIL_URL;
+const papertrailPort = process.env.PAPERTRAIL_PORT;
 
-var winstonPapertrail = new winston.transports.Papertrail({
-  host: 'logs4.papertrailapp.com',
-  port: 48158
-});
+let logger;
 
-winstonPapertrail.on('error', function (err) {
-  // Handle, report, or silently ignore connection errors and failures
-});
+if (process.env.NODE_ENV === 'production') {
+  if (!sentryUrl || !papertrailUrl || !papertrailPort) {
+    console.error('Logger cannot start');
+  }
 
-var winstonLogger = winston.createLogger({
-  transports: [winstonPapertrail]
-});
+  Sentry.init({ dsn: sentryUrl });
 
-const logger = {
-  info: message => winstonLogger.log('info', message),
-  error: message => winstonLogger.log('info', message),
-};
+  require('winston-papertrail').Papertrail;
+
+  const winstonPapertrail = new winston.transports.Papertrail({
+    host: papertrailUrl,
+    port: papertrailPort
+  });
+
+  const winstonLogger = winston.createLogger({
+    transports: [winstonPapertrail]
+  });
+
+  logger = {
+    info: message => winstonLogger.log('info', message),
+    error: message => winstonLogger.log('info', message),
+  }
+} else {
+  logger = {
+    info: console.log,
+    error: console.error,
+  }
+}
 
 module.exports = logger;
