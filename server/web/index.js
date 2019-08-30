@@ -27,4 +27,8 @@ app.get('/', (req, res) =>
 
 app.use('/public', express.static(path.join(__dirname, 'public')));
 
+app.get('/sitemap.xml', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public/sitemap.xml'));
+});
+
 app.listen(port, () => logger.info(`* Web server [ONLINE]`));
