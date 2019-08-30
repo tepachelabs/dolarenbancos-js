@@ -22,7 +22,9 @@ if (process.env.NODE_ENV === 'production') {
   });
 
   const winstonLogger = winston.createLogger({
-    transports: [winstonPapertrail]
+    transports: [winstonPapertrail],
+    hostname: process.env.NODE_ENV === 'production' ? 'dolarenbancos.prod' : 'dolarenbancos.dev',
+    program: 'dolarenbancos'
   });
 
   logger = {
