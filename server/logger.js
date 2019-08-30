@@ -18,13 +18,13 @@ if (process.env.NODE_ENV === 'production') {
 
   const winstonPapertrail = new winston.transports.Papertrail({
     host: papertrailUrl,
-    port: papertrailPort
+    port: papertrailPort,
+    hostname: process.env.NODE_ENV === 'production' ? 'dolarenbancos.prod' : 'dolarenbancos.dev',
+    program: 'dolarenbancos'
   });
 
   const winstonLogger = winston.createLogger({
-    transports: [winstonPapertrail],
-    hostname: process.env.NODE_ENV === 'production' ? 'dolarenbancos.prod' : 'dolarenbancos.dev',
-    program: 'dolarenbancos'
+    transports: [winstonPapertrail]
   });
 
   logger = {
