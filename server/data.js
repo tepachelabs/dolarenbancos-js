@@ -40,7 +40,7 @@ module.exports = {
 
     const record = {
       ...store,
-      created_at: Date.now()
+      created_at: Date.now().toString().slice(0, -5) + '00000' - 0
     };
     return db.collection('historic').add(record);
   },
