@@ -44,6 +44,15 @@ module.exports = {
     };
     return db.collection('historic').add(record);
   },
+  load: () => {
+    const historicRef = db.collection('historic');
+
+    const day = 86400000;
+    const currentTime = new Date();
+    const today = new Date(`${currentTime.getMonth() + 1}/${currentTime.getDate()}/${currentTime.getFullYear()} 12:00`).getTime();
+
+    return Promise.all([0, 1, 2, 3, 4, 5, 6].map(date => historicRef.where('created_at', '==', today - (day * date)).get()));
+  },
   getBotMessage: () => {
     const lines = Object.keys(store.banks).map(bank =>
       `* ${bank.toUpperCase()}\t Compra: ${store.banks[bank]['buy'].toFixed(2)}\t Venta: ${store.banks[bank]['sell'].toFixed(2)}\t`);

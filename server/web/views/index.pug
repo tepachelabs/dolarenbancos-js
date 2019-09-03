@@ -43,6 +43,7 @@ html(lang="es")
     link(rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/milligram/1.3.0/milligram.min.css" integrity="sha256-Ro/wP8uUi8LR71kwIdilf78atpu8bTEwrK5ZotZo+Zc=" crossorigin="anonymous")
     link(rel="stylesheet" href="public/style.css")
 
+    script(src="//cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.bundle.min.js" integrity="sha256-xKeoJ50pzbUGkpQxDYHD7o7hxe0LaOGeguUidbq6vis=" crossorigin="anonymous")
   body
     nav.navigation
       .container
@@ -92,6 +93,85 @@ html(lang="es")
       .row
         .column
           small Retraso: 60 minutos.
+
+      .split
+
+      .row
+        .column
+          canvas(id="price-chart" width="200" height="200")
+
+          script.
+            const store = !{JSON.stringify(chartData)};
+            const ctx = document.getElementById('price-chart');
+
+            new Chart(ctx, {
+              type: 'line',
+              data: {
+                datasets: [
+                  {
+                    label: "Banxico",
+                    data: store.banxico,
+                    fill: false,
+                    borderColor: 'orange'
+                  },
+                  {
+                    label: "Inbursa",
+                    data: store.inbursa,
+                    fill: false,
+                    borderColor: 'red'
+                  },
+                  {
+                    label: "Banamex",
+                    data: store.banamex,
+                    fill: false,
+                    borderColor: 'blue'
+                  },
+                  {
+                    label: "BBVA Bancomer",
+                    data: store.bbva,
+                    fill: false,
+                    borderColor: 'green'
+                  },
+                  {
+                    label: "Monex",
+                    data: store.monex,
+                    fill: false,
+                    borderColor: 'lightgreen'
+                  },
+                  {
+                    label: "Banorte",
+                    data: store.banorte,
+                    fill: false,
+                    borderColor: 'brown'
+                  },
+                ]
+              },
+              options: {
+                responsive: true,
+                title: {
+                  display: true,
+                  text: 'El precio en el tiempo'
+                },
+                scales: {
+                  xAxes: [{
+                    type: 'time',
+                    time: {
+                      tooltipFormat: 'll'
+                    },
+                    scaleLabel: {
+                      display: true,
+                      labelString: 'Fecha'
+                    }
+                  }],
+                  yAxes: [{
+                    scaleLabel: {
+                      display: true,
+                      labelString: 'Precio (MXN)'
+                    }
+                  }]
+                }
+              }
+            });
 
     .split
 

@@ -21,9 +21,38 @@ app.use(
   })
 );
 
-app.get('/', (req, res) =>
-  res.render('index', { data })
-);
+app.get('/', (req, res) => {
+  const chartData = {
+    banxico: [],
+    inbursa: [],
+    banamex: [],
+    bbva: [],
+    monex: [],
+    banorte: [],
+  };
+
+  data.load().then(snapshot => {
+    snapshot.forEach(snap => {
+      snap.forEach(doc => {
+        const docData = doc.data();
+
+        chartData.banxico.push({
+          x: docData.created_at,
+          y: docData.banxico.fix,
+        });
+
+        ['inbursa', 'banamex', 'bbva', 'monex', 'banorte'].forEach(bank => {
+          chartData[bank].push({
+            x: docData.created_at,
+            y: docData.banks[bank].buy,
+          });
+        });
+      });
+    });
+
+    return res.render('index', { data, chartData });
+  });
+});
 
 app.use('/public', express.static(path.join(__dirname, 'public')));
 
