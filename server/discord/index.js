@@ -12,6 +12,10 @@ client.on('message', msg => {
   switch (msg.content) {
     case 'dolar':
     case 'dollar':
+    case 'dólar':
+    case '/dollar':
+    case '/dolar':
+    case '/dólar':
       msg.reply(data.getBotMessage());
       break;
     default:

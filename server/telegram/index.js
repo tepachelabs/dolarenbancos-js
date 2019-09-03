@@ -8,6 +8,11 @@ if (tokenTelegram) {
   const bot = new Telegraf(tokenTelegram);
 
   bot.command('dolar', ({ reply }) => reply(data.getBotMessage()));
+  bot.command('dólar', ({ reply }) => reply(data.getBotMessage()));
+  bot.command('dollar', ({ reply }) => reply(data.getBotMessage()));
+  bot.command('/dolar', ({ reply }) => reply(data.getBotMessage()));
+  bot.command('/dollar', ({ reply }) => reply(data.getBotMessage()));
+  bot.command('/dólar', ({ reply }) => reply(data.getBotMessage()));
   bot.command('about', ({ reply }) => reply('Dolarenbancos bot. More info at https://dolarenbancos.com.'));
 
   bot.catch((err) => {
