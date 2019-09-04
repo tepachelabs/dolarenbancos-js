@@ -122,6 +122,8 @@ html(lang="es")
           li.navigation-item
             a.navigation-link(href="#" onclick="scrollIt('#start'); return false;") Inicio
           li.navigation-item
+            a.navigation-link(href="#history" onclick="scrollIt('#history'); return false;") Hist&oacute;rico
+          li.navigation-item
             a.navigation-link(href="#bot-discord" onclick="scrollIt('#bot-discord'); return false;") Bot Discord
           li.navigation-item
             a.navigation-link(href="#bot-telegram" onclick="scrollIt('#bot-telegram'); return false;") Bot Telegram
@@ -179,7 +181,7 @@ html(lang="es")
 
     .split
 
-    .container.wide
+    .container.wide#history
       .row
         .column
           h1 Hist&oacute;rico
@@ -208,8 +210,8 @@ html(lang="es")
               theme: {
                 palette: 'palette5',
               },
-              dataLabels: {
-                enabled: false
+              markers: {
+                size: 4
               },
               legend: {
                 offsetY: -10,
