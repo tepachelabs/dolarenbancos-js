@@ -43,7 +43,72 @@ html(lang="es")
     link(rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/milligram/1.3.0/milligram.min.css" integrity="sha256-Ro/wP8uUi8LR71kwIdilf78atpu8bTEwrK5ZotZo+Zc=" crossorigin="anonymous")
     link(rel="stylesheet" href="public/style.css")
 
-    script(src="//cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.bundle.min.js" integrity="sha256-xKeoJ50pzbUGkpQxDYHD7o7hxe0LaOGeguUidbq6vis=" crossorigin="anonymous")
+    script(src="https://cdn.jsdelivr.net/npm/apexcharts")
+
+    script.
+      const store = !{JSON.stringify(chartData)};
+      const months = ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'];
+
+    script.
+      const miniChartOptions = {
+        chart: {
+          sparkline: {
+            enabled: true,
+          },
+          height: 20,
+          width: 80,
+          parentHeightOffset: -200,
+          type: 'line',
+          zoom: {
+            enabled: false
+          },
+          animations: {
+            enabled: false
+          },
+          toolbar: {
+            show: false
+          }
+        },
+        stroke: {
+          width: 1,
+        },
+        dataLabels: {
+          enabled: false
+        },
+        legend: {
+          show: false
+        },
+        grid: {
+          show: false
+        },
+        tooltip: {
+          enabled: false,
+        },
+        yaxis: {
+          labels: {
+            show: false,
+            formatter: function (value) {
+              return `$ ${value.toFixed(2)}`;
+            }
+          },
+          axisBorder: {
+            show: false,
+          }
+        },
+        xaxis: {
+          labels: {
+            show: false,
+            formatter: function (time) {
+              const date = new Date(time);
+              return `${date.getMonth() + 1} / ${date.getDate()}`;
+            }
+          },
+          axisBorder: {
+            show: false,
+          }
+        }
+      };
+
   body
     nav.navigation
       .container
@@ -75,12 +140,13 @@ html(lang="es")
 
       .row
         .column
-          table
+          table.centered.comfortable
             thead
               tr
-                th Banco
-                th Compra
-                th Venta
+                th(width="25%") Banco
+                th(width="25%") Compra
+                th(width="25%") Venta
+                th(width="25%") Comportamiento
             tbody
               each bank in Object.keys(data.banks)
                 - const buy = data.banks[bank]['buy'];
@@ -89,117 +155,162 @@ html(lang="es")
                   td.capitalize= bank
                   td(class=buy === data.meta.lowestBuy ? "red" : "" || buy === data.meta.highestBuy ? "green" : "") $ #{buy.toFixed(2)}
                   td(class=sell === data.meta.lowestSell ? "green" : "" || sell === data.meta.highestSell ? "red" : "") $ #{sell.toFixed(2)}
+                  td
+                    div(class=`graph-${bank}`)
+                    script.
+                      const options_#{bank} = {
+                        ...miniChartOptions,
+                        series: [
+                          {
+                            name: '#{bank}',
+                            data: store.#{bank},
+                          }
+                        ],
+                      };
+                      const chart_#{bank} = new ApexCharts(
+                        document.querySelector('.graph-#{bank}'),
+                        options_#{bank}
+                      );
+                      chart_#{bank}.render();
 
       .row
         .column
           small Retraso: 60 minutos.
 
-      .split
+    .split
+
+    .container.wide
+      .row
+        .column
+          h1 Hist&oacute;rico
 
       .row
         .column
-          canvas(id="price-chart" width="200" height="200")
-
+          #chart
           script.
-            const store = !{JSON.stringify(chartData)};
-            const ctx = document.getElementById('price-chart');
-
-            new Chart(ctx, {
-              type: 'line',
-              data: {
-                datasets: [
-                  {
-                    label: "Banxico",
-                    data: store.banxico,
-                    fill: false,
-                    borderColor: 'orange'
-                  },
-                  {
-                    label: "Inbursa",
-                    data: store.inbursa,
-                    fill: false,
-                    borderColor: 'red'
-                  },
-                  {
-                    label: "Banamex",
-                    data: store.banamex,
-                    fill: false,
-                    borderColor: 'blue'
-                  },
-                  {
-                    label: "BBVA Bancomer",
-                    data: store.bbva,
-                    fill: false,
-                    borderColor: 'green'
-                  },
-                  {
-                    label: "Monex",
-                    data: store.monex,
-                    fill: false,
-                    borderColor: 'lightgreen'
-                  },
-                  {
-                    label: "Banorte",
-                    data: store.banorte,
-                    fill: false,
-                    borderColor: 'brown'
-                  },
-                ]
-              },
-              options: {
-                responsive: true,
-                title: {
-                  display: true,
-                  text: 'El precio en el tiempo'
+            const options = {
+              chart: {
+                height: 400,
+                type: 'line',
+                zoom: {
+                  enabled: false
                 },
-                scales: {
-                  xAxes: [{
-                    type: 'time',
-                    time: {
-                      tooltipFormat: 'll'
-                    },
-                    scaleLabel: {
-                      display: true,
-                      labelString: 'Fecha'
-                    }
-                  }],
-                  yAxes: [{
-                    scaleLabel: {
-                      display: true,
-                      labelString: 'Precio (MXN)'
-                    }
-                  }]
+                animations: {
+                  enabled: false
+                },
+                toolbar: {
+                  show: false
+                },
+              },
+              stroke: {
+                width: 2,
+              },
+              theme: {
+                palette: 'palette5',
+              },
+              dataLabels: {
+                enabled: false
+              },
+              legend: {
+                offsetY: -10,
+              },
+              series: [
+                {
+                  name: "Banxico",
+                  data: store.banxico,
+                },
+                {
+                  name: "Inbursa",
+                  data: store.inbursa,
+                },
+                {
+                  name: "Banamex",
+                  data: store.banamex,
+                },
+                {
+                  name: "BBVA",
+                  data: store.bbva,
+                },
+                {
+                  name: "Monex",
+                  data: store.monex,
+                },
+                {
+                  name: "Banorte",
+                  data: store.banorte,
+                },
+              ],
+              grid: {
+                row: {
+                  colors: ['#f4f5f6', 'transparent'], // takes an array which will be repeated on columns
+                  opacity: 0.5
+                },
+              },
+              yaxis: {
+                labels: {
+                  formatter: function (value) {
+                    return `$ ${value.toFixed(2)}`;
+                  },
+                  style: {
+                    color: '#606c76',
+                  },
+                },
+              },
+              xaxis: {
+                labels: {
+                  formatter: function (time) {
+                    const date = new Date(time);
+                    const day = date.getDate();
+                    return `${months[date.getMonth()]}, ${day < 10 ? `0${day}` : day}`;
+                  }
                 }
               }
-            });
+            }
+
+            const chart = new ApexCharts(
+              document.querySelector("#chart"),
+              options
+            );
+
+            chart.render();
 
     .split
 
     .container.wide#bot-discord
       .row
         .column
-          h1 Bot Discord
-      .row
-        .column
-          p Obt&eacute;n la informaci&oacute;n mas r&aacute;pidamente desde tu Discord. Agrega nuestro bot de Discord, env&iacute;a la palabra "dolar" y recibe el resumen en segundos.
-      .row
-        .column
-          p
-            a.button.button-green(href="https://discordapp.com/oauth2/authorize?client_id=615622507222925461&permissions=67584&scope=bot" target="_blank" rel="noopener noreferrer") Agregar a servidor
+          .row
+            .column
+              h1 Bot Discord
+          .row
+            .column
+              p Obt&eacute;n la informaci&oacute;n mas r&aacute;pidamente desde tu Discord. Agrega nuestro bot de Discord, env&iacute;a la palabra "dolar" y recibe el resumen en segundos.
+          .row
+            .column
+              p
+                a.button.button-green(href="https://discordapp.com/oauth2/authorize?client_id=615622507222925461&permissions=67584&scope=bot" target="_blank" rel="noopener noreferrer") Agregar a servidor
+        .column.column-20
+          .row
+            img(src="public/discord.svg" alt="Discord's logo")
 
     .split
 
     .container.wide#bot-telegram
       .row
         .column
-          h1 Bot Telegram
-      .row
-        .column
-          p Recibe el resumen directo a tu smartphone o computador sin tener que instalar nada extra. Consulta nuestro bot de Telegram, s&oacute;lo env&iacute;a el texto "/dolar" y recibe el resumen en segundos.
-      .row
-        .column
-          p
-            a.button.button-green(href="https://telegram.me/dolarenbancos_bot" target="_blank" rel="noopener noreferrer") Agregar bot
+          .row
+            .column
+              h1 Bot Telegram
+          .row
+            .column
+              p Recibe el resumen directo a tu smartphone o computador sin tener que instalar nada extra. Consulta nuestro bot de Telegram, s&oacute;lo env&iacute;a el texto "/dolar" y recibe el resumen en segundos.
+          .row
+            .column-80
+              p
+                a.button.button-green(href="https://telegram.me/dolarenbancos_bot" target="_blank" rel="noopener noreferrer") Agregar bot
+        .column.column-20
+          .row
+            img(src="public/telegram.svg" alt="Telegram's logo")
 
     .split
 

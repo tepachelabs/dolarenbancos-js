@@ -41,7 +41,7 @@ footer {
 
 .wide {
   margin: 0 auto;
-  max-width: 600px;
+  max-width: 900px;
 }
 
 .capitalize {
@@ -49,11 +49,29 @@ footer {
 }
 
 .green {
-  background: #ddffd6;
+  background: rgba(221, 255, 214, 0.5);
   font-weight: bold;
 }
 
 .red {
-  background: #ffd9cc;
+  background: rgba(255, 217, 204, 0.5);
   font-weight: bold;
+}
+
+table {
+  &.centered {
+    th, td {
+      text-align: center;
+    }
+  }
+
+  &.comfortable {
+    th, td {
+      padding: 1.2em 0;
+    }
+  }
+
+  .apexcharts-canvas {
+    margin: 0 auto;
+  }
 }
