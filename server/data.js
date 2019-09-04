@@ -51,7 +51,7 @@ module.exports = {
     const currentTime = new Date();
     const today = new Date(`${currentTime.getMonth() + 1}/${currentTime.getDate()}/${currentTime.getFullYear()} 12:00`).getTime();
 
-    return Promise.all([0, 1, 2, 3, 4, 5, 6].map(date => historicRef.where('created_at', '==', today - (day * date)).get()));
+    return Promise.all([0, 1, 2, 3, 4, 5, 6, 7].map(date => historicRef.where('created_at', '==', today - (day * date)).get()));
   },
   getBotMessage: () => {
     const lines = Object.keys(store.banks).map(bank =>
