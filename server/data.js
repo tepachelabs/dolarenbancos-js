@@ -49,6 +49,7 @@ module.exports = {
 
     const day = 86400000;
     const currentTime = new Date();
+    console.log(currentTime);
     const today = new Date(`${currentTime.getMonth() + 1}/${currentTime.getDate()}/${currentTime.getFullYear()} 12:00`).getTime();
 
     return Promise.all([0, 1, 2, 3, 4, 5, 6].map(date => historicRef.where('created_at', '==', today - (day * date)).get()));
