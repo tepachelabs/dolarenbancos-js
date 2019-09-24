@@ -4,6 +4,7 @@ const fetchInbursa = require('./inbursa');
 const fetchBbva = require('./bbva');
 const fetchMonex = require('./monex');
 const fetchBanorte = require('./banorte');
+const fetchSantander = require('./santander');
 
 const data = require('../data');
 const noop = () => {
@@ -17,6 +18,7 @@ const fetcher = {
     fetchBbva(),
     fetchMonex(),
     fetchBanorte(),
+    fetchSantander(),
   ]).then(values => {
     before(data);
 

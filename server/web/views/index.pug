@@ -241,6 +241,10 @@ html(lang="es")
                   name: "Banorte",
                   data: store.banorte,
                 },
+                {
+                  name: "Santander",
+                  data: store.santander,
+                },
               ],
               grid: {
                 row: {
@@ -251,6 +255,7 @@ html(lang="es")
               yaxis: {
                 labels: {
                   formatter: function (value) {
+                    if (!value) return `$ 0`;
                     return `$ ${value.toFixed(2)}`;
                   },
                   style: {
