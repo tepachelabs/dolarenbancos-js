@@ -54,12 +54,12 @@ module.exports = {
 
     return Promise.all([0, 1, 2, 3, 4, 5, 6, 7].map(date => historicRef.where('created_at', '==', today - (day * date)).get()));
   },
-  getBotMessage: () => {
+  getBotMessage: (dollars = 1) => {
     const lines = Object.keys(store.banks).map(bank =>
-      `* ${bank.toUpperCase()}\t Compra: ${store.banks[bank]['buy'].toFixed(2)}\t Venta: ${store.banks[bank]['sell'].toFixed(2)}\t`);
+      `* ${bank.toUpperCase()}\t Compra: ${(store.banks[bank]['buy'] * dollars).toFixed(2)}\t Venta: ${(store.banks[bank]['sell'] * dollars).toFixed(2)}\t`);
 
     lines.unshift('---');
-    lines.unshift(`\nPrecio al dia BANXICO: ${store.banxico.fix.toFixed(2)} MXN`);
+    lines.unshift(`\nPrecio al dia BANXICO: ${(store.banxico.fix * dollars).toFixed(2)} MXN`);
 
     lines.push('---');
     lines.push('Source: https://dolarenbancos.com');

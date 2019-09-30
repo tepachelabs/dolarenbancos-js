@@ -3,24 +3,28 @@ const logger = require('../logger');
 const data = require('../data');
 
 const client = new Discord.Client();
+const prefixes = [
+  'dolar',
+  'dollar',
+  'dólar',
+  '/dolar',
+  '/dollar',
+  '/dólar',
+];
 
 client.on('ready', () => {
   logger.info('* Discord bot [ONLINE]');
 });
 
 client.on('message', msg => {
-  switch (msg.content) {
-    case 'dolar':
-    case 'dollar':
-    case 'dólar':
-    case '/dollar':
-    case '/dolar':
-    case '/dólar':
-      msg.reply(data.getBotMessage());
-      break;
-    default:
-      break
-  }
+  prefixes.forEach(prefix => {
+    if (msg.content.startsWith(prefix)) {
+      const split = msg.content.split(' ');
+      const dollars = parseInt(split[1], 10);
+
+      msg.reply(data.getBotMessage(isNaN(dollars) ? 1 : dollars));
+    }
+  });
 });
 
 const tokenDiscord = process.env['TOKEN_DISCORD'];

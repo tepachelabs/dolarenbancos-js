@@ -6,13 +6,16 @@ const tokenTelegram = process.env.TELEGRAM_TOKEN;
 
 if (tokenTelegram) {
   const bot = new Telegraf(tokenTelegram);
+  const response = ({ reply, message }) => {
+    const split = message.text.split(' ');
+    const dollars = parseInt(split[1], 10);
 
-  bot.command('dolar', ({ reply }) => reply(data.getBotMessage()));
-  bot.command('dólar', ({ reply }) => reply(data.getBotMessage()));
-  bot.command('dollar', ({ reply }) => reply(data.getBotMessage()));
-  bot.command('/dolar', ({ reply }) => reply(data.getBotMessage()));
-  bot.command('/dollar', ({ reply }) => reply(data.getBotMessage()));
-  bot.command('/dólar', ({ reply }) => reply(data.getBotMessage()));
+    reply(data.getBotMessage(isNaN(dollars) ? 1 : dollars));
+  };
+
+  bot.command('dolar', response);
+  bot.command('dólar', response);
+  bot.command('dollar', response);
   bot.command('about', ({ reply }) => reply('Dolarenbancos bot. More info at https://dolarenbancos.com.'));
 
   bot.catch((err) => {
