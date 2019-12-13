@@ -157,23 +157,23 @@ html(lang="es")
                   td.capitalize= bank
                   td(class=buy === data.meta.lowestBuy ? "red" : "" || buy === data.meta.highestBuy ? "green" : "") $ #{buy.toFixed(2)}
                   td(class=sell === data.meta.lowestSell ? "green" : "" || sell === data.meta.highestSell ? "red" : "") $ #{sell.toFixed(2)}
-                  //td
-                  //  div(class=`graph-${bank}`)
-                  //  script.
-                  //    const options_#{bank} = {
-                  //      ...miniChartOptions,
-                  //      series: [
-                  //        {
-                  //          name: '#{bank}',
-                  //          data: store.#{bank},
-                  //        }
-                  //      ],
-                  //    };
-                  //    const chart_#{bank} = new ApexCharts(
-                  //      document.querySelector('.graph-#{bank}'),
-                  //      options_#{bank}
-                  //    );
-                  //    chart_#{bank}.render();
+                  td
+                    div(class=`graph-${bank}`)
+                    script.
+                      const options_#{bank} = {
+                        ...miniChartOptions,
+                        series: [
+                          {
+                            name: '#{bank}',
+                            data: store.#{bank},
+                          }
+                        ],
+                      };
+                      const chart_#{bank} = new ApexCharts(
+                        document.querySelector('.graph-#{bank}'),
+                        options_#{bank}
+                      );
+                      chart_#{bank}.render();
 
       .row
         .column
@@ -181,7 +181,7 @@ html(lang="es")
 
     .split
 
-    //.container.wide#history
+    .container.wide#history
       .row
         .column
           h1 Hist&oacute;rico
