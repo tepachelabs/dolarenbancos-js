@@ -156,8 +156,8 @@ html(lang="es")
                 - const sell = data.banks[bank]['sell'];
                 tr
                   td.capitalize= bank
-                  td(class=buy === data.meta.lowestBuy ? "red" : "" || buy === data.meta.highestBuy ? "green" : "") $ #{buy ? buy.toFixed(2) : 'No data'}
-                  td(class=sell === data.meta.lowestSell ? "green" : "" || sell === data.meta.highestSell ? "red" : "") $ #{sell ? sell.toFixed(2) : 'No data'}
+                  td(class=buy === data.meta.lowestBuy ? "red" : "" || buy === data.meta.highestBuy ? "green" : "") $ #{buy ? buy.toFixed(2) : '??'}
+                  td(class=sell === data.meta.lowestSell ? "green" : "" || sell === data.meta.highestSell ? "red" : "") $ #{sell ? sell.toFixed(2) : '??'}
                   td
                     div(class=`graph-${bank}`)
                     script.
@@ -193,7 +193,7 @@ html(lang="es")
           script.
             const options = {
               chart: {
-                height: 400,
+                height: 450,
                 type: 'line',
                 zoom: {
                   enabled: false
