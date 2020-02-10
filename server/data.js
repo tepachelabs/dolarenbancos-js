@@ -29,7 +29,7 @@ const store = {
     banamex: { buy: 0, sell: 0 },
     bbva: { buy: 0, sell: 0 },
     banorte: { buy: 0, sell: 0 },
-    santander: { buy: 0, sell: 0 },
+    // santander: { buy: 0, sell: 0 },
   },
   meta: {}
 };
