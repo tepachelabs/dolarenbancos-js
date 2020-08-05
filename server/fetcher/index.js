@@ -3,7 +3,8 @@ const fetchBanxico = require('./banxico');
 const fetchInbursa = require('./inbursa');
 const fetchBbva = require('./bbva');
 const fetchBanorte = require('./banorte');
-// const fetchSantander = require('./santander');
+const fetchSantander = require('./santander');
+const fetchBillDotCom = require('./billdotcom');
 
 const data = require('../data');
 const noop = () => {
@@ -16,7 +17,8 @@ const fetcher = {
     fetchInbursa(),
     fetchBbva(),
     fetchBanorte(),
-    // fetchSantander(),
+    fetchSantander(),
+    fetchBillDotCom(),
   ]).then(values => {
     before(data);
 
@@ -37,7 +39,7 @@ const fetcher = {
       acc.highestBuy = !acc.highestBuy || data.banks[bank].buy > acc.highestBuy ? data.banks[bank].buy : acc.highestBuy;
       return acc;
     }, {});
-
+    console.log(data);
     after(data);
   }).catch(err => console.error(err))
 };
