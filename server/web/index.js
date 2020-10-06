@@ -30,6 +30,7 @@ app.get('/', (req, res) => {
     banorte: [],
     santander: [],
     billdotcom: [],
+    transferwise: [],
   };
 
   data.load().then(snapshot => {
@@ -42,7 +43,7 @@ app.get('/', (req, res) => {
           y: docData.banxico.fix,
         });
 
-        ['inbursa', 'banamex', 'bbva', 'banorte', 'santander', 'billdotcom'].forEach(bank => {
+        ['inbursa', 'banamex', 'bbva', 'banorte', 'santander', 'billdotcom', 'transferwise'].forEach(bank => {
           if (!docData.banks[bank]) return;
           chartData[bank].push({
             x: docData.created_at,

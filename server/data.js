@@ -31,6 +31,7 @@ const store = {
     banorte: { buy: 0, sell: 0 },
     santander: { buy: 0, sell: 0 },
     billdotcom: { buy: 0, sell: 0 },
+    transferwise: { buy: 0, sell: 0 },
   },
   meta: {}
 };

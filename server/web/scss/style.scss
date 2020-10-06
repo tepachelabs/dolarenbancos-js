@@ -1,5 +1,6 @@
 $primary-color: #437f53;
 $gray: #e1e1e1;
+$red: #FA4443;
 
 @import "nav";
 
@@ -10,6 +11,16 @@ body {
 
 a {
   color: $primary-color;
+}
+
+.label {
+  background: $red;
+  border-radius: 2px;
+  color: white;
+  font-size: 10px;
+  font-weight: bold;
+  margin-left: 0.5em;
+  padding: 1%;
 }
 
 .split {

@@ -122,8 +122,8 @@ html(lang="es")
         ul#js-menu.navigation-list
           li.navigation-item
             a.navigation-link(href="#" onclick="scrollIt('#start'); return false;") Inicio
-          //li.navigation-item
-          //  a.navigation-link(href="#history" onclick="scrollIt('#history'); return false;") Hist&oacute;rico
+          li.navigation-item
+            a.navigation-link(href="#history" onclick="scrollIt('#history'); return false;") Hist&oacute;rico
           li.navigation-item
             a.navigation-link(href="#bot-discord" onclick="scrollIt('#bot-discord'); return false;") Bot Discord
           li.navigation-item
@@ -149,13 +149,15 @@ html(lang="es")
                 th(width="25%") Banco
                 th(width="25%") Compra
                 th(width="25%") Venta
-                //th(width="25%") Comportamiento
+                th(width="25%") Comportamiento
             tbody
               each bank in Object.keys(data.banks)
                 - const buy = data.banks[bank]['buy'];
                 - const sell = data.banks[bank]['sell'];
                 tr
                   td.capitalize= bank
+                    if bank === 'transferwise'
+                      sup.label ¡Nuevo!
                   td(class=buy === data.meta.lowestBuy ? "red" : "" || buy === data.meta.highestBuy ? "green" : "") $ #{buy ? buy.toFixed(2) : '??'}
                   td(class=sell === data.meta.lowestSell ? "green" : "" || sell === data.meta.highestSell ? "red" : "") $ #{sell ? sell.toFixed(2) : '??'}
                   td
