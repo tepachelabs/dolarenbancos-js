@@ -156,7 +156,7 @@ html(lang="es")
                 - const sell = data.banks[bank]['sell'];
                 tr
                   td.capitalize= bank
-                    if bank === 'transferwise'
+                    if bank === 'bancoazteca'
                       sup.label ¡Nuevo!
                   td(class=buy === data.meta.lowestBuy ? "red" : "" || buy === data.meta.highestBuy ? "green" : "") $ #{buy ? buy.toFixed(2) : '??'}
                   td(class=sell === data.meta.lowestSell ? "green" : "" || sell === data.meta.highestSell ? "red" : "") $ #{sell ? sell.toFixed(2) : '??'}
@@ -243,6 +243,10 @@ html(lang="es")
                 {
                   name: "Santander",
                   data: store.santander,
+                },
+                {
+                  name: "Transferwise",
+                  data: store.transferwise,
                 },
                 {
                   name: "Banco Azteca",
