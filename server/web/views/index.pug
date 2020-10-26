@@ -4,15 +4,15 @@ html(lang="es")
     meta(name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no")
 
     meta(name="keywords" content="dolar, precio, pesos, mexicanos, bancos, mxn, precios")
-    meta(name="description" content="El precio del d&oacute;lar en los distintos bancos de M&eacute;xico")
+    meta(name="description" content="El precio del dólar en los distintos bancos de México")
     meta(name="subject" content="finanzas")
-    meta(name="copyright" content="Gato Mocho")
+    meta(name="copyright" content="GatoMocho")
     meta(name="language" content="ES")
     meta(name="robots" content="index,follow" )
-    meta(name="revised" content="Tuesday, Aug 30th, 2019, 11:00 pm" )
-    meta(name="abstract" content="El precio del d&oacute;lar en los distintos bancos de M&eacute;xico")
-    meta(name="topic" content="El precio del d&oacute;lar en los distintos bancos de M&eacute;xico")
-    meta(name="summary" content="El precio del d&oacute;lar en los distintos bancos de M&eacute;xico")
+    meta(name="revised" content="Monday, Oct 26th, 2020, 1:00 pm" )
+    meta(name="abstract" content="El precio del dólar en los distintos bancos de México")
+    meta(name="topic" content="El precio del dólar en los distintos bancos de México")
+    meta(name="summary" content="El precio del dólar en los distintos bancos de México")
     meta(name="Classification" content="Finances")
     meta(name="author" content="contacto@dolarenbancos.com")
     meta(name="copyright" content="2019 dolarenbancos.com")
@@ -27,12 +27,12 @@ html(lang="es")
     meta(http-equiv="Pragma" content="no-cache")
     meta(http-equiv="Cache-Control" content="no-cache")
 
-    meta(property="og:title" content="El D&oacute;lar en Bancos de M&eacute;xico")
+    meta(property="og:title" content="El Dólar en Bancos de México")
     meta(property="og:type" content="website")
     meta(property="og:url" content="https://dolarenbancos.com")
     meta(property="og:image" content="https://dolarenbancos.com/public/dolarenbancos.png")
-    meta(property="og:site_name" content="D&oacute;lar en Bancos")
-    meta(property="og:description" content="El precio del d&oacute;lar en los distintos bancos de M&eacute;xico")
+    meta(property="og:site_name" content="Dólar en Bancos")
+    meta(property="og:description" content="El precio del dólar en los distintos bancos de México")
 
     meta(name="twitter:card" content="summary")
     meta(name="twitter:site" content="@dolarenbancos")
@@ -113,7 +113,7 @@ html(lang="es")
   body
     nav.navigation
       .container
-        a.navigation-title(href="/" title="Precio del D&oacute;lar al D&iacute;a")
+        a.navigation-title(href="/" title="Precio del Dólar al Día")
           img(src="public/dolarenbancos_100.png" alt="Website's logo")
           h1.title D&oacute;lar en Bancos
 
@@ -156,7 +156,7 @@ html(lang="es")
                 - const sell = data.banks[bank]['sell'];
                 tr
                   td.capitalize= bank
-                    if bank === 'bancoazteca'
+                    if bank === 'new-bank'
                       sup.label ¡Nuevo!
                   td(class=buy === data.meta.lowestBuy ? "red" : "" || buy === data.meta.highestBuy ? "green" : "") $ #{buy ? buy.toFixed(2) : '??'}
                   td(class=sell === data.meta.lowestSell ? "green" : "" || sell === data.meta.highestSell ? "red" : "") $ #{sell ? sell.toFixed(2) : '??'}
@@ -248,10 +248,10 @@ html(lang="es")
                   name: "Transferwise",
                   data: store.transferwise,
                 },
-                //{
-                //  name: "Banco Azteca",
-                //  data: store.bancoazteca,
-                //},
+                {
+                  name: "Banco Azteca",
+                  data: store.bancoazteca,
+                },
               ],
               grid: {
                 row: {
