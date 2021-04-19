@@ -5,6 +5,7 @@
   "license": "MIT",
   "private": true,
   "dependencies": {
+    "@firebase/rules-unit-testing": "^1.2.9",
     "@sentry/node": "^5.20.1",
     "axios": "^0.21.1",
     "cheerio": "^1.0.0-rc.3",
@@ -17,5 +18,8 @@
     "telegraf": "^3.38.0",
     "winston": "^3.3.3",
     "winston-papertrail": "^1.0.5"
+  },
+  "devDependencies": {
+    "firebase-admin": "^9.6.0"
   }
 }

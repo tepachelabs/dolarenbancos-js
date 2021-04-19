@@ -1,12 +1,15 @@
 const firebase = require('firebase/app');
 require('firebase/firestore');
+const localFirebase = require('@firebase/rules-unit-testing')
 
 const FIREBASE_API_KEY = process.env.FIREBASE_API_KEY;
 const FIREBASE_PROJECT_ID = process.env.FIREBASE_PROJECT_ID;
 
+const isProd = process.env.NODE_ENV === 'production';
+
 let db;
 
-if (FIREBASE_API_KEY && FIREBASE_PROJECT_ID) {
+if (FIREBASE_API_KEY && FIREBASE_PROJECT_ID && isProd) {
   const firebaseConfig = {
     apiKey: FIREBASE_API_KEY,
     authDomain: `${FIREBASE_PROJECT_ID}.firebaseapp.com`,
@@ -18,6 +21,14 @@ if (FIREBASE_API_KEY && FIREBASE_PROJECT_ID) {
   firebase.initializeApp(firebaseConfig);
 
   db = firebase.firestore();
+}
+
+if (!isProd) {
+  const localApp = localFirebase.initializeTestApp({
+    projectId: 'dolarenbancos-local',
+    auth: { uid: "dolarenbancos", email: "dolarenbancos@tonymtz.com" } // fake email
+  })
+  db = localApp.firestore();
 }
 
 const store = {

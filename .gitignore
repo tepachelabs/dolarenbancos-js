@@ -2,3 +2,6 @@ node_modules
 npm-debug.log
 .idea
 /server/web/public/style.css
+firebase-debug.log
+firestore-debug.log
+.vscode
