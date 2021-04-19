@@ -1,7 +1,8 @@
 const logger = require('./logger');
 const fetcher = require('./fetcher');
 
-console.log('# IS PROD? ', process.env.NODE_ENV === 'production');
+const isProd = process.env.NODE_ENV === 'production';
+console.log('# IS PROD? ', isProd);
 process.env.TZ = 'America/Hermosillo';
 
 const sysRun = new Promise(function (resolve) {
@@ -17,7 +18,9 @@ const sysRun = new Promise(function (resolve) {
 sysRun.then(() => {
   logger.info('> Starting services');
   require('./web');
-  require('./discord');
   require('./scheduler');
-  require('./telegram');
+  if (isProd) {
+    require('./discord');
+    require('./telegram');
+  }
 });
