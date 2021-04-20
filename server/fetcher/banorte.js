@@ -16,8 +16,8 @@ module.exports = () => getInfo()
 
     return {
       key: 'banorte',
-      buy: buy - 0,
-      sell: sell - 0,
+      buy: buy,
+      sell: sell,
     };
   })
   .catch(function (error) {
