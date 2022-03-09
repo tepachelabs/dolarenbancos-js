@@ -1,4 +1,4 @@
-FROM node:10-alpine as dollarbot
+FROM node:12-alpine as dollarbot
 LABEL maintainer="tonymtz <hello@tonymtz.com>"
 WORKDIR /usr/src/app
 COPY package*.json ./
