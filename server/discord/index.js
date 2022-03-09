@@ -2,7 +2,7 @@ const Discord = require('discord.js');
 const logger = require('../logger');
 const data = require('../data');
 
-const client = new Discord.Client();
+const client = new Discord.Client({ intents: [Discord.Intents.FLAGS.GUILDS] });
 const prefixes = [
   'dolar',
   'dollar',
