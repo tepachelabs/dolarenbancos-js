@@ -2,7 +2,6 @@ const fetchBanamex = require('./banamex');
 const fetchBanxico = require('./banxico');
 const fetchInbursa = require('./inbursa');
 const fetchBbva = require('./bbva');
-const fetchBanorte = require('./banorte');
 const fetchBillDotCom = require('./billdotcom');
 const fetchTransferwise = require('./transferwise');
 
@@ -16,7 +15,6 @@ const fetcher = {
     fetchBanamex(),
     fetchInbursa(),
     fetchBbva(),
-    fetchBanorte(),
     fetchBillDotCom(),
     fetchTransferwise(),
   ]).then(values => {
