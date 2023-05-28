@@ -141,15 +141,15 @@ html(lang="es")
           h4 Precio Banxico:
             b  $ #{data.banxico.fix.toFixed(2)} MXN
         .column
-          input(class="float-right" id="calculate-input" placeholder="Calcula cantidad")
+          input#calculate.float-right(placeholder="Calcula cantidad")
           script.
-            const calculateInput = document.getElementById('calculate-input');
+            const calculateInput = window.calculate;
             const formatter = Intl.NumberFormat('es-mx', {
               currency: 'MXN',
               minimumFractionDigits: 2,
             });
 
-            const formatColumn = (column, value) => {
+            const iterateAndFormatPriceColumn = (column, value) => {
               for (columnItem of column) {
                 const price = Number(columnItem.getAttribute('value'));
 
@@ -173,8 +173,8 @@ html(lang="es")
               const buyColumn = document.getElementsByClassName('buy');
               const sellColumn = document.getElementsByClassName('sell');
 
-              formatColumn(buyColumn, numericValue);
-              formatColumn(sellColumn, numericValue);
+              iterateAndFormatPriceColumn(buyColumn, numericValue);
+              iterateAndFormatPriceColumn(sellColumn, numericValue);
             });
 
 
