@@ -63,4 +63,4 @@ app.get('/sitemap.xml', (req, res) => {
   res.sendFile(path.join(__dirname, 'public/sitemap.xml'));
 });
 
-app.listen(port, () => logger.info(`* Web server [ONLINE] ${port}`));
+app.listen(port, () => logger.info(`* Web server [ONLINE]`));

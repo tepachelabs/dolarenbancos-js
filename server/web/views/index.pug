@@ -188,34 +188,34 @@ html(lang="es")
                 th(width="25%") Venta
                 th(width="25%") Comportamiento
             tbody
-               each bank in Object.keys(data.banks)
-                 - const buy = data.banks[bank]['buy'];
-                 - const sell = data.banks[bank]['sell'];
-                 - const buyClassname = buy === data.meta.lowestBuy ? "red" : "" || buy === data.meta.highestBuy ? "green" : "buy";
-                 - const sellClassname = sell === data.meta.lowestSell ? "green" : "" || sell === data.meta.highestSell ? "red" : "sell"
-                 tr
-                   td.capitalize= bank
-                     if bank === 'new-bank'
-                       sup.label ¡Nuevo!
-                   td(class=`${buyClassname} buy` value=buy ? buy : 0) $ #{buy ? buy.toFixed(2) : '??'}
-                   td(class=`${sellClassname} sell` value=sell ? sell : 0) $ #{sell ? sell.toFixed(2) : '??'}
-                   td
-                     div(class=`graph-${bank}`)
-                     script.
-                       const options_#{bank} = {
-                         ...miniChartOptions,
-                         series: [
-                           {
-                             name: '#{bank}',
-                             data: store.#{bank},
-                           }
-                         ],
-                       };
-                       const chart_#{bank} = new ApexCharts(
+              each bank in Object.keys(data.banks)
+                - const buy = data.banks[bank]['buy'];
+                - const sell = data.banks[bank]['sell'];
+                - const buyClassname = buy === data.meta.lowestBuy ? "red" : "" || buy === data.meta.highestBuy ? "green" : "buy";
+                - const sellClassname = sell === data.meta.lowestSell ? "green" : "" || sell === data.meta.highestSell ? "red" : "sell"
+                tr
+                  td.capitalize= bank
+                    if bank === 'new-bank'
+                      sup.label ¡Nuevo!
+                  td(class=`${buyClassname} buy` value=buy ? buy : 0) $ #{buy ? buy.toFixed(2) : '??'}
+                  td(class=`${sellClassname} sell` value=sell ? sell : 0) $ #{sell ? sell.toFixed(2) : '??'}
+                  td
+                    div(class=`graph-${bank}`)
+                    script.
+                      const options_#{bank} = {
+                        ...miniChartOptions,
+                        series: [
+                          {
+                            name: '#{bank}',
+                            data: store.#{bank},
+                          }
+                        ],
+                      };
+                      const chart_#{bank} = new ApexCharts(
                          document.querySelector('.graph-#{bank}'),
                          options_#{bank}
-                       );
-                       chart_#{bank}.render();
+                      );
+                      chart_#{bank}.render();
 
 
 
