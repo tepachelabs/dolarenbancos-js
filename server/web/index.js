@@ -52,6 +52,8 @@ app.get('/', (req, res) => {
     });
 
     return res.render('index', { data, chartData });
+  }).catch(() => {
+    return res.render('index', { data, chartData: [] });
   });
 });
 
