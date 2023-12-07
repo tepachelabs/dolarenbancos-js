@@ -188,8 +188,8 @@ html(lang="es")
                 th(width="25%") Venta
                 th(width="25%") Comportamiento
             tbody
-              each bank, index in Object.keys(data.banks)
-                - const buy = index;
+              each bank in Object.keys(data.banks)
+                - const buy = data.banks[bank]['buy'];
                 - const sell = data.banks[bank]['sell'];
                 - const buyClassname = buy === data.meta.lowestBuy ? "red" : "" || buy === data.meta.highestBuy ? "green" : "buy";
                 - const sellClassname = sell === data.meta.lowestSell ? "green" : "" || sell === data.meta.highestSell ? "red" : "sell"
