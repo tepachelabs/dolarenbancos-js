@@ -154,7 +154,7 @@ html(lang="es")
                 const price = Number(columnItem.getAttribute('value'));
 
                 if (price === 0) {
-                  return;
+                  continue;
                 }
 
                 const priceFormatted = formatter.format(Number(price * value).toFixed(2))
@@ -188,8 +188,8 @@ html(lang="es")
                 th(width="25%") Venta
                 th(width="25%") Comportamiento
             tbody
-              each bank in Object.keys(data.banks)
-                - const buy = data.banks[bank]['buy'];
+              each bank, index in Object.keys(data.banks)
+                - const buy = index;
                 - const sell = data.banks[bank]['sell'];
                 - const buyClassname = buy === data.meta.lowestBuy ? "red" : "" || buy === data.meta.highestBuy ? "green" : "buy";
                 - const sellClassname = sell === data.meta.lowestSell ? "green" : "" || sell === data.meta.highestSell ? "red" : "sell"
