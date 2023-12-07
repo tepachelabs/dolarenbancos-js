@@ -27,7 +27,6 @@ app.get('/', (req, res) => {
     inbursa: [],
     banamex: [],
     bbva: [],
-    banorte: [],
     billdotcom: [],
     transferwise: [],
   };
@@ -42,7 +41,7 @@ app.get('/', (req, res) => {
           y: docData.banxico.fix,
         });
 
-        ['inbursa', 'banamex', 'bbva', 'banorte', 'billdotcom', 'transferwise'].forEach(bank => {
+        ['inbursa', 'banamex', 'bbva', 'billdotcom', 'transferwise'].forEach(bank => {
           if (!docData.banks[bank]) return;
           chartData[bank].push({
             x: docData.created_at,
@@ -53,6 +52,8 @@ app.get('/', (req, res) => {
     });
 
     return res.render('index', { data, chartData });
+  }).catch(() => {
+    return res.render('index', { data, chartData: [] });
   });
 });
 
