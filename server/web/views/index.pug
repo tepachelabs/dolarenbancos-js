@@ -154,7 +154,7 @@ html(lang="es")
                 const price = Number(columnItem.getAttribute('value'));
 
                 if (price === 0) {
-                  return;
+                  continue;
                 }
 
                 const priceFormatted = formatter.format(Number(price * value).toFixed(2))
