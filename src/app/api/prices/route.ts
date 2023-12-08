@@ -5,6 +5,7 @@ import { fetchFromBanamex } from "~/lib/fetchers/banamex.fetcher";
 import { fetchFromBbva } from "~/lib/fetchers/bbva.fetcher";
 import { fetchFromBilldotcom } from "~/lib/fetchers/billdotcom.fetcher";
 import { fetchFromInbursa } from "~/lib/fetchers/inbursa.fetcher";
+import { fetchFromIntercam } from "~/lib/fetchers/intercam.fetcher";
 import { BANK, BANKS, Prices } from "~/lib/constants";
 
 export async function GET(request: NextApiRequest) {
@@ -50,6 +51,10 @@ export async function GET(request: NextApiRequest) {
     inbursa: {
       buy: 0,
       sell: 0
+    },
+    intercam: {
+      buy: 0,
+      sell: 0
     }
   };
 
@@ -87,12 +92,14 @@ async function fetchPricesFromBanks() {
     bbva,
     billdotcom,
     inbursa,
+    intercam,
   ] = await Promise.all([
     fetchFromBanxico(),
     fetchFromBanamex(),
     fetchFromBbva(),
     fetchFromBilldotcom(),
     fetchFromInbursa(),
+    fetchFromIntercam(),
   ]);
 
   return {
@@ -101,5 +108,6 @@ async function fetchPricesFromBanks() {
     bbva,
     billdotcom,
     inbursa,
+    intercam
   }
 }
