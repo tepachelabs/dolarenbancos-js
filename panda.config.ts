@@ -1,4 +1,19 @@
-import { defineConfig } from '@pandacss/dev'
+import { defineConfig, defineGlobalStyles } from '@pandacss/dev'
+
+var globalCss = defineGlobalStyles({
+  'html, body': {
+    color: 'black',
+    lineHeight: '1.5',
+  },
+  h2: {
+    fontSize: '2.5rem',
+    fontWeight: 'bold',
+  },
+  h3: {
+    fontSize: '1.5rem',
+    fontWeight: 'bold',
+  },
+})
 
 export default defineConfig({
   // Whether to use css reset
@@ -21,9 +36,14 @@ export default defineConfig({
         primary: { value: '#89B9AD' },
         secondary: { value: '#FFC5C5' },
         primaryLight: { value: '#C7DCA7' },
+        black: { value: 'rgba(0,0,0,0.87)' },
+        lightGrey: { value: 'rgba(0,0,0,0.1)' },
       },
       fonts: {
-        body: { value: 'system-ui, sans-serif' },
+        body: { value: 'var(--font-montserrat)' },
+      },
+      sizes: {
+        pageWidth: { value: '960px' },
       },
     },
     extend: {},
@@ -31,4 +51,7 @@ export default defineConfig({
 
   // The output directory for your css system
   outdir: 'styled-system',
+
+  // Global styles
+  globalCss,
 })
