@@ -2,13 +2,14 @@ import { PrismaClient } from '@prisma/client'
 
 const prisma = new PrismaClient()
 
-async function main() {
+async function main () {
   const queries = [
     { id: 'inbursa', name: 'Inbursa' },
     { id: 'banamex', name: 'Banamex' },
     { id: 'bbva', name: 'BBVA' },
     { id: 'banxico', name: 'Banxico' },
     { id: 'billdotcom', name: 'Bill.com' },
+    { id: 'intercam', name: 'Intercam' },
   ].map((bank) => {
     return prisma.bank.upsert({
       where: { id: bank.id },
@@ -19,9 +20,9 @@ async function main() {
         published: true,
       },
     })
-  });
+  })
 
-  await Promise.all(queries);
+  await Promise.all(queries)
 }
 
 main()

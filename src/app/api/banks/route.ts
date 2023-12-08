@@ -1,19 +1,11 @@
-import prisma from "../../../lib/prisma";
+import prisma from '~/lib/prisma'
 
-export async function GET(request: Request) {
+export async function GET () {
   const feed = await prisma.bank.findMany({
     where: { published: true },
-    // include: {
-    //   author: {
-    //     select: { name: true },
-    //   },
-    // },
-  });
+  })
 
   return new Response(
-    JSON.stringify({
-      props: { feed },
-      revalidate: 10,
-    })
+    JSON.stringify({ feed }),
   )
 }
