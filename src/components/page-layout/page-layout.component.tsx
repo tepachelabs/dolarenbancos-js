@@ -1,11 +1,12 @@
-import { FC, PropsWithChildren } from "react";
 import Link from 'next/link'
-import { body, footer, header } from "./page-layout.styles";
+import { FC, PropsWithChildren } from 'react'
+
+import { body, footer, header } from './page-layout.styles'
 
 const navItems = [
   { label: 'Home', path: '/' },
   { label: 'Bots', path: '/bots' },
-];
+]
 
 export const PageLayout: FC<PropsWithChildren> = ({ children }) => {
   return (
@@ -31,5 +32,5 @@ export const PageLayout: FC<PropsWithChildren> = ({ children }) => {
         <p>&copy; TepacheLabs</p>
       </footer>
     </>
-  );
+  )
 }
