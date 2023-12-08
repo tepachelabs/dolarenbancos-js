@@ -1,7 +1,7 @@
 import axios from 'axios'
 
 import { FetcherResponse } from '~/lib/fetchers/fetcher.type'
-import { prettifyRate } from '~/lib/fetchers/fetchers.utils'
+import { prettifyRate } from '~/lib/utils'
 
 const BANAMEX_DOLLAR = 'https://api.banamex.com/mx-gcgapi/ext/api/v1/consumer-services/catalogs/currencies/summary'
 const TOKEN_URL = 'https://api.banamex.com/mx-gcgapi/ext/api/v1/oauth/token?grant_type=client_credentials&scope=/api/v1'

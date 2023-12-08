@@ -2,7 +2,7 @@ import axios from 'axios'
 import { load } from 'cheerio'
 
 import { FetcherResponse } from '~/lib/fetchers/fetcher.type'
-import { prettifyRate } from '~/lib/fetchers/fetchers.utils'
+import { prettifyRate } from '~/lib/utils'
 
 const INBURSA_DOLLAR = 'https://www.inbursa.com/portal/'
 

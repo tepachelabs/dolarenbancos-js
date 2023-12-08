@@ -1,7 +1,7 @@
 import axios from 'axios'
 
 import { FetcherResponse } from '~/lib/fetchers/fetcher.type'
-import { prettifyRate } from '~/lib/fetchers/fetchers.utils'
+import { prettifyRate } from '~/lib/utils'
 
 const tokenBmx = process.env.TOKEN_BMX
 
