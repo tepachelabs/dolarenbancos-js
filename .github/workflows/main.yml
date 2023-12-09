@@ -51,38 +51,38 @@ jobs:
           image: ${{ env.IMAGE_URL }}
 
       # Notify Telegram Bot
-      - name: Send Telegram Notification
-        uses: appleboy/telegram-action@master
-        if: ${{ github.ref == 'refs/heads/next' }}
-        with:
-          to: ${{ secrets.TELEGRAM_GROUP_CHAT_ID }}
-          token: ${{ secrets.TELEGRAM_TOKEN }}
-          message: |
-            💸 *[NEXT Dólar en bancos]*
-            *Status:* ${{ job.status }}
-            Run #${{github.run_number}}; Event: ${{ github.event_name }}
-            Author: *${{github.actor}}*
-            Commit message: ${{ github.event.commits[0].message }}
-            Repository: https://github.com/${{github.repository}}
-
-            Changes: https://github.com/${{ github.repository }}/commit/${{github.sha}}
-          format: markdown
-          disable_web_page_preview: "True"
-
-      - name: Send Telegram Notification
-        uses: appleboy/telegram-action@master
-        if: ${{ github.ref == 'refs/heads/master' }}
-        with:
-          to: ${{ secrets.TELEGRAM_GROUP_CHAT_ID }}
-          token: ${{ secrets.TELEGRAM_TOKEN }}
-          message: |
-            💸 *[PROD Dólar en bancos]*
-            *Status:* ${{ job.status }}
-            Run #${{github.run_number}}; Event: ${{ github.event_name }}
-            Author: *${{github.actor}}*
-            Commit message: ${{ github.event.commits[0].message }}
-            Repository: https://github.com/${{github.repository}}
-
-            Changes: https://github.com/${{ github.repository }}/commit/${{github.sha}}
-          format: markdown
-          disable_web_page_preview: "True"
+#      - name: Send Telegram Notification
+#        uses: appleboy/telegram-action@master
+#        if: ${{ github.ref == 'refs/heads/next' }}
+#        with:
+#          to: ${{ secrets.TELEGRAM_GROUP_CHAT_ID }}
+#          token: ${{ secrets.TELEGRAM_TOKEN }}
+#          message: |
+#            💸 *[NEXT Dólar en bancos]*
+#            *Status:* ${{ job.status }}
+#            Run #${{github.run_number}}; Event: ${{ github.event_name }}
+#            Author: *${{github.actor}}*
+#            Commit message: ${{ github.event.commits[0].message }}
+#            Repository: https://github.com/${{github.repository}}
+#
+#            Changes: https://github.com/${{ github.repository }}/commit/${{github.sha}}
+#          format: markdown
+#          disable_web_page_preview: "True"
+#
+#      - name: Send Telegram Notification
+#        uses: appleboy/telegram-action@master
+#        if: ${{ github.ref == 'refs/heads/master' }}
+#        with:
+#          to: ${{ secrets.TELEGRAM_GROUP_CHAT_ID }}
+#          token: ${{ secrets.TELEGRAM_TOKEN }}
+#          message: |
+#            💸 *[PROD Dólar en bancos]*
+#            *Status:* ${{ job.status }}
+#            Run #${{github.run_number}}; Event: ${{ github.event_name }}
+#            Author: *${{github.actor}}*
+#            Commit message: ${{ github.event.commits[0].message }}
+#            Repository: https://github.com/${{github.repository}}
+#
+#            Changes: https://github.com/${{ github.repository }}/commit/${{github.sha}}
+#          format: markdown
+#          disable_web_page_preview: "True"
