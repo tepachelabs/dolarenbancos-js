@@ -5,7 +5,6 @@ export function getEmptyPricesObject (): Prices {
     banamex: { buy: 0, sell: 0 },
     banxico: { buy: 0, sell: 0 },
     bbva: { buy: 0, sell: 0 },
-    billdotcom: { buy: 0, sell: 0 },
     inbursa: { buy: 0, sell: 0 },
     intercam: { buy: 0, sell: 0 },
   }
@@ -29,8 +28,6 @@ export function translateBankIdToDisplay (bankId: BANK): string {
       return 'BBVA'
     case 'banxico':
       return 'Banxico'
-    case 'billdotcom':
-      return 'Bill.com'
     case 'intercam':
       return 'Intercam'
     default:
