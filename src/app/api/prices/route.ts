@@ -35,33 +35,38 @@ export async function GET (request: NextRequest) {
 
   const prices: Prices = getEmptyPricesObject()
 
-  const pricesFromDatabase = await Promise.all(
-    BANKS.map(async (bank: BANK) => {
-      return prisma.price.findFirst({
-        where: {
-          bankId: bank,
-        },
-        orderBy: {
-          createdAt: 'desc',
-        },
+  try {
+    const pricesFromDatabase = await Promise.all(
+      BANKS.map(async (bank: BANK) => {
+        return prisma.price.findFirst({
+          where: {
+            bankId: bank,
+          },
+          orderBy: {
+            createdAt: 'desc',
+          },
+        })
       })
+    )
+
+    pricesFromDatabase.forEach((priceInstance, index) => {
+      if (!priceInstance) {
+        return
+      }
+
+      const bank = BANKS[index]
+
+      prices[bank] = {
+        buy: priceInstance?.buy || 0,
+        sell: priceInstance?.sell || 0,
+      }
     })
-  )
 
-  pricesFromDatabase.forEach((priceInstance, index) => {
-    if (!priceInstance) {
-      return
-    }
-
-    const bank = BANKS[index]
-
-    prices[bank] = {
-      buy: priceInstance?.buy || 0,
-      sell: priceInstance?.sell || 0,
-    }
-  })
-
-  return new Response(JSON.stringify(prices))
+    return new Response(JSON.stringify(prices))
+  } catch (e) {
+    console.error(e)
+    return new Response(JSON.stringify(e), { status: 500 })
+  }
 }
 
 async function fetchPricesFromBanks () {
