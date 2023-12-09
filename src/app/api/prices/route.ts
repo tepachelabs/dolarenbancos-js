@@ -1,4 +1,4 @@
-import { NextApiRequest } from 'next'
+import { NextRequest } from 'next/server'
 
 import { BANK, BANKS, Prices } from '~/lib/constants'
 import { fetchFromBanamex } from '~/lib/fetchers/banamex.fetcher'
@@ -8,8 +8,9 @@ import { fetchFromBilldotcom } from '~/lib/fetchers/billdotcom.fetcher'
 import { fetchFromInbursa } from '~/lib/fetchers/inbursa.fetcher'
 import { fetchFromIntercam } from '~/lib/fetchers/intercam.fetcher'
 import prisma from '~/lib/prisma'
+import { getEmptyPricesObject } from '~/lib/utils'
 
-export async function GET (request: NextApiRequest) {
+export async function GET (request: NextRequest) {
   const { url } = request
   const query = url?.split('?')[1] || ''
   const params = new URLSearchParams(query)
@@ -32,32 +33,7 @@ export async function GET (request: NextApiRequest) {
     )
   }
 
-  const prices: Prices = {
-    banxico: {
-      buy: 0,
-      sell: 0,
-    },
-    banamex: {
-      buy: 0,
-      sell: 0,
-    },
-    bbva: {
-      buy: 0,
-      sell: 0,
-    },
-    billdotcom: {
-      buy: 0,
-      sell: 0,
-    },
-    inbursa: {
-      buy: 0,
-      sell: 0,
-    },
-    intercam: {
-      buy: 0,
-      sell: 0,
-    },
-  }
+  const prices: Prices = getEmptyPricesObject()
 
   const pricesFromDatabase = await Promise.all(
     BANKS.map(async (bank: BANK) => {
