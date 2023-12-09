@@ -9,20 +9,24 @@ const BILL_CURRENCY_URL = 'https://app.bill.com/api/v2/ExternalCurrencyConverter
 const POST_DATA = 'data={"fundingAmount" : 1, "localCurrency" : "MXN", "partnerType" : "0"}'
 
 export async function fetchFromBilldotcom (): Promise<FetcherResponse> {
-  const { data } = await axios.post(BILL_CURRENCY_URL, POST_DATA, {
-    headers: {
-      'User-Agent': USER_AGENT,
-      'Content-type': 'application/x-www-form-urlencoded',
-      'Accept': 'application/json',
-      'Cache-Control': 'no-cache',
-    },
-  })
+  try {
+    const { data } = await axios.post(BILL_CURRENCY_URL, POST_DATA, {
+      headers: {
+        'User-Agent': USER_AGENT,
+        'Content-type': 'application/x-www-form-urlencoded',
+        'Accept': 'application/json',
+        'Cache-Control': 'no-cache',
+      },
+    })
 
-  const { response_data: values } = data
+    const { response_data: values } = data
 
-  return {
-    bank: 'billdotcom',
-    buy: prettifyRate(values['exchangeRate']),
-    sell: prettifyRate(values['disburseAmount']),
+    return {
+      bank: 'billdotcom',
+      buy: prettifyRate(values['exchangeRate']),
+      sell: prettifyRate(values['disburseAmount']),
+    }
+  } catch (e) {
+    throw e
   }
 }

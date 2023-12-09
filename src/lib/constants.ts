@@ -3,7 +3,6 @@ export type BANK =
   | 'banamex'
   | 'bbva'
   | 'banxico'
-  | 'billdotcom'
   | 'intercam'
 
 export const BANKS: BANK[] = [
@@ -11,7 +10,6 @@ export const BANKS: BANK[] = [
   'banamex',
   'bbva',
   'banxico',
-  'billdotcom',
   'intercam',
 ]
 

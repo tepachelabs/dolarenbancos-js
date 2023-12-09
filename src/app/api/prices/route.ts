@@ -73,14 +73,12 @@ async function fetchPricesFromBanks () {
     banxico,
     banamex,
     bbva,
-    billdotcom,
     inbursa,
     intercam,
   ] = await Promise.all([
     fetchFromBanxico(),
     fetchFromBanamex(),
     fetchFromBbva(),
-    fetchFromBilldotcom(),
     fetchFromInbursa(),
     fetchFromIntercam(),
   ])
@@ -89,7 +87,6 @@ async function fetchPricesFromBanks () {
     banxico,
     banamex,
     bbva,
-    billdotcom,
     inbursa,
     intercam,
   }

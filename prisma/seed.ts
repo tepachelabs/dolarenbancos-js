@@ -8,7 +8,6 @@ async function main () {
     { id: 'banamex', name: 'Banamex' },
     { id: 'bbva', name: 'BBVA' },
     { id: 'banxico', name: 'Banxico' },
-    { id: 'billdotcom', name: 'Bill.com' },
     { id: 'intercam', name: 'Intercam' },
   ].map((bank) => {
     return prisma.bank.upsert({
