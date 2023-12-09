@@ -1,11 +1,12 @@
 import { PageLayout } from '~/components/page-layout/page-layout.component'
 import { PricesTable } from '~/components/prices-table/prices-table.component'
 import { Prices } from '~/lib/constants'
+import { getEmptyPricesObject } from '~/lib/utils'
 
 import { css } from '../../styled-system/css'
 
 export default async function Home () {
-  const { banxico, ...prices }: Prices = await getPrices()
+  const { banxico, ...prices } = await getPrices()
 
   return (
     <PageLayout>
@@ -22,7 +23,20 @@ export default async function Home () {
   )
 }
 
-async function getPrices () {
-  const response = await fetch('http://localhost:3000/api/prices')
-  return await response.json()
+async function getPrices (): Promise<Prices> {
+  try {
+    const response = await fetch(`${ getBaseUrl() }/api/prices`)
+    return await response.json()
+  } catch (error) {
+    console.error(error)
+    return getEmptyPricesObject()
+  }
+}
+
+function getBaseUrl () {
+  if (process.env.NODE_ENV === 'development') {
+    return 'http://localhost:3000'
+  } else {
+    return 'https://dolarenbancos.pozole.dev'
+  }
 }

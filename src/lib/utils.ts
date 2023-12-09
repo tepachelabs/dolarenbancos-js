@@ -1,4 +1,15 @@
-import { BANK } from '~/lib/constants'
+import { BANK, Prices } from '~/lib/constants'
+
+export function getEmptyPricesObject (): Prices {
+  return {
+    banamex: { buy: 0, sell: 0 },
+    banxico: { buy: 0, sell: 0 },
+    bbva: { buy: 0, sell: 0 },
+    billdotcom: { buy: 0, sell: 0 },
+    inbursa: { buy: 0, sell: 0 },
+    intercam: { buy: 0, sell: 0 },
+  }
+}
 
 export function prettifyRate (str: string): number {
   return Number(parseFloat(str).toFixed(2))
