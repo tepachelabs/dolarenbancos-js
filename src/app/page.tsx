@@ -26,6 +26,11 @@ export default async function Home () {
 async function getPrices (): Promise<Prices> {
   try {
     const response = await fetch(`${ getBaseUrl() }/api/prices`)
+
+    if (!response.ok) {
+      throw new Error('Could not fetch prices')
+    }
+
     return await response.json()
   } catch (error) {
     console.error(error)
