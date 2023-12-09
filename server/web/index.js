@@ -2,11 +2,14 @@ const path = require('path');
 const express = require('express');
 const sass = require('node-sass-middleware');
 const logger = require('../logger');
+const {sentryRequests} = require('../sentry');
 const data = require('../data');
 
 const app = express();
 const port = process.env.PORT || 3000;
 const isDev = process.env.NODE_ENV !== 'production';
+
+app.use(sentryRequests.requestHandler());
 
 app.set('view engine', 'pug');
 app.set('views', path.join(__dirname, './views'));
@@ -62,5 +65,7 @@ app.use('/public', express.static(path.join(__dirname, 'public')));
 app.get('/sitemap.xml', (req, res) => {
   res.sendFile(path.join(__dirname, 'public/sitemap.xml'));
 });
+
+app.use(sentryRequests.errorHandler());
 
 app.listen(port, () => logger.info(`* Web server [ONLINE]`));
