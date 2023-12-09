@@ -2,20 +2,21 @@ FROM node:20.10.0-alpine AS deps
 RUN apk add --no-cache libc6-compat
 WORKDIR /app
 
-COPY package.json package-lock.json ./
+COPY package.json package-lock.json panda.config.ts postcss.config.cjs ./
 RUN  npm install
 
 FROM node:20.10.0-alpine AS builder
 WORKDIR /app
 COPY --from=deps /app/node_modules ./node_modules
+COPY --from=deps /app/styled-system ./styled-system
 COPY . .
 
 ENV NEXT_TELEMETRY_DISABLED 1
 ARG NEXT_PUBLIC_POSTHOG_KEY=$NEXT_PUBLIC_POSTHOG_KEY
-ARG NEXT_PUBLIC_POSTHOG_HOST=$NEXT_PUBLIC_POSTHOG_HOST
-ARG NEXT_PUBLIC_SENTRY_DSN=$NEXT_PUBLIC_SENTRY_DSN
-ARG SENTRY_DSN=$SENTRY_DSN
+ARG TOKEN_BMX=$TOKEN_BMX
+ARG DATABASE_URL=$DATABASE_URL
 
+RUN npx prisma generate
 RUN npm run build
 
 FROM node:20.10.0-alpine AS runner
@@ -24,9 +25,8 @@ WORKDIR /app
 ENV NODE_ENV production
 ENV NEXT_TELEMETRY_DISABLED 1
 ARG NEXT_PUBLIC_POSTHOG_KEY=$NEXT_PUBLIC_POSTHOG_KEY
-ARG NEXT_PUBLIC_POSTHOG_HOST=$NEXT_PUBLIC_POSTHOG_HOST
-ARG NEXT_PUBLIC_SENTRY_DSN=$NEXT_PUBLIC_SENTRY_DSN
-ARG SENTRY_DSN=$SENTRY_DSN
+ARG TOKEN_BMX=$TOKEN_BMX
+ARG DATABASE_URL=$DATABASE_URL
 
 RUN addgroup --system --gid 1001 nodejs
 RUN adduser --system --uid 1001 nextjs
