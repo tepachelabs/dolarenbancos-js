@@ -22,6 +22,6 @@ ${rollbaScript(process.env.NEXT_PUBLIC_ROLLBAR_CLIENT_TOKEN || '')}
 
 export const RollbarScript = () => {
   return (
-    <Script dangerouslySetInnerHTML={{ __html: scriptTagHtml }} />
+    <Script id="rollbar-script" dangerouslySetInnerHTML={{ __html: scriptTagHtml }} />
   )
 }
