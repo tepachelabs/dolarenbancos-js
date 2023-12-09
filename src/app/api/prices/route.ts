@@ -64,8 +64,7 @@ export async function GET (request: NextRequest) {
 
     return new Response(JSON.stringify(prices))
   } catch (e) {
-    console.error(e)
-    return new Response(JSON.stringify(e), { status: 500 })
+    throw e
   }
 }
 

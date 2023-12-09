@@ -39,3 +39,6 @@ next-env.d.ts
 
 # styling
 styled-system
+
+# Sentry Config File
+.sentryclirc
