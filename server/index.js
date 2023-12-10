@@ -20,7 +20,7 @@ sysRun.then(() => {
   require('./web');
   require('./scheduler');
   if (isProd) {
-    require('./discord');
+    // require('./discord'); // TODO fixing in next version
     require('./telegram');
   }
 });
