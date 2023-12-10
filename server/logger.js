@@ -1,6 +1,6 @@
 require('./rollbar');
 const Sentry = require('@sentry/node');
-const morgan = require('morgan');
+const pino = require('pino');
 
 const sentryUrl = process.env.SENTRY_URL;
 
@@ -10,9 +10,9 @@ if (process.env.NODE_ENV === 'production') {
   if (sentryUrl) {
     Sentry.init({ dsn: sentryUrl });
   }
-  logger = morgan('combined');
+  logger = pino({ level: 'info' });
 } else {
-  logger = morgan('dev');
+  logger = pino({ level: 'debug' });
 }
 
 module.exports = logger;
