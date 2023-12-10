@@ -4,6 +4,7 @@ export type BANK =
   | 'bbva'
   | 'banxico'
   | 'intercam'
+  | 'transferwise'
 
 export const BANKS: BANK[] = [
   'inbursa',
@@ -11,6 +12,7 @@ export const BANKS: BANK[] = [
   'bbva',
   'banxico',
   'intercam',
+  'transferwise',
 ]
 
 export type Prices = Record<BANK, {
