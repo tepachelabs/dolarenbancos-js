@@ -9,6 +9,7 @@ async function main () {
     { id: 'bbva', name: 'BBVA' },
     { id: 'banxico', name: 'Banxico' },
     { id: 'intercam', name: 'Intercam' },
+    { id: 'transferwise', name: 'Transferwise' },
   ].map((bank) => {
     return prisma.bank.upsert({
       where: { id: bank.id },
