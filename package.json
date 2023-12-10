@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "@firebase/rules-unit-testing": "^3.0.1",
+    "@logtail/pino": "^0.4.17",
     "@sentry/node": "^7.86.0",
     "axios": "^1.6.2",
     "cheerio": "^1.0.0-rc.10",
