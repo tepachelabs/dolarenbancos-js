@@ -15,7 +15,7 @@ const fetcher = {
     fetchBanamex(),
     fetchInbursa(),
     fetchBbva(),
-    fetchBillDotCom(),
+    // fetchBillDotCom(), // Failing
     fetchTransferwise(),
   ]).then(values => {
     before(data);
