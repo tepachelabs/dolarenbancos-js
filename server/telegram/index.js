@@ -1,4 +1,4 @@
-const Telegraf = require('telegraf');
+const { Telegraf } = require('telegraf')
 const logger = require('../logger');
 const data = require('../data');
 
