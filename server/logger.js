@@ -1,28 +1,18 @@
 require('./rollbar');
 const Sentry = require('@sentry/node');
+const morgan = require('morgan');
 
 const sentryUrl = process.env.SENTRY_URL;
-const papertrailUrl = process.env.PAPERTRAIL_URL;
-const papertrailPort = process.env.PAPERTRAIL_PORT;
 
 let logger;
 
 if (process.env.NODE_ENV === 'production') {
-  if (!sentryUrl || !papertrailUrl || !papertrailPort) {
-    console.error('Logger cannot start');
+  if (sentryUrl) {
+    Sentry.init({ dsn: sentryUrl });
   }
-
-  Sentry.init({ dsn: sentryUrl });
-
-  logger = {
-    info: message => winstonLogger.log('info', message),
-    error: message => winstonLogger.log('info', message),
-  }
+  logger = morgan('combined');
 } else {
-  logger = {
-    info: console.log,
-    error: console.error,
-  }
+  logger = morgan('dev');
 }
 
 module.exports = logger;
