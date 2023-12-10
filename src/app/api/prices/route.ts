@@ -8,6 +8,7 @@ import { fetchFromInbursa } from '~/lib/fetchers/inbursa.fetcher'
 import { fetchFromIntercam } from '~/lib/fetchers/intercam.fetcher'
 import prisma from '~/lib/prisma'
 import { getEmptyPricesObject } from '~/lib/utils'
+import { fetchFromTransferwise } from "~/lib/fetchers/transferwise.fetcher";
 
 export async function GET (request: NextRequest) {
   const { url } = request
@@ -74,12 +75,14 @@ async function fetchPricesFromBanks () {
     bbva,
     inbursa,
     intercam,
+    transferwise,
   ] = await Promise.all([
     fetchFromBanxico(),
     fetchFromBanamex(),
     fetchFromBbva(),
     fetchFromInbursa(),
     fetchFromIntercam(),
+    fetchFromTransferwise(),
   ])
 
   return {
@@ -88,5 +91,6 @@ async function fetchPricesFromBanks () {
     bbva,
     inbursa,
     intercam,
+    transferwise,
   }
 }
