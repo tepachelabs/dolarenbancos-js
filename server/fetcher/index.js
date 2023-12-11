@@ -45,13 +45,8 @@ const ENABLED_BANKS = Object.entries(BANKS)
 
 const fetcher = {
   fetchAll: (before = noop, after = noop) => Promise.all(
-    fetchBanxico(),
-    fetchBanamex(),
-    fetchInbursa(),
-    fetchBbva(),
-    // fetchBillDotCom(), // TODO failing
-    fetchTransferwise(),
-  ).then(values => {
+    Object.values(ENABLED_BANKS).map(bank => bank.fetch())
+).then(values => {
     before(data);
 
     const banxico = values.shift();
