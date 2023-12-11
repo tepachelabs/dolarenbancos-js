@@ -1,5 +1,6 @@
+import { log } from '@logtail/next'
+
 import { getWeekReport } from '~/lib/data/report-week.data'
-import { log } from "@logtail/next";
 
 export const dynamic = 'force-dynamic'
 
