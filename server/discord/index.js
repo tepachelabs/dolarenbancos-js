@@ -1,11 +1,12 @@
 const Discord = require('discord.js');
+const GatewayIntentBits = Discord.GatewayIntentBits;
 const logger = require('../logger');
 const data = require('../data');
 
 const client = new Discord.Client({
   intents: [
-    Discord.Intents.FLAGS.GUILDS,
-    Discord.Intents.FLAGS.GUILD_MESSAGES
+    GatewayIntentBits.Guilds,
+    GatewayIntentBits.GuildMessages,
   ]
 });
 

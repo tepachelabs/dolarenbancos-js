@@ -60,7 +60,9 @@ module.exports = {
     }));
   },
   getBotMessage: (dollars = 1) => {
-    const lines = Object.keys(store.banks).map(bank =>
+    const lines = Object.keys(store.banks)
+      .filter(bank => store.banks[bank]['sell'] !== 0 && store.banks[bank]['buy'] !== 0)
+      .map(bank =>
       `* ${ bank.toUpperCase() }\t Compra: ${ (store.banks[bank]['buy'] * dollars).toFixed(2) }\t Venta: ${ (store.banks[bank]['sell'] * dollars).toFixed(2) }\t`);
 
     lines.unshift('---');

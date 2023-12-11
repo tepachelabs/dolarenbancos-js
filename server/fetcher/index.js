@@ -9,25 +9,56 @@ const data = require('../data');
 const noop = () => {
 };
 
+const BANKS= {
+  banxico: {
+    fetch: fetchBanxico,
+    enabled: true,
+  },
+  banamex: {
+    fetch: fetchBanamex,
+    enabled: true,
+  },
+  inbursa: {
+    fetch: fetchInbursa,
+    enabled: true,
+  },
+  bbva: {
+    fetch: fetchBbva,
+    enabled: true,
+  },
+  billdotcom: {
+    fetch: fetchBillDotCom,
+    enabled: false,
+  },
+  transferwise: {
+    fetch: fetchTransferwise,
+    enabled: true,
+  },
+};
+
+const ENABLED_BANKS = Object.entries(BANKS)
+  .filter(([_key, bank]) => bank.enabled)
+  .reduce((obj, [key, value]) => {
+    obj[key] = value;
+    return obj;
+  }, {});
+
 const fetcher = {
-  fetchAll: (before = noop, after = noop) => Promise.all([
-    fetchBanxico(),
-    fetchBanamex(),
-    fetchInbursa(),
-    fetchBbva(),
-    // fetchBillDotCom(), // TODO failing
-    fetchTransferwise(),
-  ]).then(values => {
+  fetchAll: (before = noop, after = noop) => Promise.all(
+    Object.entries(ENABLED_BANKS).map(([_k, bank]) => bank.fetch)
+  ).then(values => {
     before(data);
 
     const banxico = values.shift();
     data.banxico.fix = banxico && banxico.buy ? banxico.buy : 0;
 
     values.forEach(value => {
-      data.banks[value.key] = {
-        buy: value.buy,
-        sell: value.sell,
-      };
+      if (value && value.key) {
+        data.banks[value.key] = {
+          buy: value.buy,
+          sell: value.sell,
+        };
+      }
     });
 
     data.meta = Object.keys(data.banks).reduce((acc, bank) => {
