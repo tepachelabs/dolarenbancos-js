@@ -40,7 +40,7 @@ jobs:
             NEXT_PUBLIC_POSTHOG_KEY=${{ vars.NEXT_PUBLIC_POSTHOG_KEY }}
             DATABASE_URL=${{ secrets.DATABASE_URL }}
             TOKEN_BMX=${{ secrets.TOKEN_BMX }}
-            SENTRY_AUTH_TOKEN=${{ secrets.SENTRY_AUTH_TOKEN }}
+            LOGTAIL_SOURCE_TOKEN=${{ secrets.LOGTAIL_SOURCE_TOKEN }}
 
       # Deploy to CapRover
       - name: Deploy Image to CapRover
