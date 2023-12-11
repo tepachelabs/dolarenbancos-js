@@ -1,14 +1,13 @@
+import { log } from '@logtail/next'
 import { NextRequest } from 'next/server'
 
-import { BANK, BANKS, Prices } from '~/lib/constants'
 import { fetchFromBanamex } from '~/lib/fetchers/banamex.fetcher'
 import { fetchFromBanxico } from '~/lib/fetchers/banxico.fetcher'
 import { fetchFromBbva } from '~/lib/fetchers/bbva.fetcher'
 import { fetchFromInbursa } from '~/lib/fetchers/inbursa.fetcher'
 import { fetchFromIntercam } from '~/lib/fetchers/intercam.fetcher'
+import { fetchFromTransferwise } from '~/lib/fetchers/transferwise.fetcher'
 import prisma from '~/lib/prisma'
-import { getEmptyPricesObject } from '~/lib/utils'
-import { fetchFromTransferwise } from "~/lib/fetchers/transferwise.fetcher";
 
 export async function GET (request: NextRequest) {
   const { url } = request
@@ -18,54 +17,27 @@ export async function GET (request: NextRequest) {
   if (params.has('refetch')) {
     const fetchedPrices = await fetchPricesFromBanks()
 
-    await Promise.all(
-      Object.keys(fetchedPrices).map((bank) => {
-        const prop = bank as keyof typeof fetchedPrices
-        const price = fetchedPrices[prop]!
-        return prisma.price.create({
-          data: {
-            bankId: prop,
-            sell: price.sell,
-            buy: price.buy,
-          },
+    try {
+      await Promise.all(
+        Object.keys(fetchedPrices).map((bank) => {
+          const prop = bank as keyof typeof fetchedPrices
+          const price = fetchedPrices[prop]!
+          return prisma.price.create({
+            data: {
+              bankId: prop,
+              sell: price.sell,
+              buy: price.buy,
+            },
+          })
         })
-      })
-    )
+      )
+    } catch (e) {
+      // @ts-ignore
+      log.error(e)
+    }
   }
 
-  const prices: Prices = getEmptyPricesObject()
-
-  try {
-    const pricesFromDatabase = await Promise.all(
-      BANKS.map(async (bank: BANK) => {
-        return prisma.price.findFirst({
-          where: {
-            bankId: bank,
-          },
-          orderBy: {
-            createdAt: 'desc',
-          },
-        })
-      })
-    )
-
-    pricesFromDatabase.forEach((priceInstance, index) => {
-      if (!priceInstance) {
-        return
-      }
-
-      const bank = BANKS[index]
-
-      prices[bank] = {
-        buy: priceInstance?.buy || 0,
-        sell: priceInstance?.sell || 0,
-      }
-    })
-
-    return new Response(JSON.stringify(prices))
-  } catch (e) {
-    throw e
-  }
+  return new Response('ok')
 }
 
 async function fetchPricesFromBanks () {
