@@ -6,6 +6,8 @@ import { formatServerDate, getEmptyPricesObject } from '~/lib/utils'
 
 import { css } from '../../styled-system/css'
 
+const sectionStyles = css({ w: '100%', maxW: '65%', m: '0 auto 2em' })
+
 export default async function Home () {
   const weekReport = await getPrices()
   const today = formatServerDate(new Date())
@@ -16,17 +18,19 @@ export default async function Home () {
     <PageLayout>
       <h2>Precio del dólar al día</h2>
 
-      <div>
+      <section>
         <h3>Precio de referencia: ${ banxico.sell } MXN</h3>
-      </div>
+      </section>
 
-      <div className={ css({ w: '100%', maxW: '65%', m: '0 auto', h: '22em' }) }>
-        <WeeklyPriceChart week={ weekReport }/>
-      </div>
-
-      <div className={ css({ w: '100%', maxW: '65%', m: '0 auto' }) }>
+      <section className={ sectionStyles }>
+        <h4>Precios actuales</h4>
         <PricesTable prices={ prices }/>
-      </div>
+      </section>
+
+      <section className={ sectionStyles }>
+        <h4>Vista semanal</h4>
+        <WeeklyPriceChart weeklyReport={ weekReport }/>
+      </section>
     </PageLayout>
   )
 }

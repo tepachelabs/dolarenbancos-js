@@ -1,32 +1,27 @@
-import dynamic from 'next/dynamic'
+'use client'
+
+import { Chart as ChartJS, CategoryScale, LinearScale, Tooltip, PointElement, LineElement } from 'chart.js'
 import { FC, useMemo } from 'react'
+import { Line } from 'react-chartjs-2'
 
-// import Chart from 'react-apexcharts'
 import { Prices } from '~/lib/constants'
-import { convertToChartFormat } from '~/lib/utils'
+import { convertToChartFormat, prettifyDate } from '~/lib/utils'
 
-const Chart = dynamic(() => import('react-apexcharts'), { ssr: false })
+// Register ChartJS components using ChartJS.register
+ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Tooltip)
 
 interface Props {
-  week: Record<string, Prices>
+  weeklyReport: Record<string, Prices>
 }
 
-export const WeeklyPriceChart: FC<Props> = ({ week }) => {
-  const categories = useMemo(() => Object.keys(week).reverse(), [week])
-  const series = useMemo(() => convertToChartFormat(week), [week])
-
-  return (
-    <div>
-      { (typeof window !== 'undefined') && (
-        <Chart
-          id="weekly-prices"
-          options={ {} }
-          xaxis={ { categories } }
-          series={ series }
-          type="line"
-          width="100%"
-        />
-      )}
-    </div>
+export const WeeklyPriceChart: FC<Props> = ({ weeklyReport }) => {
+  const labels = useMemo(() =>
+    Object.keys(weeklyReport)
+      .map((date) => prettifyDate(new Date(date)))
+      .reverse(),
+  [weeklyReport]
   )
+  const datasets = useMemo(() => convertToChartFormat(weeklyReport), [weeklyReport])
+
+  return <Line data={{ labels, datasets }}/>
 }
