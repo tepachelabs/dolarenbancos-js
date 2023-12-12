@@ -59,10 +59,6 @@ export function translateBankIdToBackgroundColor (bankId: BANK): string {
   }
 }
 
-export function formatServerDate (date: Date): string {
-  return `${ date.getMonth() + 1 }/${ date.getDate() }/${ date.getFullYear() }`
-}
-
 interface ChartFormat {
   label: string,
   backgroundColor: string,

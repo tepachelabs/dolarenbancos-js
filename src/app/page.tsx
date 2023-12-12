@@ -1,17 +1,22 @@
+import { log } from '@logtail/next'
+
 import { PageLayout } from '~/components/page-layout'
 import { PricesTable } from '~/components/prices-table'
 import { WeeklyPriceChart } from '~/components/weekly-price-chart'
 import { Prices } from '~/lib/constants'
-import { formatServerDate, getEmptyPricesObject } from '~/lib/utils'
 
 import { css } from '../../styled-system/css'
+
+interface Data {
+  today: Prices,
+  week: Record<string, Prices>
+}
 
 const sectionStyles = css({ w: '100%', maxW: '65%', m: '0 auto 2em' })
 
 export default async function Home () {
-  const weekReport = await getPrices()
-  const today = formatServerDate(new Date())
-  const todayPrices = weekReport[today]
+  const data = await getPrices()
+  const todayPrices = data.today
   const { banxico, ...prices } = todayPrices
 
   return (
@@ -29,24 +34,31 @@ export default async function Home () {
 
       <section className={ sectionStyles }>
         <h4>Vista semanal</h4>
-        <WeeklyPriceChart weeklyReport={ weekReport }/>
+        <WeeklyPriceChart weeklyReport={ data.week }/>
       </section>
     </PageLayout>
   )
 }
 
-async function getPrices (): Promise<Record<string, Prices>> {
+async function getPrices (): Promise<Data> {
   try {
-    const response = await fetch(`${ getBaseUrl() }/api/report/week`)
+    const [today, weekly] = await Promise.all([
+      fetch(`${ getBaseUrl() }/api/report/now`),
+      fetch(`${ getBaseUrl() }/api/report/week`),
+    ])
 
-    if (!response.ok) {
+    if (!today.ok || !weekly.ok) {
       throw new Error('Could not fetch prices')
     }
 
-    return await response.json()
+    return {
+      today: await today.json(),
+      week: await weekly.json(),
+    }
   } catch (error) {
-    console.error(error)
-    return { '': getEmptyPricesObject() }
+    // @ts-ignore
+    log.error(error)
+    throw new Error('Could not fetch prices')
   }
 }
 
