@@ -1,5 +1,5 @@
+import { Footer } from '@tepachelabs/components'
 import Link from 'next/link'
-import { Footer } from '@tepachelabs/components';
 import { FC, PropsWithChildren } from 'react'
 
 import { body, bodySection, centeredSection, footer, header, mainNav } from './page-layout.styles'
@@ -10,7 +10,7 @@ const navItems = [
   { label: 'Inicio', path: '/' },
 ]
 
-import '@tepachelabs/components/dist/css/min.css';
+import '@tepachelabs/components/dist/css/min.css'
 
 export const PageLayout: FC<PropsWithChildren> = ({ children }) => {
   return (
