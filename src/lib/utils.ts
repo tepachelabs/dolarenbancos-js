@@ -37,3 +37,41 @@ export function translateBankIdToDisplay (bankId: BANK): string {
       return '??'
   }
 }
+
+export function formatServerDate (date: Date): string {
+  return `${date.getMonth() + 1}/${date.getDate()}/${date.getFullYear()}`
+}
+
+interface ChartFormat {
+  name: BANK,
+  data: number[]
+}
+
+export function convertToChartFormat (week: Record<string, Prices>): ChartFormat[] {
+  const chartFormat: ChartFormat[] = []
+  const bankWeeklyPrices = new Map<BANK, number[]>()
+
+  for (const date in week) {
+    const prices = week[date]
+
+    for (const bankName in prices) {
+      const bank = bankName as BANK
+      const price = prices[bank as BANK]
+
+      if (!bankWeeklyPrices.has(bank)) {
+        bankWeeklyPrices.set(bank, [])
+      }
+
+      bankWeeklyPrices.get(bank)?.unshift(price.buy)
+    }
+  }
+
+  bankWeeklyPrices.forEach(
+    (price, bank) => chartFormat.push({
+      name: bank,
+      data: price,
+    })
+  )
+
+  return chartFormat
+}
