@@ -1,3 +1,4 @@
+import { Footer } from '@tepachelabs/components'
 import Link from 'next/link'
 import { FC, PropsWithChildren } from 'react'
 
@@ -8,6 +9,8 @@ import { container } from '../../../styled-system/patterns'
 const navItems = [
   { label: 'Inicio', path: '/' },
 ]
+
+import '@tepachelabs/components/dist/css/min.css'
 
 export const PageLayout: FC<PropsWithChildren> = ({ children }) => {
   return (
@@ -33,11 +36,7 @@ export const PageLayout: FC<PropsWithChildren> = ({ children }) => {
         </div>
       </main>
 
-      <footer className={ footer }>
-        <div className={ centeredSection }>
-          <p>&copy; 2017-{ new Date().getFullYear() } Dólar en bancos. Algunos derechos reservados.</p>
-        </div>
-      </footer>
+      <Footer title="dolarenbancos.com" />
     </>
   )
 }
