@@ -41,10 +41,13 @@ export default async function Home () {
 }
 
 async function getPrices (): Promise<Data> {
+  // takes data from cache if available
+  const commonFetchProps = { next: { tags: ['prices'] } }
+
   try {
     const [today, weekly] = await Promise.all([
-      fetch(`${ getBaseUrl() }/api/report/now`),
-      fetch(`${ getBaseUrl() }/api/report/week`),
+      fetch(`${ getBaseUrl() }/api/report/now`, commonFetchProps),
+      fetch(`${ getBaseUrl() }/api/report/week`, commonFetchProps),
     ])
 
     if (!today.ok || !weekly.ok) {
