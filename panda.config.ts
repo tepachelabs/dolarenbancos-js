@@ -13,6 +13,10 @@ var globalCss = defineGlobalStyles({
     fontSize: '1.5rem',
     fontWeight: 'bold',
   },
+  h4: {
+    fontSize: '1.25rem',
+    fontWeight: 'bold',
+  },
 })
 
 export default defineConfig({
