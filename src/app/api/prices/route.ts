@@ -1,4 +1,5 @@
 import { log } from '@logtail/next'
+import { revalidateTag } from 'next/cache'
 import { NextRequest } from 'next/server'
 
 import { fetchFromBanamex } from '~/lib/fetchers/banamex.fetcher'
@@ -31,6 +32,9 @@ export async function GET (request: NextRequest) {
           })
         })
       )
+
+      // purge prices cache
+      revalidateTag('prices')
     } catch (e) {
       // @ts-ignore
       log.error(e)
