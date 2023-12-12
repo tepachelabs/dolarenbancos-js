@@ -1,12 +1,16 @@
-import { PageLayout } from '~/components/page-layout/page-layout.component'
-import { PricesTable } from '~/components/prices-table/prices-table.component'
+import { PageLayout } from '~/components/page-layout'
+import { PricesTable } from '~/components/prices-table'
+import { WeeklyPriceChart } from '~/components/weekly-price-chart'
 import { Prices } from '~/lib/constants'
-import { getEmptyPricesObject } from '~/lib/utils'
+import { formatServerDate, getEmptyPricesObject } from '~/lib/utils'
 
 import { css } from '../../styled-system/css'
 
 export default async function Home () {
-  const { banxico, ...prices } = await getPrices()
+  const weekReport = await getPrices()
+  const today = formatServerDate(new Date())
+  const todayPrices = weekReport[today]
+  const { banxico, ...prices } = todayPrices
 
   return (
     <PageLayout>
@@ -16,6 +20,10 @@ export default async function Home () {
         <h3>Precio de referencia: ${ banxico.sell } MXN</h3>
       </div>
 
+      <div className={ css({ w: '100%', maxW: '65%', m: '0 auto', h: '22em' }) }>
+        <WeeklyPriceChart week={ weekReport }/>
+      </div>
+
       <div className={ css({ w: '100%', maxW: '65%', m: '0 auto' }) }>
         <PricesTable prices={ prices }/>
       </div>
@@ -23,9 +31,9 @@ export default async function Home () {
   )
 }
 
-async function getPrices (): Promise<Prices> {
+async function getPrices (): Promise<Record<string, Prices>> {
   try {
-    const response = await fetch(`${ getBaseUrl() }/api/report/now`)
+    const response = await fetch(`${ getBaseUrl() }/api/report/week`)
 
     if (!response.ok) {
       throw new Error('Could not fetch prices')
@@ -34,7 +42,7 @@ async function getPrices (): Promise<Prices> {
     return await response.json()
   } catch (error) {
     console.error(error)
-    return getEmptyPricesObject()
+    return { '': getEmptyPricesObject() }
   }
 }
 
