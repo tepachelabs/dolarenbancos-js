@@ -12,5 +12,5 @@ export const footer = css({
   '&.tp-footer .text': {
     fontSize: '24px',
     color: 'cyan',
-  }
+  },
 })

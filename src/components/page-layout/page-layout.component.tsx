@@ -4,8 +4,7 @@ import { FC, PropsWithChildren } from 'react'
 import { body, bodySection, centeredSection, header, mainNav } from './page-layout.styles'
 import { cx } from '../../../styled-system/css'
 import { container } from '../../../styled-system/patterns'
-
-import {Footer} from "~/components/footer";
+import { Footer } from '../footer'
 
 const navItems = [
   { label: 'Inicio', path: '/' },
