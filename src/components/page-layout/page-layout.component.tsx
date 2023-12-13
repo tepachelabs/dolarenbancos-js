@@ -1,10 +1,11 @@
-import { Footer } from '@tepachelabs/components'
 import Link from 'next/link'
 import { FC, PropsWithChildren } from 'react'
 
-import { body, bodySection, centeredSection, footer, header, mainNav } from './page-layout.styles'
+import { body, bodySection, centeredSection, header, mainNav } from './page-layout.styles'
 import { cx } from '../../../styled-system/css'
 import { container } from '../../../styled-system/patterns'
+
+import {Footer} from "~/components/footer";
 
 const navItems = [
   { label: 'Inicio', path: '/' },
@@ -36,7 +37,7 @@ export const PageLayout: FC<PropsWithChildren> = ({ children }) => {
         </div>
       </main>
 
-      <Footer title="dolarenbancos.com" />
+      <Footer />
     </>
   )
 }
