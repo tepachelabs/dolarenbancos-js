@@ -22,6 +22,6 @@ sysRun.then(() => {
   if (isProd) {
     // require('./discord');
     require('./telegram');
-    logger.warning("> Bots should be disabled now.")
+    logger.info("> Bots should be disabled now.")
   }
 });
