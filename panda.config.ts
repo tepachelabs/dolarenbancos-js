@@ -37,9 +37,9 @@ export default defineConfig({
     // 👇🏻 Define your tokens here
     tokens: {
       colors: {
-        primary: { value: '#89B9AD' },
+        primary: { value: '#7DAF47' },
+        primaryLight: { value: '#F4F8F4' },
         secondary: { value: '#FFC5C5' },
-        primaryLight: { value: '#C7DCA7' },
         black: { value: 'rgba(0,0,0,0.87)' },
         lightGrey: { value: 'rgba(0,0,0,0.1)' },
       },
@@ -47,7 +47,7 @@ export default defineConfig({
         body: { value: 'var(--font-montserrat)' },
       },
       sizes: {
-        pageWidth: { value: '960px' },
+        pageWidth: { value: '1000px' },
       },
     },
     extend: {},
