@@ -39,13 +39,13 @@ export default async function Home () {
         <Card marginBottom='2rem'>
           <h3>Bot para Telegram</h3>
           <p>Recibe el resumen directo a tu smartphone o computador sin tener que instalar nada extra. Consulta nuestro
-            bot de Telegram, sólo envía el texto "/dolar" y recibe el resumen en segundos.</p>
+            bot de Telegram, sólo envía el texto &ldquo;/dolar&rdquo; y recibe el resumen en segundos.</p>
           <a href='#'>Comenzar chat</a>
         </Card>
         <Card>
           <h3>Bot para Discord</h3>
           <p>Obtén la información mas rápidamente desde tu Discord. Agrega nuestro bot de Discord, envía la palabra
-            "dolar" y recibe el resumen en segundos.</p>
+            &ldquo;dolar&rdquo; y recibe el resumen en segundos.</p>
           <a href="#">Agrega a tu servidor</a>
         </Card>
         <Caption>Nuestros bots no guardan historial de mensajes. Consulta nuestra política de privacidad aquí.</Caption>
