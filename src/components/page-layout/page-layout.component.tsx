@@ -1,3 +1,4 @@
+import '@tepachelabs/components/dist/css/min.css'
 import { Footer } from '@tepachelabs/components'
 import Link from 'next/link'
 import { FC, PropsWithChildren } from 'react'
@@ -9,8 +10,6 @@ const navItems = [
   { label: 'Histórico', path: '/#historico' },
   { label: 'Bots', path: '/#bots' },
 ]
-
-import '@tepachelabs/components/dist/css/min.css'
 
 export const PageLayout: FC<PropsWithChildren> = ({ children }) => {
   return (
@@ -34,7 +33,10 @@ export const PageLayout: FC<PropsWithChildren> = ({ children }) => {
         { children }
       </main>
 
-      <Footer title="Dólar en Bancos" copyright='© 2023 Dólar en Bancos. Algunos derechos reservados.'/>
+      <Footer
+        title="Dólar en Bancos"
+        copyright="© 2023 Dólar en Bancos. Algunos derechos reservados."
+      />
     </>
   )
 }
