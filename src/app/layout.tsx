@@ -1,11 +1,25 @@
 import type { Metadata } from 'next'
-import { Montserrat } from 'next/font/google'
+import { Anton, Courier_Prime, Montserrat } from 'next/font/google'
 import { ReactNode } from 'react'
+
 import './globals.css'
+import { cx } from '../../styled-system/css'
 
 const montserrat = Montserrat({
   subsets: ['latin'],
-  variable: '--font-montserrat',
+  variable: '--font-body',
+})
+
+const anton = Anton({
+  subsets: ['latin'],
+  variable: '--font-heading',
+  weight: '400',
+})
+
+const courier = Courier_Prime({
+  subsets: ['latin'],
+  variable: '--font-mono',
+  weight: '400',
 })
 
 export const metadata: Metadata = {
@@ -19,8 +33,9 @@ export default function RootLayout ({
   children: ReactNode
 }) {
   return (
-    <html lang="en" className={ montserrat.variable }>
+    <html lang="en" className={ cx(anton.variable, courier.variable, montserrat.variable) }>
       <body>{ children }</body>
     </html>
   )
 }
+
