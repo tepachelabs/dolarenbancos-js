@@ -1,18 +1,19 @@
 import { log } from '@logtail/next'
 
+import { Caption } from '~/components/atoms/caption.component'
+import { Card } from '~/components/atoms/card.component'
+import { Section } from '~/components/atoms/section.component'
 import { PageLayout } from '~/components/page-layout'
 import { PricesTable } from '~/components/prices-table'
 import { WeeklyPriceChart } from '~/components/weekly-price-chart'
 import { Prices } from '~/lib/constants'
 
-import { css } from '../../styled-system/css'
+const disclaimer = 'Actualizado con información pública. Las cantidades son datos de referencia solamente.'
 
 interface Data {
   today: Prices,
   week: Record<string, Prices>
 }
-
-const sectionStyles = css({ w: '100%', maxW: '65%', m: '0 auto 2em' })
 
 export default async function Home () {
   const data = await getPrices()
@@ -21,21 +22,34 @@ export default async function Home () {
 
   return (
     <PageLayout>
-      <h2>Precio del dólar al día</h2>
-
-      <section>
-        <h3>Precio de referencia: ${ banxico.sell } MXN</h3>
-      </section>
-
-      <section className={ sectionStyles }>
-        <h4>Precios actuales</h4>
+      <Section id="precios">
+        <h2>Precios al día</h2>
         <PricesTable prices={ prices }/>
-      </section>
+        <Caption>{ disclaimer }</Caption>
+      </Section>
 
-      <section className={ sectionStyles }>
-        <h4>Vista semanal</h4>
+      <Section id="historico" backgroundColor="primaryLight">
+        <h2>Histórico semanal</h2>
         <WeeklyPriceChart weeklyReport={ data.week }/>
-      </section>
+        <Caption>{ disclaimer }</Caption>
+      </Section>
+
+      <Section id="bots">
+        <h2>Información al momento</h2>
+        <Card marginBottom='2rem'>
+          <h3>Bot para Telegram</h3>
+          <p>Recibe el resumen directo a tu smartphone o computador sin tener que instalar nada extra. Consulta nuestro
+            bot de Telegram, sólo envía el texto "/dolar" y recibe el resumen en segundos.</p>
+          <a href='#'>Comenzar chat</a>
+        </Card>
+        <Card>
+          <h3>Bot para Discord</h3>
+          <p>Obtén la información mas rápidamente desde tu Discord. Agrega nuestro bot de Discord, envía la palabra
+            "dolar" y recibe el resumen en segundos.</p>
+          <a href="#">Agrega a tu servidor</a>
+        </Card>
+        <Caption>Nuestros bots no guardan historial de mensajes. Consulta nuestra política de privacidad aquí.</Caption>
+      </Section>
     </PageLayout>
   )
 }
