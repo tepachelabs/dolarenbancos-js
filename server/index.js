@@ -20,7 +20,8 @@ sysRun.then(() => {
   require('./web');
   require('./scheduler');
   if (isProd) {
-    require('./discord');
-    require('./telegram');
+    // require('./discord');
+    // require('./telegram');
+    logger.warning("> Bots should be disabled now.")
   }
 });
