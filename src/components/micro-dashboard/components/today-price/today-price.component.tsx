@@ -21,7 +21,7 @@ export const TodayPrice: FC<Props> = ({ price }) => {
     <Card backgroundColor="white" width="100%">
       <div className={ widget }>
         <h3>Precio de<br/>referencia</h3>
-        <b className={ priceDisplay }>$ 19.89</b>
+        <b className={ priceDisplay }>$ {price}</b>
       </div>
     </Card>
   )
