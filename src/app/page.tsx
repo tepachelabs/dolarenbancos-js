@@ -3,10 +3,12 @@ import { log } from '@logtail/next'
 import { Caption } from '~/components/atoms/caption.component'
 import { Card } from '~/components/atoms/card.component'
 import { Section } from '~/components/atoms/section.component'
+import { MicroDashboard } from '~/components/micro-dashboard'
 import { PageLayout } from '~/components/page-layout'
 import { PricesTable } from '~/components/prices-table'
 import { WeeklyPriceChart } from '~/components/weekly-price-chart'
 import { Prices } from '~/lib/constants'
+import { formatPrice } from '~/lib/utils'
 
 const disclaimer = 'Actualizado con información pública. Las cantidades son datos de referencia solamente.'
 
@@ -22,6 +24,13 @@ export default async function Home () {
 
   return (
     <PageLayout>
+      <Section padding="4rem 0 0">
+        <MicroDashboard
+          todayPrice={ formatPrice(banxico.buy) }
+          weeklyReport={ data.week }
+        />
+      </Section>
+
       <Section id="precios">
         <h2>Precios al día</h2>
         <PricesTable prices={ prices }/>
@@ -36,11 +45,11 @@ export default async function Home () {
 
       <Section id="bots">
         <h2>Información al momento</h2>
-        <Card marginBottom='2rem'>
+        <Card marginBottom="2rem">
           <h3>Bot para Telegram</h3>
           <p>Recibe el resumen directo a tu smartphone o computador sin tener que instalar nada extra. Consulta nuestro
             bot de Telegram, sólo envía el texto &ldquo;/dolar&rdquo; y recibe el resumen en segundos.</p>
-          <a href='#'>Comenzar chat</a>
+          <a href="#">Comenzar chat</a>
         </Card>
         <Card>
           <h3>Bot para Discord</h3>

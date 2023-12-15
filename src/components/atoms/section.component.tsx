@@ -26,11 +26,17 @@ const wrapper = css({
 interface SectionProps {
   id?: string
   backgroundColor?: 'transparent' | 'primaryLight' | 'primaryLighter'
+  padding?: string
 }
 
-export const Section: FC<PropsWithChildren<SectionProps>> = ({ backgroundColor = 'transparent', children, id }) => {
+export const Section: FC<PropsWithChildren<SectionProps>> = ({
+  backgroundColor = 'transparent',
+  children,
+  id,
+  padding,
+}) => {
   return (
-    <section id={id} className={ cx(section, css({ backgroundColor })) }>
+    <section id={ id } className={ cx(section, css({ backgroundColor, padding })) }>
       <div className={ wrapper }>{ children }</div>
     </section>
   )
