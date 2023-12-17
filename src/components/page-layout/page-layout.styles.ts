@@ -6,6 +6,7 @@ export const header = css({
   borderColor: 'lightGrey',
   position: 'sticky',
   top: 0,
+  zIndex: 1,
 })
 
 export const wrapper = css({
