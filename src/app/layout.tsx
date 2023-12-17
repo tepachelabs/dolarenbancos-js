@@ -1,8 +1,10 @@
+import './globals.css'
 import type { Metadata } from 'next'
 import { Anton, Courier_Prime, Montserrat } from 'next/font/google'
 import { ReactNode } from 'react'
 
-import './globals.css'
+import { Providers } from '~/components/providers.component'
+
 import { cx } from '../../styled-system/css'
 
 const montserrat = Montserrat({
@@ -34,7 +36,11 @@ export default function RootLayout ({
 }) {
   return (
     <html lang="en" className={ cx(anton.variable, courier.variable, montserrat.variable) }>
-      <body>{ children }</body>
+      <body>
+        <Providers>
+          { children }
+        </Providers>
+      </body>
     </html>
   )
 }
