@@ -3,7 +3,7 @@
 import { FC } from 'react'
 
 import { table } from '~/components/prices-table/prices-table.styles'
-import { useCalculator } from '~/lib/calculator.context-provider'
+import { useCalculatorResult } from '~/lib/calculator-result.context-provider'
 import { BANK, Prices } from '~/lib/constants'
 import { formatPrice, translateBankIdToDisplay } from '~/lib/utils'
 
@@ -12,7 +12,7 @@ interface Props {
 }
 
 export const PricesTable: FC<Props> = ({ prices }) => {
-  const { usd } = useCalculator()
+  const { usd } = useCalculatorResult()
 
   return (
     <table className={ table }>

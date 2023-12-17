@@ -9,7 +9,7 @@ import { PricesTable } from '~/components/prices-table'
 import { ResetButton } from '~/components/reset-button'
 import { WeeklyPriceChart } from '~/components/weekly-price-chart'
 import { ApplicationProvider } from '~/lib/application.context-provider'
-import { CalculatorProvider } from '~/lib/calculator.context-provider'
+import { CalculatorResultProvider } from '~/lib/calculator-result.context-provider'
 import { Prices } from '~/lib/constants'
 
 const disclaimer = 'Actualizado con información pública. Las cantidades son datos de referencia solamente.'
@@ -26,7 +26,7 @@ export default async function Home () {
 
   return (
     <ApplicationProvider price={ banxico.buy }>
-      <CalculatorProvider referencePrice={ banxico.buy }>
+      <CalculatorResultProvider referencePrice={ banxico.buy }>
         <PageLayout>
           <Section padding="4rem 0 0">
             <MicroDashboard weeklyReport={ data.week }/>
@@ -67,7 +67,7 @@ export default async function Home () {
               aquí.</Caption>
           </Section>
         </PageLayout>
-      </CalculatorProvider>
+      </CalculatorResultProvider>
     </ApplicationProvider>
   )
 }
