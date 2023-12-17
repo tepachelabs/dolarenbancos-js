@@ -5,6 +5,7 @@ import { useEffectOnce } from 'usehooks-ts'
 
 import { Card } from '~/components/atoms/card.component'
 import { widget } from '~/components/micro-dashboard/components/common.styles'
+import { useApplication } from '~/lib/application.context-provider'
 import { useCalculator } from '~/lib/calculator.context-provider'
 
 import { css } from '../../../../../styled-system/css'
@@ -33,23 +34,24 @@ const input = css({
   },
 })
 
-export const Calculator: FC<Props> = ({ price }) => {
+export const Calculator: FC = () => {
+  const { referencePrice } = useApplication()
   const { mxn, setDefaults, setMxn, setUsd, usd } = useCalculator()
 
   useEffectOnce(() => {
-    setDefaults(1, Number(price))
+    setDefaults(1, referencePrice)
   })
 
   function onMxnUpdate (event: ChangeEvent<HTMLInputElement>) {
     const mxn = event.target.value
-    const usd = Number(mxn) / Number(price)
+    const usd = Number(mxn) / referencePrice
     setMxn(Number(mxn))
     setUsd(usd)
   }
 
   function onUsdUpdate (event: ChangeEvent<HTMLInputElement>) {
     const usd = event.target.value
-    const mxn = Number(usd) * Number(price)
+    const mxn = Number(usd) * referencePrice
     setUsd(Number(usd))
     setMxn(mxn)
   }
@@ -61,7 +63,7 @@ export const Calculator: FC<Props> = ({ price }) => {
         <div>
           <div className={ input }>
             <label htmlFor="mxn">MXN</label>
-            <input type="number" name="mxn" value={ (mxn || Number(price)).toFixed(2) } onChange={ onMxnUpdate }/>
+            <input type="number" name="mxn" value={ (mxn || referencePrice).toFixed(2) } onChange={ onMxnUpdate }/>
           </div>
           <div className={ input }>
             <label htmlFor="usd">USD</label>

@@ -2,6 +2,7 @@
 
 import { FC } from 'react'
 
+import { useApplication } from '~/lib/application.context-provider'
 import { useCalculator } from '~/lib/calculator.context-provider'
 
 import { css } from '../../../styled-system/css'
@@ -17,15 +18,12 @@ const button = css({
   padding: '0.5em 1em',
 })
 
-interface Props {
-  price: number
-}
-
-export const ResetButton: FC<Props> = ({ price }) => {
+export const ResetButton: FC = () => {
   const { isDirty, setDefaults } = useCalculator()
+  const { referencePrice } = useApplication()
 
   function onClick () {
-    setDefaults(1, price)
+    setDefaults(1, referencePrice)
   }
 
   return isDirty && (
