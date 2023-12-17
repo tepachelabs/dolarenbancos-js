@@ -6,6 +6,7 @@ import { Section } from '~/components/atoms/section.component'
 import { MicroDashboard } from '~/components/micro-dashboard'
 import { PageLayout } from '~/components/page-layout'
 import { PricesTable } from '~/components/prices-table'
+import { ResetButton } from '~/components/reset-button'
 import { WeeklyPriceChart } from '~/components/weekly-price-chart'
 import { Prices } from '~/lib/constants'
 import { formatPrice } from '~/lib/utils'
@@ -31,20 +32,25 @@ export default async function Home () {
         />
       </Section>
 
-      <Section id="precios">
-        <h2>Precios al día</h2>
+      <Section
+        id="precios"
+        title="Precios al día"
+        action={ <ResetButton price={ banxico.buy }/> }
+      >
         <PricesTable prices={ prices }/>
         <Caption>{ disclaimer }</Caption>
       </Section>
 
-      <Section id="historico" backgroundColor="primaryLight">
-        <h2>Histórico semanal</h2>
+      <Section
+        id="historico"
+        backgroundColor="primaryLight"
+        title="Histórico semanal"
+      >
         <WeeklyPriceChart weeklyReport={ data.week }/>
         <Caption>{ disclaimer }</Caption>
       </Section>
 
-      <Section id="bots">
-        <h2>Información al momento</h2>
+      <Section id="bots" title="Información al momento">
         <Card marginBottom="2rem">
           <h3>Bot para Telegram</h3>
           <p>Recibe el resumen directo a tu smartphone o computador sin tener que instalar nada extra. Consulta nuestro
