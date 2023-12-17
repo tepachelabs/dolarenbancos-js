@@ -34,7 +34,10 @@ export const PageLayout: FC<PropsWithChildren> = ({ children }) => {
       </main>
 
       <Footer
-        title="Dólar en Bancos"
+        title={{
+          footerTitle: 'Dólar en Bancos',
+          copyRightTitle: '',
+        }}
         copyright="© 2023 Dólar en Bancos. Algunos derechos reservados."
       />
     </>
