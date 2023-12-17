@@ -1,7 +1,6 @@
 'use client'
 
 import { ChangeEvent, FC } from 'react'
-import { useEffectOnce } from 'usehooks-ts'
 
 import { Card } from '~/components/atoms/card.component'
 import { widget } from '~/components/micro-dashboard/components/common.styles'
@@ -9,10 +8,6 @@ import { useApplication } from '~/lib/application.context-provider'
 import { useCalculator } from '~/lib/calculator.context-provider'
 
 import { css } from '../../../../../styled-system/css'
-
-interface Props {
-  price: string
-}
 
 const input = css({
   fontFamily: 'mono',
@@ -36,11 +31,7 @@ const input = css({
 
 export const Calculator: FC = () => {
   const { referencePrice } = useApplication()
-  const { mxn, setDefaults, setMxn, setUsd, usd } = useCalculator()
-
-  useEffectOnce(() => {
-    setDefaults(1, referencePrice)
-  })
+  const { mxn, setMxn, setUsd, usd } = useCalculator()
 
   function onMxnUpdate (event: ChangeEvent<HTMLInputElement>) {
     const mxn = event.target.value

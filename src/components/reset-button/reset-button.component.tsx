@@ -2,7 +2,6 @@
 
 import { FC } from 'react'
 
-import { useApplication } from '~/lib/application.context-provider'
 import { useCalculator } from '~/lib/calculator.context-provider'
 
 import { css } from '../../../styled-system/css'
@@ -19,11 +18,10 @@ const button = css({
 })
 
 export const ResetButton: FC = () => {
-  const { isDirty, setDefaults } = useCalculator()
-  const { referencePrice } = useApplication()
+  const { isDirty, reset } = useCalculator()
 
   function onClick () {
-    setDefaults(1, referencePrice)
+    reset()
   }
 
   return isDirty && (

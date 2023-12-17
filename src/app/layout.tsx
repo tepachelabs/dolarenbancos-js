@@ -3,8 +3,6 @@ import type { Metadata } from 'next'
 import { Anton, Courier_Prime, Montserrat } from 'next/font/google'
 import { ReactNode } from 'react'
 
-import { Providers } from '~/components/providers.component'
-
 import { cx } from '../../styled-system/css'
 
 const montserrat = Montserrat({
@@ -37,9 +35,7 @@ export default function RootLayout ({
   return (
     <html lang="en" className={ cx(anton.variable, courier.variable, montserrat.variable) }>
       <body>
-        <Providers>
-          { children }
-        </Providers>
+        { children }
       </body>
     </html>
   )
