@@ -1,4 +1,4 @@
-import { FC, PropsWithChildren } from 'react'
+import { FC, PropsWithChildren, ReactNode } from 'react'
 
 import { css, cx } from '../../../styled-system/css'
 
@@ -13,7 +13,7 @@ const wrapper = css({
   paddingLeft: '1rem',
   paddingRight: '1rem',
 
-  '& h2': {
+  '& > h2': {
     marginBottom: '3rem',
   },
 
@@ -23,15 +23,42 @@ const wrapper = css({
   },
 })
 
+const heading = css({
+  display: 'flex',
+  flexDirection: 'row',
+  justifyContent: 'space-between',
+  marginBottom: '3rem',
+})
+
 interface SectionProps {
   id?: string
   backgroundColor?: 'transparent' | 'primaryLight' | 'primaryLighter'
+  padding?: string
+  title?: string
+  action?: ReactNode
 }
 
-export const Section: FC<PropsWithChildren<SectionProps>> = ({ backgroundColor = 'transparent', children, id }) => {
+export const Section: FC<PropsWithChildren<SectionProps>> = ({
+  action,
+  backgroundColor = 'transparent',
+  children,
+  id,
+  padding,
+  title,
+}) => {
+  const showHeading = title || action
+
   return (
-    <section id={id} className={ cx(section, css({ backgroundColor })) }>
-      <div className={ wrapper }>{ children }</div>
+    <section id={ id } className={ cx(section, css({ backgroundColor, padding })) }>
+      <div className={ wrapper }>
+        {showHeading && (
+          <div className={ heading }>
+            { title && <h2>{ title }</h2> }
+            { action }
+          </div>
+        ) }
+        { children }
+      </div>
     </section>
   )
 }

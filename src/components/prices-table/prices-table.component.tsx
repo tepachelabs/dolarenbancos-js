@@ -1,6 +1,9 @@
+'use client'
+
 import { FC } from 'react'
 
 import { table } from '~/components/prices-table/prices-table.styles'
+import { useCalculatorResult } from '~/lib/calculator-result.context-provider'
 import { BANK, Prices } from '~/lib/constants'
 import { formatPrice, translateBankIdToDisplay } from '~/lib/utils'
 
@@ -9,6 +12,8 @@ interface Props {
 }
 
 export const PricesTable: FC<Props> = ({ prices }) => {
+  const { usd } = useCalculatorResult()
+
   return (
     <table className={ table }>
       <thead>
@@ -22,8 +27,8 @@ export const PricesTable: FC<Props> = ({ prices }) => {
         { Object.entries(prices).map(([bank, { buy, sell }]) => (
           <tr key={ bank }>
             <td>{ translateBankIdToDisplay(bank as BANK) }</td>
-            <td>$ { formatPrice(buy) }</td>
-            <td>$ { formatPrice(sell) }</td>
+            <td>$ { formatPrice(buy * usd) }</td>
+            <td>$ { formatPrice(sell* usd) }</td>
           </tr>
         )) }
       </tbody>

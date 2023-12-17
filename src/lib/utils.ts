@@ -40,6 +40,7 @@ export function translateBankIdToDisplay (bankId: BANK): string {
   }
 }
 
+// move this to panda.config
 export function translateBankIdToBackgroundColor (bankId: BANK): string {
   switch (bankId) {
     case 'inbursa':
