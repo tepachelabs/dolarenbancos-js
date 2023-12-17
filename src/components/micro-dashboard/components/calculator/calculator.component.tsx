@@ -5,7 +5,7 @@ import { ChangeEvent, FC } from 'react'
 import { Card } from '~/components/atoms/card.component'
 import { widget } from '~/components/micro-dashboard/components/common.styles'
 import { useApplication } from '~/lib/application.context-provider'
-import { useCalculator } from '~/lib/calculator.context-provider'
+import { useCalculatorResult } from '~/lib/calculator-result.context-provider'
 
 import { css } from '../../../../../styled-system/css'
 
@@ -31,7 +31,7 @@ const input = css({
 
 export const Calculator: FC = () => {
   const { referencePrice } = useApplication()
-  const { mxn, setMxn, setUsd, usd } = useCalculator()
+  const { mxn, setMxn, setUsd, usd } = useCalculatorResult()
 
   function onMxnUpdate (event: ChangeEvent<HTMLInputElement>) {
     const mxn = event.target.value

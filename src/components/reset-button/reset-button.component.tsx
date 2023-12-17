@@ -2,7 +2,7 @@
 
 import { FC } from 'react'
 
-import { useCalculator } from '~/lib/calculator.context-provider'
+import { useCalculatorResult } from '~/lib/calculator-result.context-provider'
 
 import { css } from '../../../styled-system/css'
 
@@ -18,7 +18,7 @@ const button = css({
 })
 
 export const ResetButton: FC = () => {
-  const { isDirty, reset } = useCalculator()
+  const { isDirty, reset } = useCalculatorResult()
 
   function onClick () {
     reset()

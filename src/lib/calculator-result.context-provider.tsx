@@ -4,7 +4,7 @@ import { createContext, FC, PropsWithChildren, useCallback, useContext, useMemo,
 import { useBoolean } from 'usehooks-ts'
 
 // Context type
-interface CalculatorContextType {
+interface CalculatorResultContextType {
   usd: number;
   mxn: number;
   isDirty: boolean;
@@ -13,10 +13,17 @@ interface CalculatorContextType {
   reset: () => void;
 }
 
-export const CalculatorContext = createContext<CalculatorContextType | undefined>(undefined)
+export const CalculatorResultContext = createContext<CalculatorResultContextType | undefined>(undefined)
+
+interface CalculatorResultProps {
+  referencePrice: number
+}
 
 // Context provider (all the logic goes here)
-export const CalculatorProvider: FC<PropsWithChildren<{ referencePrice: number }>> = ({ children, referencePrice }) => {
+export const CalculatorResultProvider: FC<PropsWithChildren<CalculatorResultProps>> = ({
+  children,
+  referencePrice,
+}) => {
   const { setFalse, setTrue: setIsDirty, value: isDirty } = useBoolean(false)
   const [usd, setUsd] = useState<number>(1)
   const [mxn, setMxn] = useState<number>(referencePrice)
@@ -42,18 +49,18 @@ export const CalculatorProvider: FC<PropsWithChildren<{ referencePrice: number }
   }), [isDirty, mxn, reset, setWithDirtyStatus, usd])
 
   return (
-    <CalculatorContext.Provider value={ value }>
+    <CalculatorResultContext.Provider value={ value }>
       { children }
-    </CalculatorContext.Provider>
+    </CalculatorResultContext.Provider>
   )
 }
 
 // Hook to use the context
-export const useCalculator = () => {
-  const context = useContext(CalculatorContext)
+export const useCalculatorResult = () => {
+  const context = useContext(CalculatorResultContext)
 
   if (context === undefined) {
-    throw new Error('useCalculator must be used within a CalculatorProvider')
+    throw new Error('useCalculatorResult must be used within a CalculatorResultProvider')
   }
 
   return context
