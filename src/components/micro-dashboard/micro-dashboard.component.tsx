@@ -9,11 +9,10 @@ import { WeeklyChart } from './components/weekly-chart'
 import { wrapper } from './micro-dashboard.styles'
 
 interface Props {
-  todayPrice: string
   weeklyReport: Record<string, Prices>
 }
 
-export const MicroDashboard: FC<Props> = ({ todayPrice, weeklyReport }) => {
+export const MicroDashboard: FC<Props> = ({ weeklyReport }) => {
   const weeklyPrices = Object.values(weeklyReport).map((prices) => prices.banxico.buy).reverse()
   const labels = useMemo(() =>
     Object.keys(weeklyReport)
@@ -24,9 +23,9 @@ export const MicroDashboard: FC<Props> = ({ todayPrice, weeklyReport }) => {
 
   return (
     <div className={ wrapper }>
-      <TodayPrice price={ todayPrice }/>
+      <TodayPrice/>
       <WeeklyChart prices={ weeklyPrices } labels={ labels }/>
-      <Calculator price={ todayPrice }/>
+      <Calculator/>
     </div>
   )
 }
