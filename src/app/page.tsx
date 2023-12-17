@@ -25,7 +25,7 @@ export default async function Home () {
   const { banxico } = todayPrices
 
   return (
-    <ApplicationProvider price={ banxico.buy }>
+    <ApplicationProvider referencePrice={ banxico.buy }>
       <CalculatorResultProvider referencePrice={ banxico.buy }>
         <PageLayout>
           <Section padding="4rem 0 0">
