@@ -10,9 +10,16 @@ interface ApplicationContextType {
 
 export const ApplicationContext = createContext<ApplicationContextType | undefined>(undefined)
 
+interface ApplicationContextProps {
+  referencePrice: number;
+}
+
 // Context provider (all the logic goes here)
-export const ApplicationProvider: FC<PropsWithChildren<{ price: number }>> = ({ children, price }) => {
-  const [referencePrice, setReferencePrice] = useState<number>(price || 0)
+export const ApplicationProvider: FC<PropsWithChildren<ApplicationContextProps>> = ({
+  children,
+  referencePrice: _referencePrice,
+}) => {
+  const [referencePrice, setReferencePrice] = useState<number>(_referencePrice || 0)
 
   const value = useMemo(() => ({
     referencePrice,
