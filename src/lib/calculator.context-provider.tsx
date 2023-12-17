@@ -1,6 +1,6 @@
 'use client'
 
-import { createContext, FC, PropsWithChildren, useContext, useMemo, useState } from 'react'
+import { createContext, FC, PropsWithChildren, useCallback, useContext, useMemo, useState } from 'react'
 import { useBoolean } from 'usehooks-ts'
 
 // Context type
@@ -10,27 +10,27 @@ interface CalculatorContextType {
   isDirty: boolean;
   setUsd: (price: number) => void;
   setMxn: (price: number) => void;
-  setDefaults: (usd: number, mxn: number) => void;
+  reset: () => void;
 }
 
 export const CalculatorContext = createContext<CalculatorContextType | undefined>(undefined)
 
 // Context provider (all the logic goes here)
-export const CalculatorProvider: FC<PropsWithChildren> = ({ children }) => {
-  const {setFalse, setTrue: setIsDirty, value: isDirty} = useBoolean(false)
+export const CalculatorProvider: FC<PropsWithChildren<{ referencePrice: number }>> = ({ children, referencePrice }) => {
+  const { setFalse, setTrue: setIsDirty, value: isDirty } = useBoolean(false)
   const [usd, setUsd] = useState<number>(1)
-  const [mxn, setMxn] = useState<number>(0)
+  const [mxn, setMxn] = useState<number>(referencePrice)
 
   const setWithDirtyStatus = useMemo(() => (fn: any) => (args: any) => {
     setIsDirty()
     fn(args)
   }, [setIsDirty])
 
-  const setDefaults = useMemo(() => (usd: number, mxn: number) => {
-    setUsd(usd)
-    setMxn(mxn)
+  const reset = useCallback(() => {
     setFalse()
-  }, [setFalse])
+    setUsd(1)
+    setMxn(referencePrice)
+  },[referencePrice, setFalse])
 
   const value = useMemo(() => ({
     usd,
@@ -38,8 +38,8 @@ export const CalculatorProvider: FC<PropsWithChildren> = ({ children }) => {
     isDirty,
     setUsd: setWithDirtyStatus(setUsd),
     setMxn: setWithDirtyStatus(setMxn),
-    setDefaults,
-  }), [isDirty, mxn, setDefaults, setWithDirtyStatus, usd])
+    reset,
+  }), [isDirty, mxn, reset, setWithDirtyStatus, usd])
 
   return (
     <CalculatorContext.Provider value={ value }>
