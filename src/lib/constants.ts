@@ -27,4 +27,5 @@ export const meta = {
   keywords: 'dolar, precio, pesos, mexicanos, bancos, mxn, precios',
   abstract: 'El precio del dólar en los distintos bancos de México',
   url: 'https://dolarenbancos.com',
+  image: (price: string | number) => `/api/og?price=${ price }`,
 }
