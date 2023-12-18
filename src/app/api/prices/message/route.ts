@@ -2,6 +2,7 @@ import { BANK, BANKS, Prices } from '~/lib/constants'
 import prisma from '~/lib/prisma'
 import { formatPrice, getEmptyPricesObject, translateBankIdToDisplay } from '~/lib/utils'
 
+// @deprecated
 export async function GET () {
   const prices: Prices = getEmptyPricesObject()
 
