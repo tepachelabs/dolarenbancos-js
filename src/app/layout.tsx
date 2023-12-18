@@ -41,7 +41,7 @@ export async function generateMetadata (): Promise<Metadata> {
       url: meta.url,
       type: 'website',
       siteName: meta.title,
-      images: [meta.image(today.banxico.buy)],
+      images: [`${ getBaseUrl() }/api/og?price=${ today.banxico.buy }`],
     },
   } satisfies Metadata
 }
