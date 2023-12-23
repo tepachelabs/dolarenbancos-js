@@ -2,20 +2,8 @@
 
 import { FC } from 'react'
 
+import { button } from '~/components/atoms/button.cva'
 import { useCalculatorResult } from '~/lib/calculator-result.context-provider'
-
-import { css } from '../../../styled-system/css'
-
-const button = css({
-  backgroundColor: 'black',
-  border: '1px solid',
-  borderColor: 'black',
-  color: 'white',
-  cursor: 'pointer',
-  fontSize: '1.25em',
-  fontWeight: 'bold',
-  padding: '0.5em 1em',
-})
 
 export const ResetButton: FC = () => {
   const { isDirty, reset } = useCalculatorResult()
@@ -25,7 +13,7 @@ export const ResetButton: FC = () => {
   }
 
   return isDirty && (
-    <button className={ button } onClick={ onClick }>
+    <button className={ button() } onClick={ onClick }>
       Reiniciar
     </button>
   )

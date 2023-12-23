@@ -1,7 +1,9 @@
 import { log } from '@logtail/next'
+import Image from 'next/image'
 
 import { Caption } from '~/components/atoms/caption.component'
 import { Card } from '~/components/atoms/card.component'
+import { FeaturedCard } from '~/components/atoms/featured-card.component'
 import { Section } from '~/components/atoms/section.component'
 import { MicroDashboard } from '~/components/micro-dashboard'
 import { PageLayout } from '~/components/page-layout'
@@ -51,18 +53,24 @@ export default async function Home () {
           </Section>
 
           <Section id="bots" title="Información al momento">
-            <Card marginBottom="2rem">
-              <h3>Bot para Telegram</h3>
-              <p>Recibe el resumen directo a tu smartphone o computador sin tener que instalar nada extra. Consulta
-                nuestro bot de Telegram, sólo envía el texto &ldquo;/dolar&rdquo; y recibe el resumen en segundos.</p>
-              <a href="#">Comenzar chat</a>
-            </Card>
-            <Card>
-              <h3>Bot para Discord</h3>
-              <p>Obtén la información mas rápidamente desde tu Discord. Agrega nuestro bot de Discord, envía la
-                palabra &ldquo;dolar&rdquo; y recibe el resumen en segundos.</p>
-              <a href="#">Agrega a tu servidor</a>
-            </Card>
+            <FeaturedCard
+              body="Recibe el resumen directo a tu smartphone o computador sin tener que instalar nada extra. Consulta
+                nuestro bot de Telegram, sólo envía el texto &ldquo;/dolar&rdquo; y recibe el resumen en segundos."
+              title="Bot para Telegram"
+              imgSrc="/telegram.svg"
+              cta={ {
+                text: 'Comenzar chat',
+                href: 'https://telegram.me/dolarenbancos_bot',
+              } }/>
+            <FeaturedCard
+              body="Obtén la información mas rápidamente desde tu Discord. Agrega nuestro bot de Discord, envía la
+                palabra &ldquo;dolar&rdquo; y recibe el resumen en segundos."
+              title="Bot para Discord"
+              imgSrc="/discord.svg"
+              cta={ {
+                text: 'Agrega a tu servidor',
+                href: 'https://discordapp.com/oauth2/authorize?client_id=615622507222925461&permissions=67584&scope=bot',
+              } }/>
             <Caption>Nuestros bots no guardan historial de mensajes. Consulta nuestra política de privacidad
               aquí.</Caption>
           </Section>
