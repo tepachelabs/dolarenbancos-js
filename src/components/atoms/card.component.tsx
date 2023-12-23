@@ -17,17 +17,19 @@ interface CardProps {
   padding?: string
   marginBottom?: string
   width?: string
+  className?: string
 }
 
 export const Card: FC<PropsWithChildren<CardProps>> = ({
   backgroundColor = 'transparent',
   children,
+  className,
   marginBottom,
   padding,
   width,
 }) => {
   return (
-    <div className={ cx(card, css({ backgroundColor, marginBottom, padding, width })) }>
+    <div className={ cx(card, css({ backgroundColor, marginBottom, padding, width }), className) }>
       { children }
     </div>
   )
