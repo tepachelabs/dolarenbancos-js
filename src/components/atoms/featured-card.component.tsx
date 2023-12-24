@@ -43,6 +43,10 @@ const styles = {
     '& h3': {
       marginBottom: '0',
     },
+    '& img': {
+      height: '200px',
+      width: '200px',
+    },
   }),
   wrapper: css({
     alignItems: 'flex-start',
