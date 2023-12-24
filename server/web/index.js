@@ -31,6 +31,10 @@ app.get('/', (req, res) => {
     transferwise: [],
   };
 
+  const posthogKey = process.env.POSTHOG_KEY
+    ? process.env.POSTHOG_KEY
+    : 'phc_SFIeKESkpVDto9slO5Aq1PN0AxDJtEMgVwYAZ1eSEQg'; // legacy key
+
   data.load().then(snapshot => {
     snapshot.forEach(snap => {
       snap.forEach(doc => {
@@ -51,9 +55,9 @@ app.get('/', (req, res) => {
       });
     });
 
-    return res.render('index', { data, chartData });
+    return res.render('index', { data, chartData, posthogKey });
   }).catch(() => {
-    return res.render('index', { data, chartData: [] });
+    return res.render('index', { data, chartData: [], posthogKey });
   });
 });
 
