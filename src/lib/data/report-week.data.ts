@@ -8,7 +8,7 @@ export async function getWeekReport () {
   const today = new Date()
   today.setHours(0, 0, 0, 0)
 
-  for (let i = 0; i < 7; i++) {
+  for (let i = 0; i < 8; i++) {
     const endDate = new Date(today)
     endDate.setDate(today.getDate() - i)
 
@@ -45,7 +45,10 @@ export async function getWeekReport () {
       }
     })
 
-    week[startDate.toLocaleDateString()] = prices
+    // If there is no price for the day, we don't want to show it
+    if (prices.banxico.buy !== 0) {
+      week[startDate.toLocaleDateString()] = prices
+    }
   }
 
   return week
