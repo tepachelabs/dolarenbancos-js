@@ -3,11 +3,10 @@ import type { Metadata } from 'next'
 import { Anton, Courier_Prime, Montserrat } from 'next/font/google'
 import { ReactNode, Suspense } from 'react'
 
+import {PHProvider, PostHogPageview} from '~/app/providers'
 import { meta, Prices } from '~/lib/constants'
 
 import { cx } from '../../styled-system/css'
-
-import {PHProvider, PostHogPageview} from "~/app/providers";
 
 const montserrat = Montserrat({
   subsets: ['latin'],
@@ -55,14 +54,14 @@ export default function RootLayout ({
 }) {
   return (
     <html lang="es" className={cx(anton.variable, courier.variable, montserrat.variable)}>
-    <Suspense>
-      <PostHogPageview/>
-    </Suspense>
-    <PHProvider>
-      <body>
-      {children}
-      </body>
-    </PHProvider>
+      <Suspense>
+        <PostHogPageview/>
+      </Suspense>
+      <PHProvider>
+        <body>
+          {children}
+        </body>
+      </PHProvider>
     </html>
   )
 }
