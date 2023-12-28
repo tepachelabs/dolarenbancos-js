@@ -25,7 +25,7 @@ const courier = Courier_Prime({
   weight: '400',
 })
 
-export async function generateMetadata(): Promise<Metadata> {
+export async function generateMetadata (): Promise<Metadata> {
   // fetch data
   const today: Prices = await fetch(`${getBaseUrl()}/api/report/now`).then((res) => res.json())
 
@@ -47,26 +47,26 @@ export async function generateMetadata(): Promise<Metadata> {
   } satisfies Metadata
 }
 
-export default function RootLayout({
-                                     children,
-                                   }: {
+export default function RootLayout ({
+  children,
+}: {
   children: ReactNode
 }) {
   return (
     <html lang="es" className={cx(anton.variable, courier.variable, montserrat.variable)}>
-    <Suspense>
-      <PostHogPageview/>
-    </Suspense>
-    <PHProvider>
-      <body>
-      {children}
-      </body>
-    </PHProvider>
+      <Suspense>
+        <PostHogPageview/>
+      </Suspense>
+      <PHProvider>
+        <body>
+          {children}
+        </body>
+      </PHProvider>
     </html>
   )
 }
 
-function getBaseUrl() {
+function getBaseUrl () {
   if (process.env.NODE_ENV === 'development') {
     return 'http://localhost:3000'
   } else {
