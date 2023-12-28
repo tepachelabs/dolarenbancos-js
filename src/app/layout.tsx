@@ -1,12 +1,12 @@
 import './globals.css'
-import type { Metadata } from 'next'
-import { Anton, Courier_Prime, Montserrat } from 'next/font/google'
-import { ReactNode, Suspense } from 'react'
+import type {Metadata} from 'next'
+import {Anton, Courier_Prime, Montserrat} from 'next/font/google'
+import {ReactNode, Suspense} from 'react'
 
 import {PHProvider, PostHogPageview} from '~/app/providers'
-import { meta, Prices } from '~/lib/constants'
+import {meta, Prices} from '~/lib/constants'
 
-import { cx } from '../../styled-system/css'
+import {cx} from '../../styled-system/css'
 
 const montserrat = Montserrat({
   subsets: ['latin'],
@@ -27,7 +27,7 @@ const courier = Courier_Prime({
 
 export async function generateMetadata (): Promise<Metadata> {
   // fetch data
-  const today: Prices = await fetch(`${ getBaseUrl() }/api/report/now`).then((res) => res.json())
+  const today: Prices = await fetch(`${getBaseUrl()}/api/report/now`).then((res) => res.json())
 
   return {
     title: meta.title,
@@ -42,7 +42,7 @@ export async function generateMetadata (): Promise<Metadata> {
       url: meta.url,
       type: 'website',
       siteName: meta.title,
-      images: [`${ getBaseUrl() }/api/og?price=${ today.banxico.buy }`],
+      images: [`${getBaseUrl()}/api/og?price=${today.banxico.buy}`],
     },
   } satisfies Metadata
 }
