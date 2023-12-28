@@ -1,9 +1,9 @@
 {
   "name": "dolarenbancos",
-  "version": "0.1.2",
+  "version": "0.1.4",
   "private": true,
   "scripts": {
-    "prepare": "panda codegen",
+    "prepare": "panda codegen && husky install",
     "dev": "rm -rf .next && next dev",
     "build": "next build",
     "start": "next start",
