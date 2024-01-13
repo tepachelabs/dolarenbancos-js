@@ -61,6 +61,7 @@ export default defineConfig({
         mono: { value: 'var(--font-mono)' },
       },
       sizes: {
+        condensedPageWidth: { value: '95%' },
         pageWidth: { value: '90%' },
       },
     },

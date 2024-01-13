@@ -46,11 +46,12 @@ export const wrapper = css({
   display: 'flex',
   justifyContent: 'space-between',
   margin: '0 auto',
-  maxWidth: 'pageWidth',
+  maxWidth: 'condensedPageWidth',
   padding: '1.5rem 1rem',
 
   lg: {
-    padding: '0.75rem',
+    maxWidth: 'pageWidth',
+    padding: '0.75rem 0',
   },
 })
 
