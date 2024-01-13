@@ -1,4 +1,5 @@
 'use client'
+
 import {usePathname, useSearchParams} from 'next/navigation'
 import posthog from 'posthog-js'
 import {PostHogProvider} from 'posthog-js/react'
