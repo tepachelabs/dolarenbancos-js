@@ -15,7 +15,7 @@ const navItems = [
 ]
 
 export const PageLayout: FC<PropsWithChildren> = ({ children }) => {
-  const { toggle, value } = useBoolean(true)
+  const { toggle, value } = useBoolean(false)
 
   return (
     <>
