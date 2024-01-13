@@ -54,6 +54,8 @@ export default defineConfig({
         secondary: { value: '#FFC5C5' },
         black: { value: 'rgba(0,0,0,0.87)' },
         lightGrey: { value: 'rgba(0,0,0,0.1)' },
+        red: { value: 'rgba(255,217,204,0.5)' },
+        green: { value: 'rgba(221,255,214,0.5)' },
       },
       fonts: {
         body: { value: 'var(--font-body)' },

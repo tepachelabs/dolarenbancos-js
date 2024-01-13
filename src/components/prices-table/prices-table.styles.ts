@@ -1,4 +1,6 @@
-import { css } from '../../../styled-system/css'
+import { truncate } from '~/components/atoms/paragraph.cva'
+
+import { css, cva } from '../../../styled-system/css'
 
 const gap = '1.5rem'
 
@@ -31,5 +33,21 @@ export const table = css({
   '& td': {
     ...commonBorder,
     padding: gap,
+  },
+})
+
+export const cell = cva({
+  base: {
+    ...truncate.raw(),
+  },
+  variants: {
+    color: {
+      green: {
+        backgroundColor: 'green',
+      },
+      red: {
+        backgroundColor: 'red',
+      },
+    },
   },
 })
