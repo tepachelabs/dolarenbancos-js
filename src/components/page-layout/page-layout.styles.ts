@@ -19,7 +19,10 @@ export const nav = {
     left: 0,
     width: '100%',
     lg: {
+      backgroundColor: 'transparent',
       display: 'block',
+      position: 'static',
+      width: 'initial',
     },
   }),
   inactive: css({
@@ -69,5 +72,16 @@ export const mainNav = css({
   textAlign: 'center',
   '& li': {
     padding: '0.5em 0',
+  },
+
+  lg: {
+    borderBottom: '0',
+    flexDirection: 'row',
+    fontSize: '1.25em',
+    gap: '1.75em',
+
+    '& li': {
+      padding: '0',
+    },
   },
 })
