@@ -4,7 +4,7 @@ import { FC } from 'react'
 
 import { cell, subtitle, table } from '~/components/prices-table/prices-table.styles'
 import { useCalculatorResult } from '~/lib/calculator-result.context-provider'
-import { BANK, Prices } from '~/lib/constants'
+import { BANK, Price, Prices } from '~/lib/constants'
 import { formatPrice, translateBankIdToDisplay } from '~/lib/utils'
 
 interface Props {
@@ -13,12 +13,7 @@ interface Props {
 
 export const PricesTable: FC<Props> = ({ prices }) => {
   const { isDirty, usd } = useCalculatorResult()
-  const {
-    highestBuy,
-    highestSell,
-    lowestBuy,
-    lowestSell,
-  } = getLowestAndHighestPrices(prices)
+  const metaPrices = getLowestAndHighestPrices(prices)
 
   return (
     <>
@@ -37,18 +32,13 @@ export const PricesTable: FC<Props> = ({ prices }) => {
         </thead>
         <tbody>
           { Object.entries(prices).map(([bank, { buy, sell }]) => {
-            const isHighestBuy = buy === highestBuy
-            const isLowestBuy = buy === lowestBuy
-            const isHighestSell = sell === highestSell
-            const isLowestSell = sell === lowestSell
-            const buyCellColor = isHighestBuy ? 'red' : isLowestBuy ? 'green' : undefined
-            const sellCellColor = isHighestSell ? 'red' : isLowestSell ? 'green' : undefined
+            const { buyColor, sellColor } = getCellColors({ buy, sell }, metaPrices)
 
             return (
               <tr key={ bank }>
                 <td className={ cell() }>{ translateBankIdToDisplay(bank as BANK) }</td>
-                <td className={ cell({ color: buyCellColor }) }>$ { formatPrice(buy * usd) }</td>
-                <td className={ cell({ color: sellCellColor }) }>$ { formatPrice(sell * usd) }</td>
+                <td className={ cell({ color: buyColor }) }>$ { formatPrice(buy * usd) }</td>
+                <td className={ cell({ color: sellColor }) }>$ { formatPrice(sell * usd) }</td>
               </tr>
             )
           }) }
@@ -58,7 +48,21 @@ export const PricesTable: FC<Props> = ({ prices }) => {
   )
 }
 
-function getLowestAndHighestPrices (prices: Props['prices']) {
+interface MetaPrices {
+  lowestBuy: number,
+  lowestSell: number,
+  highestBuy: number,
+  highestSell: number,
+}
+
+function getLowestAndHighestPrices (prices: Props['prices']): MetaPrices {
+  const seed: MetaPrices = {
+    lowestBuy: Infinity,
+    lowestSell: Infinity,
+    highestBuy: -Infinity,
+    highestSell: -Infinity,
+  }
+
   return Object.entries(prices).reduce((acc, [bank, { buy, sell }]) => {
     if (buy < acc.lowestBuy) {
       acc.lowestBuy = buy
@@ -77,10 +81,24 @@ function getLowestAndHighestPrices (prices: Props['prices']) {
     }
 
     return acc
-  }, {
-    lowestBuy: Infinity,
-    lowestSell: Infinity,
-    highestBuy: -Infinity,
-    highestSell: -Infinity,
-  })
+  }, seed)
+}
+
+type ColorValue = 'red' | 'green' | undefined
+
+function getCellColors (price: Price, meta: MetaPrices): { buyColor: ColorValue, sellColor: ColorValue } {
+  // Extract useful data
+  const { highestBuy, highestSell, lowestBuy, lowestSell } = meta
+  const { buy, sell } = price
+
+  // Math
+  const isHighestBuy = buy === highestBuy
+  const isLowestBuy = buy === lowestBuy
+  const isHighestSell = sell === highestSell
+  const isLowestSell = sell === lowestSell
+  const buyCellColor = isHighestBuy ? 'red' : isLowestBuy ? 'green' : undefined
+  const sellCellColor = isHighestSell ? 'red' : isLowestSell ? 'green' : undefined
+
+  // Result
+  return { buyColor: buyCellColor, sellColor: sellCellColor }
 }
