@@ -13,6 +13,7 @@ export const table = css({
   backgroundColor: 'white',
   fontFamily: 'body',
   fontSize: '1.5em',
+  tableLayout: 'fixed',
   textAlign: 'center',
   width: '100%',
 

@@ -1,3 +1,5 @@
+import { button } from '~/components/atoms/button.cva'
+
 import { css } from '../../../styled-system/css'
 
 export const header = css({
@@ -9,13 +11,47 @@ export const header = css({
   zIndex: 1,
 })
 
+export const nav = {
+  active: css({
+    backgroundColor: 'primaryLight',
+    position: 'fixed',
+    top: 'calc(7.5rem + 1px)',
+    left: 0,
+    width: '100%',
+    lg: {
+      backgroundColor: 'transparent',
+      display: 'block',
+      position: 'static',
+      width: 'initial',
+    },
+  }),
+  inactive: css({
+    display: 'none',
+    lg: {
+      display: 'block',
+    },
+  }),
+}
+
+export const navTrigger = css({
+  ...button.raw(),
+  display: 'block',
+  lg: {
+    display: 'none',
+  },
+})
+
 export const wrapper = css({
   alignItems: 'center',
   display: 'flex',
   justifyContent: 'space-between',
   margin: '0 auto',
   maxWidth: 'pageWidth',
-  padding: '1.5rem 0',
+  padding: '1.5rem 1rem',
+
+  lg: {
+    padding: '0.75rem',
+  },
 })
 
 export const logo = css({
@@ -26,9 +62,26 @@ export const logo = css({
 
 export const mainNav = css({
   display: 'flex',
-  flexDirection: 'row',
+  borderBottom: '1px solid',
+  borderColor: 'black',
+  flexDirection: 'column',
   fontFamily: 'mono',
-  fontSize: '1.25em',
-  gap: '1.75em',
+  fontSize: '2em',
+  gap: '0.5em',
   textTransform: 'uppercase',
+  textAlign: 'center',
+  '& li': {
+    padding: '0.5em 0',
+  },
+
+  lg: {
+    borderBottom: '0',
+    flexDirection: 'row',
+    fontSize: '1.25em',
+    gap: '1.75em',
+
+    '& li': {
+      padding: '0',
+    },
+  },
 })
