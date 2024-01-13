@@ -72,7 +72,7 @@ const section = cva({
 
 const wrapper = css({
   margin: '0 auto',
-  maxWidth: '90%',
+  maxWidth: 'pageWidth',
   paddingLeft: '1rem',
   paddingRight: '1rem',
 

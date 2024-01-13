@@ -60,7 +60,7 @@ export default defineConfig({
         mono: { value: 'var(--font-mono)' },
       },
       sizes: {
-        pageWidth: { value: '1000px' },
+        pageWidth: { value: '90%' },
       },
     },
     extend: {},
