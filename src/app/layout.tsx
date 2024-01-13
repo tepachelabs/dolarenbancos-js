@@ -70,6 +70,6 @@ function getBaseUrl () {
   if (process.env.NODE_ENV === 'development') {
     return 'http://localhost:3000'
   } else {
-    return 'https://dolarenbancos.pozole.dev'
+    return 'https://dolarenbancos.com'
   }
 }
