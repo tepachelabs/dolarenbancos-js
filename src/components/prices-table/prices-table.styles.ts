@@ -9,6 +9,17 @@ const commonBorder = {
   borderColor: 'black',
 }
 
+export const subtitle = css({
+  fontSize: '1.2em',
+  marginBottom: '1em',
+
+  '& em': {
+    color: 'primary',
+    // fontSize: '1.5em',
+    fontWeight: 'bold',
+  },
+})
+
 export const table = css({
   ...commonBorder,
 

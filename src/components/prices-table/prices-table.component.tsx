@@ -2,7 +2,7 @@
 
 import { FC } from 'react'
 
-import { cell, table } from '~/components/prices-table/prices-table.styles'
+import { cell, subtitle, table } from '~/components/prices-table/prices-table.styles'
 import { useCalculatorResult } from '~/lib/calculator-result.context-provider'
 import { BANK, Prices } from '~/lib/constants'
 import { formatPrice, translateBankIdToDisplay } from '~/lib/utils'
@@ -12,7 +12,7 @@ interface Props {
 }
 
 export const PricesTable: FC<Props> = ({ prices }) => {
-  const { usd } = useCalculatorResult()
+  const { isDirty, usd } = useCalculatorResult()
   const {
     highestBuy,
     highestSell,
@@ -21,33 +21,40 @@ export const PricesTable: FC<Props> = ({ prices }) => {
   } = getLowestAndHighestPrices(prices)
 
   return (
-    <table className={ table }>
-      <thead>
-        <tr>
-          <th>Banco</th>
-          <th>Compra</th>
-          <th>Venta</th>
-        </tr>
-      </thead>
-      <tbody>
-        { Object.entries(prices).map(([bank, { buy, sell }]) => {
-          const isHighestBuy = buy === highestBuy
-          const isLowestBuy = buy === lowestBuy
-          const isHighestSell = sell === highestSell
-          const isLowestSell = sell === lowestSell
-          const buyCellColor = isHighestBuy ? 'red' : isLowestBuy ? 'green' : undefined
-          const sellCellColor = isHighestSell ? 'red' : isLowestSell ? 'green' : undefined
+    <>
+      { isDirty && (
+        <p className={ subtitle }>
+          <em>**</em> Mostrando el precio de ${ formatPrice(usd) } USD en los distintos bancos de México
+        </p>
+      ) }
+      <table className={ table }>
+        <thead>
+          <tr>
+            <th>Banco</th>
+            <th>Compra</th>
+            <th>Venta</th>
+          </tr>
+        </thead>
+        <tbody>
+          { Object.entries(prices).map(([bank, { buy, sell }]) => {
+            const isHighestBuy = buy === highestBuy
+            const isLowestBuy = buy === lowestBuy
+            const isHighestSell = sell === highestSell
+            const isLowestSell = sell === lowestSell
+            const buyCellColor = isHighestBuy ? 'red' : isLowestBuy ? 'green' : undefined
+            const sellCellColor = isHighestSell ? 'red' : isLowestSell ? 'green' : undefined
 
-          return (
-            <tr key={ bank }>
-              <td className={ cell() }>{ translateBankIdToDisplay(bank as BANK) }</td>
-              <td className={ cell({ color: buyCellColor }) }>$ { formatPrice(buy * usd) }</td>
-              <td className={ cell({ color: sellCellColor }) }>$ { formatPrice(sell * usd) }</td>
-            </tr>
-          )
-        }) }
-      </tbody>
-    </table>
+            return (
+              <tr key={ bank }>
+                <td className={ cell() }>{ translateBankIdToDisplay(bank as BANK) }</td>
+                <td className={ cell({ color: buyCellColor }) }>$ { formatPrice(buy * usd) }</td>
+                <td className={ cell({ color: sellCellColor }) }>$ { formatPrice(sell * usd) }</td>
+              </tr>
+            )
+          }) }
+        </tbody>
+      </table>
+    </>
   )
 }
 
