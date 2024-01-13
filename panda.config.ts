@@ -6,6 +6,10 @@ var globalCss = defineGlobalStyles({
     color: 'black',
     fontFamily: 'body',
     lineHeight: '1.5',
+    fontSize: '3vw',
+    sm: { fontSize: '2.5vw' },
+    md: { fontSize: '2vw' },
+    lg: { fontSize: '1.3vw' },
   },
   h1: {
     fontFamily: 'heading',
@@ -13,7 +17,8 @@ var globalCss = defineGlobalStyles({
   },
   h2: {
     fontFamily: 'heading',
-    fontSize: '2.5rem',
+    fontSize: '3rem',
+    md: { fontSize: '2.5rem' },
   },
   h3: {
     fontFamily: 'body',
@@ -56,7 +61,7 @@ export default defineConfig({
         mono: { value: 'var(--font-mono)' },
       },
       sizes: {
-        pageWidth: { value: '1000px' },
+        pageWidth: { value: '90%' },
       },
     },
     extend: {},

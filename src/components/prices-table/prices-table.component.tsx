@@ -2,6 +2,7 @@
 
 import { FC } from 'react'
 
+import { truncate } from '~/components/atoms/paragraph.cva'
 import { table } from '~/components/prices-table/prices-table.styles'
 import { useCalculatorResult } from '~/lib/calculator-result.context-provider'
 import { BANK, Prices } from '~/lib/constants'
@@ -26,9 +27,9 @@ export const PricesTable: FC<Props> = ({ prices }) => {
       <tbody>
         { Object.entries(prices).map(([bank, { buy, sell }]) => (
           <tr key={ bank }>
-            <td>{ translateBankIdToDisplay(bank as BANK) }</td>
-            <td>$ { formatPrice(buy * usd) }</td>
-            <td>$ { formatPrice(sell* usd) }</td>
+            <td className={ truncate() }>{ translateBankIdToDisplay(bank as BANK) }</td>
+            <td className={ truncate() }>$ { formatPrice(buy * usd) }</td>
+            <td className={ truncate() }>$ { formatPrice(sell * usd) }</td>
           </tr>
         )) }
       </tbody>

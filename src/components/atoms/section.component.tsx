@@ -1,10 +1,73 @@
 import { FC, PropsWithChildren, ReactNode } from 'react'
 
-import { css, cx } from '../../../styled-system/css'
+import { css, cva } from '../../../styled-system/css'
 
-const section = css({
-  padding: '6rem 0',
-  width: '100%',
+interface SectionProps {
+  id?: string
+  backgroundColor?: 'transparent' | 'primaryLight' | 'primaryLighter'
+  size?: 'compact' | 'default'
+  title?: string
+  action?: ReactNode
+}
+
+export const Section: FC<PropsWithChildren<SectionProps>> = ({
+  action,
+  backgroundColor = 'transparent',
+  children,
+  id,
+  size= 'default',
+  title,
+}) => {
+  const showHeading = title || action
+
+  return (
+    <section id={ id } className={ section({ size, backgroundColor }) }>
+      <div className={ wrapper }>
+        {showHeading && (
+          <div className={ heading }>
+            { title && <h2>{ title }</h2> }
+            { action }
+          </div>
+        ) }
+        { children }
+      </div>
+    </section>
+  )
+}
+
+/*
+ * Styles
+ */
+
+const section = cva({
+  base: {
+    paddingLeft: '0',
+    paddingRight: '0',
+    width: '100%',
+  },
+  variants: {
+    size: {
+      default: {
+        paddingTop: '6rem',
+        paddingBottom: '6rem',
+      },
+      compact: {
+        paddingTop: '2rem',
+        paddingBottom: '0',
+      },
+    },
+    backgroundColor: {
+      transparent: {
+        backgroundColor: 'transparent',
+      },
+      primaryLight: {
+        backgroundColor: 'primaryLight',
+      },
+      primaryLighter: {
+        backgroundColor: 'primaryLighter',
+      },
+    },
+  },
 })
 
 const wrapper = css({
@@ -29,36 +92,3 @@ const heading = css({
   justifyContent: 'space-between',
   marginBottom: '3rem',
 })
-
-interface SectionProps {
-  id?: string
-  backgroundColor?: 'transparent' | 'primaryLight' | 'primaryLighter'
-  padding?: string
-  title?: string
-  action?: ReactNode
-}
-
-export const Section: FC<PropsWithChildren<SectionProps>> = ({
-  action,
-  backgroundColor = 'transparent',
-  children,
-  id,
-  padding,
-  title,
-}) => {
-  const showHeading = title || action
-
-  return (
-    <section id={ id } className={ cx(section, css({ backgroundColor, padding })) }>
-      <div className={ wrapper }>
-        {showHeading && (
-          <div className={ heading }>
-            { title && <h2>{ title }</h2> }
-            { action }
-          </div>
-        ) }
-        { children }
-      </div>
-    </section>
-  )
-}

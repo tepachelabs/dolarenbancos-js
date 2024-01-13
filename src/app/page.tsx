@@ -1,8 +1,6 @@
 import { log } from '@logtail/next'
-import Image from 'next/image'
 
 import { Caption } from '~/components/atoms/caption.component'
-import { Card } from '~/components/atoms/card.component'
 import { FeaturedCard } from '~/components/atoms/featured-card.component'
 import { Section } from '~/components/atoms/section.component'
 import { MicroDashboard } from '~/components/micro-dashboard'
@@ -30,7 +28,7 @@ export default async function Home () {
     <ApplicationProvider referencePrice={ banxico.buy }>
       <CalculatorResultProvider referencePrice={ banxico.buy }>
         <PageLayout>
-          <Section padding="4rem 0 0">
+          <Section size='compact'>
             <MicroDashboard weeklyReport={ data.week }/>
           </Section>
 
