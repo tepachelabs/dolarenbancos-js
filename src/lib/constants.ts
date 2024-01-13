@@ -15,10 +15,12 @@ export const BANKS: BANK[] = [
   'transferwise',
 ]
 
-export type Prices = Record<BANK, {
+export type Price = {
   buy: number;
   sell: number;
-}>
+}
+
+export type Prices = Record<BANK, Price>
 
 export const meta: Record<string, string> = {
   title: 'El Dólar en Bancos de México',
