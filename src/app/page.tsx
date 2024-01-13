@@ -28,7 +28,7 @@ export default async function Home () {
     <ApplicationProvider referencePrice={ banxico.buy }>
       <CalculatorResultProvider referencePrice={ banxico.buy }>
         <PageLayout>
-          <Section padding="4rem 0 0">
+          <Section size='compact'>
             <MicroDashboard weeklyReport={ data.week }/>
           </Section>
 
