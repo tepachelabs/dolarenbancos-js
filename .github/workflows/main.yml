@@ -2,7 +2,7 @@ name: Build & Deployment
 
 on:
   push:
-    branches: [ next ]
+    branches: [ master ]
 
 jobs:
   build:
@@ -54,7 +54,7 @@ jobs:
       # Notify Telegram Bot
       - name: Send Telegram Notification
         uses: appleboy/telegram-action@master
-        if: ${{ github.ref == 'refs/heads/next' }}
+        if: ${{ github.ref == 'refs/heads/master' }}
         with:
           to: ${{ secrets.TELEGRAM_GROUP_CHAT_ID }}
           token: ${{ secrets.TELEGRAM_TOKEN }}
