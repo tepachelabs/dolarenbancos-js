@@ -86,3 +86,20 @@ export const mainNav = css({
     },
   },
 })
+
+export const footer = css({
+  backgroundColor: 'black',
+  color: 'white',
+  padding: '4rem 0',
+
+  '& h1': {
+    fontSize: '2em',
+  },
+
+  '& > div': {
+    flexDirection: 'column',
+    md: {
+      flexDirection: 'row',
+    },
+  },
+})
