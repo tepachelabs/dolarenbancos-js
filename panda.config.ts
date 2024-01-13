@@ -17,7 +17,8 @@ var globalCss = defineGlobalStyles({
   },
   h2: {
     fontFamily: 'heading',
-    fontSize: '2.5rem',
+    fontSize: '3rem',
+    md: { fontSize: '2.5rem' },
   },
   h3: {
     fontFamily: 'body',

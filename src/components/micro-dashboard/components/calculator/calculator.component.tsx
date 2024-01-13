@@ -56,7 +56,7 @@ export const Calculator: FC = () => {
 
 const input = css({
   fontFamily: 'mono',
-  fontSize: '1.25em',
+  fontSize: '1.5em',
   position: 'relative',
 
   '& input': {
@@ -85,5 +85,9 @@ const input = css({
     '_hover': {
       fontWeight: 'bold',
     },
+  },
+
+  md: {
+    fontSize: '1.25em',
   },
 })

@@ -31,7 +31,7 @@ export const PageLayout: FC<PropsWithChildren> = ({ children }) => {
               )) }
             </ul>
           </nav>
-          <button className={ navTrigger } onClick={ toggle }>Toggle</button>
+          <button className={ navTrigger } onClick={ toggle }>Menú</button>
         </div>
       </header>
 

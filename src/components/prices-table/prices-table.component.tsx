@@ -28,8 +28,8 @@ export const PricesTable: FC<Props> = ({ prices }) => {
         { Object.entries(prices).map(([bank, { buy, sell }]) => (
           <tr key={ bank }>
             <td className={ truncate() }>{ translateBankIdToDisplay(bank as BANK) }</td>
-            <td>$ { formatPrice(buy * usd) }</td>
-            <td>$ { formatPrice(sell * usd) }</td>
+            <td className={ truncate() }>$ { formatPrice(buy * usd) }</td>
+            <td className={ truncate() }>$ { formatPrice(sell * usd) }</td>
           </tr>
         )) }
       </tbody>
