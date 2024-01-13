@@ -6,6 +6,10 @@ var globalCss = defineGlobalStyles({
     color: 'black',
     fontFamily: 'body',
     lineHeight: '1.5',
+    fontSize: '3vw',
+    sm: { fontSize: '2.5vw' },
+    md: { fontSize: '2vw' },
+    lg: { fontSize: '1.3vw' },
   },
   h1: {
     fontFamily: 'heading',
