@@ -27,7 +27,7 @@ export async function fetchFromTransferwise (): Promise<FetcherResponse> {
   )
 
   return {
-    bank: 'banamex',
+    bank: 'transferwise',
     buy: prettifyRate(data.rate),
     sell: prettifyRate(data.rate),
   }
