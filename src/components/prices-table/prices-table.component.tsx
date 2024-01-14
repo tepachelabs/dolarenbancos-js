@@ -19,7 +19,7 @@ export const PricesTable: FC<Props> = ({ prices }) => {
     <>
       { isDirty && (
         <p className={ subtitle }>
-          <em>**</em> Mostrando el precio de ${ formatPrice(usd) } USD en los distintos bancos de México
+          <em>*</em> Mostrando el precio de ${ formatPrice(usd) } USD en los distintos bancos de México
         </p>
       ) }
       <table className={ table }>
