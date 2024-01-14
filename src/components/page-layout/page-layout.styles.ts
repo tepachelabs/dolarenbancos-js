@@ -34,7 +34,7 @@ export const nav = {
 }
 
 export const navTrigger = css({
-  ...button.raw(),
+  ...button.raw({ type: 'icon' }),
   display: 'block',
   lg: {
     display: 'none',
@@ -56,6 +56,7 @@ export const wrapper = css({
 })
 
 export const logo = css({
+  textDecoration: 'none',
   '& em': {
     color: 'primary',
   },
@@ -73,6 +74,9 @@ export const mainNav = css({
   textAlign: 'center',
   '& li': {
     padding: '0.5em 0',
+  },
+  '& a': {
+    textDecoration: 'none',
   },
 
   lg: {

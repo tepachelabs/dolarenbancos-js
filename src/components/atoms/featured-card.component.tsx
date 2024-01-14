@@ -56,6 +56,17 @@ const styles = {
     },
     md: {
       flexDirection: 'row-reverse',
+      '& img': {
+        height: '40%',
+        width: '40%',
+      },
+    },
+    lg: {
+      padding: '3em 3.5em',
+      '& img': {
+        height: '25%',
+        width: '25%',
+      },
     },
   }),
   wrapper: css({

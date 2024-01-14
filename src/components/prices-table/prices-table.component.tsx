@@ -2,6 +2,7 @@
 
 import { FC } from 'react'
 
+import { IconExclamation } from '~/components/icons'
 import { cell, subtitle, table } from '~/components/prices-table/prices-table.styles'
 import { useCalculatorResult } from '~/lib/calculator-result.context-provider'
 import { Bank, Price, Prices } from '~/lib/types'

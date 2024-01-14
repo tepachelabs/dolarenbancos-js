@@ -7,9 +7,20 @@ export const button = cva({
     borderColor: 'black',
     color: 'white',
     cursor: 'pointer',
-    fontSize: '1.25em',
+    fontSize: '1.6em',
     fontWeight: '500',
     padding: '0.5em 1em',
+    textDecoration: 'none',
+    md: {
+      fontSize: '1.25em',
+    },
+  },
+  variants: {
+    type: {
+      icon: {
+        fontSize: '1.25em',
+        padding: '0',
+      },
+    },
   },
 })
-

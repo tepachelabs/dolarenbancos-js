@@ -28,6 +28,10 @@ var globalCss = defineGlobalStyles({
   h4: {
     fontSize: '1.25rem',
   },
+  a: {
+    textDecoration: 'underline',
+    textUnderlineOffset: '0.5em',
+  },
 })
 
 export default defineConfig({

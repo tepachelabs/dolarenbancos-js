@@ -15,7 +15,6 @@ export const subtitle = css({
 
   '& em': {
     color: 'primary',
-    // fontSize: '1.5em',
     fontWeight: 'bold',
   },
 })

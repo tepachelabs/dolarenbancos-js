@@ -4,8 +4,10 @@ import Link from 'next/link'
 import { FC, PropsWithChildren } from 'react'
 import { useBoolean } from 'usehooks-ts'
 
+import { IconMenu } from '~/components/icons'
+import { ToTop } from '~/components/to-top'
+
 import { wrapper, header, logo, mainNav, nav, navTrigger, footer, footerNav } from './page-layout.styles'
-import { ToTop } from '../atoms/to-top.component'
 
 const navItems = [
   { label: 'Inicio', path: '/' },
@@ -26,8 +28,8 @@ export const PageLayout: FC<PropsWithChildren> = ({ children }) => {
     <>
       <header className={ header }>
         <div className={ wrapper }>
-          <Link href="/" onClick={ setFalse }>
-            <h1 className={ logo }><em>Dólar</em> en Bancos</h1>
+          <Link href="/" onClick={ setFalse } className={ logo }>
+            <h1><em>Dólar</em> en Bancos</h1>
           </Link>
           <nav className={ value ? nav.active : nav.inactive }>
             <ul className={ mainNav }>
@@ -38,7 +40,9 @@ export const PageLayout: FC<PropsWithChildren> = ({ children }) => {
               )) }
             </ul>
           </nav>
-          <button className={ navTrigger } onClick={ toggle }>Menú</button>
+          <button className={ navTrigger } onClick={ toggle }>
+            <IconMenu/>
+          </button>
         </div>
       </header>
 

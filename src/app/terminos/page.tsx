@@ -7,6 +7,7 @@ export default async function Terms () {
   return (
     <PageLayout>
       <Section title="Términos y Condiciones" size="fullPage">
+        <p><b>Última actualización: 14 Enero, 2024</b></p>
         <p>Bienvenido a Dólar en Bancos. Al acceder y utilizar nuestro sitio web, usted (el &#8220;Usuario&#8221;)
           acepta y acuerda cumplir con los siguientes términos y condiciones (los &#8220;Términos&#8221;). Si no está de
           acuerdo con estos Términos, por favor no utilice nuestro sitio.</p>
