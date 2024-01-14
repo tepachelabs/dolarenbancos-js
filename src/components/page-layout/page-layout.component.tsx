@@ -5,6 +5,7 @@ import { FC, PropsWithChildren } from 'react'
 import { useBoolean } from 'usehooks-ts'
 
 import { wrapper, header, logo, mainNav, nav, navTrigger, footer, footerNav } from './page-layout.styles'
+import { ToTop } from '../atoms/to-top.component'
 
 const navItems = [
   { label: 'Inicio', path: '/' },
@@ -43,6 +44,7 @@ export const PageLayout: FC<PropsWithChildren> = ({ children }) => {
 
       <main>
         { children }
+        <ToTop />
       </main>
 
       <footer className={ footer }>
