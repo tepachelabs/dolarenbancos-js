@@ -20,20 +20,20 @@ const footerItems = [
 ]
 
 export const PageLayout: FC<PropsWithChildren> = ({ children }) => {
-  const { toggle, value } = useBoolean(false)
+  const { setFalse, toggle, value } = useBoolean(false)
 
   return (
     <>
       <header className={ header }>
         <div className={ wrapper }>
-          <Link href='/' onClick={ toggle }>
+          <Link href="/" onClick={ setFalse }>
             <h1 className={ logo }><em>Dólar</em> en Bancos</h1>
           </Link>
           <nav className={ value ? nav.active : nav.inactive }>
             <ul className={ mainNav }>
               { navItems.map(({ label, path }) => (
                 <li key={ path }>
-                  <Link href={ path } onClick={ toggle }>{ label }</Link>
+                  <Link href={ path } onClick={ setFalse }>{ label }</Link>
                 </li>
               )) }
             </ul>
@@ -44,7 +44,7 @@ export const PageLayout: FC<PropsWithChildren> = ({ children }) => {
 
       <main>
         { children }
-        <ToTop />
+        <ToTop/>
       </main>
 
       <footer className={ footer }>
