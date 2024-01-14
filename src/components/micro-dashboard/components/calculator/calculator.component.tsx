@@ -46,12 +46,20 @@ export const Calculator: FC = () => {
               name="mxn"
               value={ (mxn || referencePrice).toFixed(2) }
               onChange={ onMxnUpdate }
+              inputMode='numeric'
             />
             { featureCleanButton && isDirty && <button onClick={ onReset } title="Reiniciar cantidad">X</button> }
           </div>
           <div className={ input }>
             <label htmlFor="usd">USD</label>
-            <input type="number" id="usd" name="usd" value={ usd.toFixed(2) } onChange={ onUsdUpdate }/>
+            <input
+              type="number"
+              id="usd"
+              name="usd"
+              value={ usd.toFixed(0) }
+              onChange={ onUsdUpdate }
+              inputMode='numeric'
+            />
             { featureCleanButton && isDirty && <button onClick={ onReset } title="Reiniciar cantidad">X</button> }
           </div>
         </div>
