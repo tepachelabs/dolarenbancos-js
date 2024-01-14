@@ -25,7 +25,9 @@ export const PageLayout: FC<PropsWithChildren> = ({ children }) => {
     <>
       <header className={ header }>
         <div className={ wrapper }>
-          <h1 className={ logo }><em>Dólar</em> en Bancos</h1>
+          <Link href='/' onClick={ toggle }>
+            <h1 className={ logo }><em>Dólar</em> en Bancos</h1>
+          </Link>
           <nav className={ value ? nav.active : nav.inactive }>
             <ul className={ mainNav }>
               { navItems.map(({ label, path }) => (
