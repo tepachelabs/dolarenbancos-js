@@ -1,4 +1,5 @@
 import { log } from '@logtail/next'
+import Link from 'next/link'
 
 import { Caption } from '~/components/atoms/caption.component'
 import { FeaturedCard } from '~/components/atoms/featured-card.component'
@@ -69,8 +70,10 @@ export default async function Home () {
                 text: 'Agrega a tu servidor',
                 href: 'https://discordapp.com/oauth2/authorize?client_id=615622507222925461&permissions=67584&scope=bot',
               } }/>
-            <Caption>Nuestros bots no guardan historial de mensajes. Consulta nuestra política de privacidad
-              aquí.</Caption>
+            <Caption>
+              Nuestros bots no guardan historial de mensajes.
+              Consulta nuestra <Link href="/privacidad">política de privacidad aquí</Link>.
+            </Caption>
           </Section>
         </PageLayout>
       </CalculatorResultProvider>
