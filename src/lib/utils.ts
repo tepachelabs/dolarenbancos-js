@@ -125,3 +125,11 @@ const month = [
 export function prettifyDate (date: Date): string {
   return `${ date.getDate() } ${ month[date.getMonth()] }`
 }
+
+export function getBaseUrl (): string {
+  if (process.env.NODE_ENV === 'development') {
+    return 'http://localhost:3000'
+  } else {
+    return 'https://dolarenbancos.com'
+  }
+}

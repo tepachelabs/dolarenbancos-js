@@ -12,6 +12,7 @@ import { WeeklyPriceChart } from '~/components/weekly-price-chart'
 import { ApplicationProvider } from '~/lib/application.context-provider'
 import { CalculatorResultProvider } from '~/lib/calculator-result.context-provider'
 import { Prices } from '~/lib/constants'
+import { getBaseUrl } from '~/lib/utils'
 
 const disclaimer = 'Actualizado con información pública. Las cantidades son datos de referencia solamente.'
 
@@ -106,10 +107,3 @@ async function getPrices (): Promise<Data> {
   }
 }
 
-function getBaseUrl () {
-  if (process.env.NODE_ENV === 'development') {
-    return 'http://localhost:3000'
-  } else {
-    return 'https://dolarenbancos.com'
-  }
-}

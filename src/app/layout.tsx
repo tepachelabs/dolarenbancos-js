@@ -5,6 +5,7 @@ import { ReactNode } from 'react'
 
 import { PHProvider, PostHogPageview } from '~/app/providers'
 import { meta, Prices } from '~/lib/constants'
+import { getBaseUrl } from '~/lib/utils'
 
 import { cx } from '../../styled-system/css'
 
@@ -58,12 +59,4 @@ export default function RootLayout ({ children }: { children: ReactNode }) {
       </PHProvider>
     </html>
   )
-}
-
-function getBaseUrl () {
-  if (process.env.NODE_ENV === 'development') {
-    return 'http://localhost:3000'
-  } else {
-    return 'https://dolarenbancos.com'
-  }
 }
