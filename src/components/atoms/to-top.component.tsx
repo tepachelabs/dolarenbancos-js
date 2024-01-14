@@ -1,4 +1,4 @@
-import { FC, useEffect, useState } from 'react'
+import { FC } from 'react'
 import { useBoolean, useEffectOnce } from 'usehooks-ts'
 
 import { button } from '~/components/atoms/button.cva'
