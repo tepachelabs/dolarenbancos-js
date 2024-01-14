@@ -5,7 +5,7 @@ import { css, cva } from '../../../styled-system/css'
 interface SectionProps {
   id?: string
   backgroundColor?: 'transparent' | 'primaryLight' | 'primaryLighter'
-  size?: 'compact' | 'default'
+  size?: 'compact' | 'default' | 'fullPage'
   title?: string
   action?: ReactNode
 }
@@ -54,6 +54,19 @@ const section = cva({
       compact: {
         paddingTop: '2rem',
         paddingBottom: '0',
+      },
+      fullPage: {
+        paddingTop: '2rem',
+        paddingBottom: '10em',
+        fontSize: '1.4rem',
+
+        '& h3': {
+          margin: '2em 0 1em',
+        },
+
+        '& p + p': {
+          marginTop: '1em',
+        },
       },
     },
     backgroundColor: {

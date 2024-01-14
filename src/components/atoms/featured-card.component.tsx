@@ -45,6 +45,10 @@ const styles = {
       fontSize: '2rem',
       marginBottom: '0',
     },
+    '& p': {
+      fontSize: '1.4rem',
+      marginBottom: '0',
+    },
     '& img': {
       height: '200px',
       margin: '0 auto',
