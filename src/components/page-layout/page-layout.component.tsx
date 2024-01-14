@@ -30,7 +30,7 @@ export const PageLayout: FC<PropsWithChildren> = ({ children }) => {
             <ul className={ mainNav }>
               { navItems.map(({ label, path }) => (
                 <li key={ path }>
-                  <Link href={ path }>{ label }</Link>
+                  <Link href={ path } onClick={ toggle }>{ label }</Link>
                 </li>
               )) }
             </ul>
