@@ -3,7 +3,7 @@
 ## Pre-requisites
 
 - [Doppler (for secrets management)](https://doppler.com/)
-- [Node.js](https://nodejs.org/en/) **v20.10**
+- [Node.js](https://nodejs.org/en/) **v20.11.0**
 
 ## Getting Started
 
