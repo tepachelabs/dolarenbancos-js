@@ -103,3 +103,14 @@ export const footer = css({
     },
   },
 })
+
+export const footerNav = css({
+  display: 'flex',
+  flexDirection: 'row',
+  gap: '1em',
+  justifyContent: 'center',
+  padding: '1em 0',
+  md: {
+    justifyContent: 'flex-end',
+  },
+})
