@@ -14,7 +14,7 @@ const styles = css({
   right: '1em',
 
   lg: {
-    bottom: '5em',
+    bottom: '13em',
   },
 })
 
