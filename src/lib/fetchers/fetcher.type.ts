@@ -1,7 +1,7 @@
-import { BANK } from '~/lib/constants'
+import { Bank } from '~/lib/types'
 
 export type FetcherResponse = {
-  bank: BANK;
+  bank: Bank;
   buy: number;
   sell: number;
 } | void

@@ -1,6 +1,6 @@
 import { FC, useMemo } from 'react'
 
-import { Prices } from '~/lib/constants'
+import { Prices } from '~/lib/types'
 import { prettifyDate } from '~/lib/utils'
 
 import { Calculator } from './components/calculator'

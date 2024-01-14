@@ -4,7 +4,8 @@ import { Anton, Courier_Prime, Montserrat } from 'next/font/google'
 import { ReactNode } from 'react'
 
 import { PHProvider, PostHogPageview } from '~/app/providers'
-import { meta, Prices } from '~/lib/constants'
+import { METADATA } from '~/config'
+import { Prices } from '~/lib/types'
 import { getBaseUrl } from '~/lib/utils'
 
 import { cx } from '../../styled-system/css'
@@ -31,18 +32,18 @@ export async function generateMetadata (): Promise<Metadata> {
   const today: Prices = await fetch(`${ getBaseUrl() }/api/report/now`).then((res) => res.json())
 
   return {
-    title: meta.title,
-    description: meta.description,
-    keywords: meta.keywords,
+    title: METADATA.title,
+    description: METADATA.description,
+    keywords: METADATA.keywords,
     robots: 'index, follow',
-    abstract: meta.abstract,
+    abstract: METADATA.abstract,
     classification: 'Finances',
     openGraph: {
-      title: meta.title,
-      description: meta.description,
-      url: meta.url,
+      title: METADATA.title,
+      description: METADATA.description,
+      url: METADATA.url,
       type: 'website',
-      siteName: meta.title,
+      siteName: METADATA.title,
       images: [`${ getBaseUrl() }/api/og?price=${ today.banxico.buy }`],
     },
   } satisfies Metadata

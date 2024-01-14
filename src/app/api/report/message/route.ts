@@ -1,7 +1,7 @@
 import { log } from '@logtail/next'
 
-import { BANK, BANKS, Prices } from '~/lib/constants'
 import { getNowReport } from '~/lib/data/report-now.data'
+import { Bank, BANKS, Prices } from '~/lib/types'
 import { formatPrice, translateBankIdToDisplay } from '~/lib/utils'
 
 export const dynamic = 'force-dynamic'
@@ -20,7 +20,7 @@ function getChatMessage (prices: Prices, multiplier: number) {
   return `**DÓLAR EN BANCOS**
 Precio comparativo: $${ formatPrice(prices.banxico.buy) } ${multiplier !== 1 ? `\nLa tabla muestra el precio para $${multiplier} USD` : ''}
 ---
-${ BANKS.map((bank: BANK) =>
+${ BANKS.map((bank: Bank) =>
     `- ${ translateBankIdToDisplay(bank) }. Compra: $${ formatPrice(prices[bank].buy * multiplier) }. Venta: $${ formatPrice(prices[bank].sell * multiplier) }`
   ).join('\n') }
 ---

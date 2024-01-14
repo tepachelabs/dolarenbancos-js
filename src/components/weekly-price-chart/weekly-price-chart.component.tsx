@@ -5,7 +5,7 @@ import { FC, useMemo } from 'react'
 import { Line } from 'react-chartjs-2'
 
 import { Card } from '~/components/atoms/card.component'
-import { Prices } from '~/lib/constants'
+import { Prices } from '~/lib/types'
 import { convertToChartFormat, prettifyDate } from '~/lib/utils'
 
 // Register ChartJS components using ChartJS.register

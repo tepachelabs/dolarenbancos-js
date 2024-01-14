@@ -4,7 +4,7 @@ import { FC } from 'react'
 
 import { cell, subtitle, table } from '~/components/prices-table/prices-table.styles'
 import { useCalculatorResult } from '~/lib/calculator-result.context-provider'
-import { BANK, Price, Prices } from '~/lib/constants'
+import { Bank, Price, Prices } from '~/lib/types'
 import { formatPrice, translateBankIdToDisplay } from '~/lib/utils'
 
 interface Props {
@@ -36,7 +36,7 @@ export const PricesTable: FC<Props> = ({ prices }) => {
 
             return (
               <tr key={ bank }>
-                <td className={ cell() }>{ translateBankIdToDisplay(bank as BANK) }</td>
+                <td className={ cell() }>{ translateBankIdToDisplay(bank as Bank) }</td>
                 <td className={ cell({ color: buyColor }) }>$ { formatPrice(buy * usd) }</td>
                 <td className={ cell({ color: sellColor }) }>$ { formatPrice(sell * usd) }</td>
               </tr>

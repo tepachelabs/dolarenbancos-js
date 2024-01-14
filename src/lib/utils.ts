@@ -1,15 +1,14 @@
-import { BANK, Prices } from '~/lib/constants'
+import { ACTIVE_BANKS, BANK_META } from '~/config'
+import { Bank, Prices } from '~/lib/types'
 
-// TODO: make this empty object dynamically generated from the BANKS array
 export function getEmptyPricesObject (): Prices {
-  return {
-    banamex: { buy: 0, sell: 0 },
-    banxico: { buy: 0, sell: 0 },
-    bbva: { buy: 0, sell: 0 },
-    inbursa: { buy: 0, sell: 0 },
-    intercam: { buy: 0, sell: 0 },
-    transferwise: { buy: 0, sell: 0 },
+  const emptyObject: Prices = {} as Prices
+
+  for (const bank of ACTIVE_BANKS) {
+    emptyObject[bank] = { buy: 0, sell: 0 }
   }
+
+  return emptyObject
 }
 
 export function prettifyRate (str: string): number {
@@ -20,44 +19,12 @@ export function formatPrice (price: number): string {
   return price.toFixed(2)
 }
 
-// TODO: next two functions should be data from the database instead
-export function translateBankIdToDisplay (bankId: BANK): string {
-  switch (bankId) {
-    case 'inbursa':
-      return 'Inbursa'
-    case 'banamex':
-      return 'Banamex'
-    case 'bbva':
-      return 'BBVA'
-    case 'banxico':
-      return 'Banxico'
-    case 'intercam':
-      return 'Intercam'
-    case 'transferwise':
-      return 'Transferwise'
-    default:
-      return '??'
-  }
+export function translateBankIdToDisplay (bankId: Bank): string {
+  return BANK_META[bankId].display
 }
 
-// move this to panda.config
-export function translateBankIdToBackgroundColor (bankId: BANK): string {
-  switch (bankId) {
-    case 'inbursa':
-      return 'rgb(9,117,243)'
-    case 'banamex':
-      return 'rgb(168,38,38)'
-    case 'bbva':
-      return 'rgb(57,219,248)'
-    case 'banxico':
-      return 'rgb(65,67,72)'
-    case 'intercam':
-      return 'rgb(50,171,44)'
-    case 'transferwise':
-      return 'rgb(243,99,9)'
-    default:
-      return 'rgb(243,212,9)'
-  }
+export function translateBankIdToBackgroundColor (bankId: Bank): string {
+  return BANK_META[bankId].color
 }
 
 interface ChartFormat {
@@ -70,14 +37,14 @@ interface ChartFormat {
 
 export function convertToChartFormat (week: Record<string, Prices>): ChartFormat[] {
   const chartFormat: ChartFormat[] = []
-  const bankWeeklyPrices = new Map<BANK, ChartFormat['data']>()
+  const bankWeeklyPrices = new Map<Bank, ChartFormat['data']>()
 
   for (const date in week) {
     const prices = week[date]
 
     for (const bankName in prices) {
-      const bank = bankName as BANK
-      const price = prices[bank as BANK]
+      const bank = bankName as Bank
+      const price = prices[bank as Bank]
 
       if (!bankWeeklyPrices.has(bank)) {
         bankWeeklyPrices.set(bank, [])

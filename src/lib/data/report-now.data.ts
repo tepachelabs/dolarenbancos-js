@@ -1,12 +1,12 @@
-import { BANK, BANKS, Prices } from '~/lib/constants'
 import prisma from '~/lib/prisma'
+import { Bank, BANKS, Prices } from '~/lib/types'
 import { getEmptyPricesObject } from '~/lib/utils'
 
 export async function getNowReport () {
   const prices: Prices = getEmptyPricesObject()
 
   const pricesFromDatabase = await Promise.all(
-    BANKS.map((bank: BANK) =>
+    BANKS.map((bank: Bank) =>
       prisma.price.findFirst({
         where: { bankId: bank },
         orderBy: {
