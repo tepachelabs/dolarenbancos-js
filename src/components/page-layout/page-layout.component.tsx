@@ -7,7 +7,7 @@ import { useBoolean } from 'usehooks-ts'
 import { IconMenu } from '~/components/icons'
 import { ToTop } from '~/components/to-top'
 
-import { wrapper, header, logo, mainNav, nav, navTrigger, footer, footerNav } from './page-layout.styles'
+import { wrapper, header, logo, mainNav, nav, navTrigger, footer, footerNav, row } from './page-layout.styles'
 
 const navItems = [
   { label: 'Inicio', path: '/' },
@@ -27,10 +27,15 @@ export const PageLayout: FC<PropsWithChildren> = ({ children }) => {
   return (
     <>
       <header className={ header }>
-        <div className={ wrapper }>
-          <Link href="/" onClick={ setFalse } className={ logo }>
-            <h1><em>Dólar</em> en Bancos</h1>
-          </Link>
+        <div className={ row }>
+          <div className={ wrapper }>
+            <Link href="/" onClick={ setFalse } className={ logo }>
+              <h1><em>Dólar</em> en Bancos</h1>
+            </Link>
+            <button className={ navTrigger } onClick={ toggle }>
+              <IconMenu/>
+            </button>
+          </div>
           <nav className={ value ? nav.active : nav.inactive }>
             <ul className={ mainNav }>
               { navItems.map(({ label, path }) => (
@@ -40,9 +45,6 @@ export const PageLayout: FC<PropsWithChildren> = ({ children }) => {
               )) }
             </ul>
           </nav>
-          <button className={ navTrigger } onClick={ toggle }>
-            <IconMenu/>
-          </button>
         </div>
       </header>
 

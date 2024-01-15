@@ -11,47 +11,58 @@ export const header = css({
   zIndex: 1,
 })
 
+const navDesktop = ({
+  lg: {
+    backgroundColor: 'transparent',
+    alignItems: 'center',
+    display: 'flex',
+  },
+})
+
 export const nav = {
   active: css({
     backgroundColor: 'primaryLight',
-    position: 'fixed',
-    top: 'calc(7.5rem + 1px)',
-    left: 0,
-    width: '100%',
-    lg: {
-      backgroundColor: 'transparent',
-      display: 'block',
-      position: 'static',
-      width: 'initial',
-    },
+
+    ...navDesktop,
   }),
   inactive: css({
     display: 'none',
-    lg: {
-      display: 'block',
-    },
+
+    ...navDesktop,
   }),
 }
 
 export const navTrigger = css({
   ...button.raw({ type: 'icon' }),
   display: 'block',
+
   lg: {
     display: 'none',
+  },
+})
+
+export const row = css({
+  lg: {
+    margin: '0 auto',
+    maxWidth: 'pageWidth',
+    padding: '0.75rem 0',
+    display: 'flex',
+    justifyContent: 'space-between',
   },
 })
 
 export const wrapper = css({
   alignItems: 'center',
   display: 'flex',
-  justifyContent: 'space-between',
+  flexDirection: 'row',
   margin: '0 auto',
   maxWidth: 'condensedPageWidth',
   padding: '1.5rem 1rem',
+  width: '100%',
+  justifyContent: 'space-between',
 
   lg: {
-    maxWidth: 'pageWidth',
-    padding: '0.75rem 0',
+    padding: '0',
   },
 })
 
@@ -72,6 +83,7 @@ export const mainNav = css({
   gap: '0.5em',
   textTransform: 'uppercase',
   textAlign: 'center',
+
   '& li': {
     padding: '0.5em 0',
   },
