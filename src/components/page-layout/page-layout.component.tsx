@@ -2,12 +2,23 @@
 
 import Link from 'next/link'
 import { FC, PropsWithChildren } from 'react'
-import { useBoolean } from 'usehooks-ts'
+import { useTransition } from 'react-transition-state'
 
 import { IconMenu } from '~/components/icons'
 import { ToTop } from '~/components/to-top'
 
-import { wrapper, header, logo, mainNav, nav, navTrigger, footer, footerNav, row } from './page-layout.styles'
+import {
+  wrapper,
+  header,
+  logo,
+  mainNav,
+  nav,
+  navTrigger,
+  footer,
+  footerNav,
+  row,
+  animatedNav,
+} from './page-layout.styles'
 
 const navItems = [
   { label: 'Inicio', path: '/' },
@@ -22,29 +33,34 @@ const footerItems = [
 ]
 
 export const PageLayout: FC<PropsWithChildren> = ({ children }) => {
-  const { setFalse, toggle, value } = useBoolean(false)
+  const [{ isEnter, status }, toggle] = useTransition({
+    timeout: { enter: 250, exit: 250 },
+    preEnter: true,
+  })
 
   return (
     <>
       <header className={ header }>
         <div className={ row }>
           <div className={ wrapper }>
-            <Link href="/" onClick={ setFalse } className={ logo }>
+            <Link href="/" onClick={ () => toggle(false) } className={ logo }>
               <h1><em>Dólar</em> en Bancos</h1>
             </Link>
-            <button className={ navTrigger } onClick={ toggle }>
+            <button className={ navTrigger({ isEnter }) } onClick={ () => toggle() }>
               <IconMenu/>
             </button>
           </div>
-          <nav className={ value ? nav.active : nav.inactive }>
-            <ul className={ mainNav }>
-              { navItems.map(({ label, path }) => (
-                <li key={ path }>
-                  <Link href={ path } onClick={ setFalse }>{ label }</Link>
-                </li>
-              )) }
-            </ul>
-          </nav>
+          <div className={ animatedNav({ show: status }) }>
+            <nav className={ nav }>
+              <ul className={ mainNav }>
+                { navItems.map(({ label, path }) => (
+                  <li key={ path }>
+                    <Link href={ path } onClick={ () => toggle(false) }>{ label }</Link>
+                  </li>
+                )) }
+              </ul>
+            </nav>
+          </div>
         </div>
       </header>
 

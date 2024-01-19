@@ -1,6 +1,6 @@
 import { button } from '~/components/atoms/button.cva'
 
-import { css } from '../../../styled-system/css'
+import { css, cva } from '../../../styled-system/css'
 
 export const header = css({
   backgroundColor: 'primaryLighter',
@@ -16,28 +16,76 @@ const navDesktop = ({
     backgroundColor: 'transparent',
     alignItems: 'center',
     display: 'flex',
+    maxHeight: 'initial',
+    overflow: 'initial',
   },
 })
 
-export const nav = {
-  active: css({
-    backgroundColor: 'primaryLight',
+export const nav = css({
+  backgroundColor: 'primaryLight',
+
+  ...navDesktop,
+})
+
+export const animatedNav = cva({
+  base: {
+    overflow: 'hidden',
+    transition: 'all',
+    transitionTimingFunction: 'ease-in-out',
+    transitionDuration: '0.25s',
 
     ...navDesktop,
-  }),
-  inactive: css({
-    display: 'none',
+  },
+  variants: {
+    show: {
+      preEnter: {
+        maxHeight: '0',
+      },
+      entering: {
+        maxHeight: '0',
+      },
+      entered: {
+        maxHeight: '100vh',
+      },
+      preExit: {
+      },
+      exiting: {
+        maxHeight: '0',
+      },
+      exited: {
+        maxHeight: '0',
+      },
+      unmounted: {},
+    },
+  },
+})
 
-    ...navDesktop,
-  }),
-}
+export const navTrigger = cva({
+  base: {
+    ...button.raw({ type: 'icon' }),
+    display: 'block',
 
-export const navTrigger = css({
-  ...button.raw({ type: 'icon' }),
-  display: 'block',
+    '& rect': {
+      transition: 'all',
+      transitionTimingFunction: 'ease-in-out',
+      transitionDuration: '0.25s',
+    },
 
-  lg: {
-    display: 'none',
+    lg: {
+      display: 'none',
+    },
+  },
+  variants: {
+    isEnter: {
+      true: {
+        '& rect:first-of-type': {
+          transform: 'rotate(45deg) translate(15px, -32px)',
+        },
+        '& rect:last-of-type': {
+          transform: 'rotate(-45deg) translate(-37px, 8px)',
+        },
+      },
+    },
   },
 })
 
