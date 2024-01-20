@@ -3,7 +3,7 @@
 import { usePathname, useSearchParams } from 'next/navigation'
 import posthog from 'posthog-js'
 import { PostHogProvider, usePostHog } from 'posthog-js/react'
-import { useEffect } from 'react'
+import { Suspense, useEffect } from 'react'
 
 if (typeof window !== 'undefined') {
   posthog.init(process.env.NEXT_PUBLIC_POSTHOG_KEY!!, {
@@ -37,5 +37,9 @@ export function PostHogPageview () {
 }
 
 export function PHProvider ({ children }: { children: React.ReactNode }) {
-  return <PostHogProvider client={ posthog }>{ children }</PostHogProvider>
+  return (
+    <Suspense>
+      <PostHogProvider client={ posthog }>{ children }</PostHogProvider>
+    </Suspense>
+  )
 }
