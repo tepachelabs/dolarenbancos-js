@@ -8,6 +8,7 @@ import { MicroDashboard } from '~/components/micro-dashboard'
 import { PageLayout } from '~/components/page-layout'
 import { PricesTable } from '~/components/prices-table'
 import { ResetButton } from '~/components/reset-button'
+import { SammyBanner } from '~/components/sammy-banner'
 import { WeeklyPriceChart } from '~/components/weekly-price-chart'
 import { ApplicationProvider } from '~/lib/application.context-provider'
 import { CalculatorResultProvider } from '~/lib/calculator-result.context-provider'
@@ -32,6 +33,14 @@ export default async function Home () {
         <PageLayout>
           <Section size='compact'>
             <MicroDashboard weeklyReport={ data.week }/>
+          </Section>
+
+          <Section
+            id="sammy"
+            title=""
+            backgroundColor="primaryLight"
+          >
+            <SammyBanner />
           </Section>
 
           <Section
