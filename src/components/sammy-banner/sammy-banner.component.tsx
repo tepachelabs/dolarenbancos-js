@@ -23,26 +23,28 @@ const BenefitsList = () => {
 
 export const SammyBanner = () => {
   return (
-    <div>
+    <>
       <div className={ elementsWrapper }>
         <Image
+          width={100}
+          height={100}
           className={ image }
           src="/sammy_logo.jpeg"
           alt="Sammy Logo"
         />
         <div className={ copyWrapper }>
-          <h2>¿Quieres abrir una cuenta en dólares?</h2>
+          <h3>¿Quieres abrir una cuenta en dólares?</h3>
           <p>Prueba <strong>Sammy</strong></p>
         </div>
         <a
           className={ button }
-          href="https://www.google.com/"
+          href="https://www.usesammy.com/en"
           target="_blank"
         >
           Abrir Cuenta
         </a>
       </div>
       <BenefitsList />
-    </div>
+    </>
   )
 }

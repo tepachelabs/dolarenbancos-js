@@ -5,13 +5,12 @@ export const benefitsList = css({
 })
 
 export const image = css({
-  height: 100,
-  width: 100,
   borderRadius: '100%',
 })
 
 export const elementsWrapper = css({
   display: 'flex',
+  flexWrap: 'wrap',
   justifyContent: 'center',
   alignContent: 'center',
   alignItems: 'center',
@@ -24,12 +23,35 @@ export const copyWrapper = css({
   flexDirection: 'column',
   justifyContent: 'center',
   alignContent: 'center',
+  textAlign: 'center',
+  '& h3': {
+    fontSize: '2rem',
+  },
+  '& p': {
+    fontSize: '1.5rem',
+
+    '& strong': {
+      textDecoration: 'underline',
+    },
+  },
+  'lg': {
+    textAlign: 'left',
+
+    '& p': {
+      fontSize: '1rem',
+    },
+  },
 })
 
 export const button = css({
-  marginLeft: 'auto',
+  margin: 'auto',
   backgroundColor: 'black',
   color: 'white',
   padding: '16px 24px',
   textDecoration: 'none',
+  fontSize: '1.5rem',
+  'lg': {
+    fontSize: '1rem',
+    margin: '0 0 0 auto',
+  },
 })
