@@ -1,5 +1,6 @@
 import { log } from '@logtail/next'
 import Link from 'next/link'
+import { posthog } from 'posthog-js'
 
 import { Caption } from '~/components/atoms/caption.component'
 import { FeaturedCard } from '~/components/atoms/featured-card.component'
@@ -35,13 +36,17 @@ export default async function Home () {
             <MicroDashboard weeklyReport={ data.week }/>
           </Section>
 
-          <Section
-            id="sammy"
-            title=""
-            backgroundColor="primaryLight"
-          >
-            <SammyBanner />
-          </Section>
+          {
+            posthog.isFeatureEnabled('sammy_banner') ? (
+              <Section
+                id="sammy"
+                title=""
+                backgroundColor="primaryLight"
+              >
+                <SammyBanner />
+              </Section>
+            ) : null
+          }
 
           <Section
             id="precios"
