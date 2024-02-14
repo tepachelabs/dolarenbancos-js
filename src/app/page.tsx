@@ -1,3 +1,5 @@
+export const dynamic = 'force-dynamic'
+
 import { log } from '@logtail/next'
 import Link from 'next/link'
 import { PostHog } from 'posthog-node'
