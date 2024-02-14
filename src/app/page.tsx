@@ -18,20 +18,20 @@ import { getBaseUrl } from '~/lib/utils'
 
 const disclaimer = 'Actualizado con información pública. Las cantidades son datos de referencia solamente.'
 
-const posthog = new PostHog(process.env.NEXT_PUBLIC_POSTHOG_KEY!!,
-  {
-    host: process.env.NEXT_PUBLIC_POSTHOG_HOST || 'https://app.posthog.com',
-    flushAt: 1,
-    flushInterval: 0,
-  }
-)
-
 interface Data {
   today: Prices,
   week: Record<string, Prices>
 }
 
 export default async function Home () {
+  const posthog = new PostHog(process.env.NEXT_PUBLIC_POSTHOG_KEY!!,
+    {
+      host: process.env.NEXT_PUBLIC_POSTHOG_HOST || 'https://app.posthog.com',
+      flushAt: 1,
+      flushInterval: 0,
+    }
+  )
+
   const data = await getPrices()
   const todayPrices = data.today
   const { banxico } = todayPrices
