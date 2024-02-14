@@ -31,10 +31,6 @@ const posthog = new PostHog(process.env.POSTHOG_KEY!!,
   }
 )
 
-if (posthog) {
-  log.info('... feli')
-}
-
 export default async function Home () {
   const data = await getPrices()
   const todayPrices = data.today
