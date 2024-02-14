@@ -38,7 +38,7 @@ export const SammyBanner = () => {
         </div>
         <a
           className={ button }
-          href="https://www.usesammy.com/en"
+          href="https://www.usesammy.com/es/dolarenbancos"
           target="_blank"
         >
           Abrir Cuenta
