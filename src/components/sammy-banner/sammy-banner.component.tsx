@@ -29,7 +29,7 @@ export const SammyBanner = () => {
           width={100}
           height={100}
           className={ image }
-          src="/sammy_logo.jpeg"
+          src="https://ik.imagekit.io/vkih1k0zz/sammy_logo.jpeg?updatedAt=1707946566231"
           alt="Sammy Logo"
         />
         <div className={ copyWrapper }>
