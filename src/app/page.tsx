@@ -24,9 +24,9 @@ interface Data {
 }
 
 export default async function Home () {
-  const posthog = new PostHog(process.env.NEXT_PUBLIC_POSTHOG_KEY!!,
+  const posthog = new PostHog(process.env.POSTHOG_KEY!!,
     {
-      host: process.env.NEXT_PUBLIC_POSTHOG_HOST || 'https://app.posthog.com',
+      host: 'https://app.posthog.com',
       flushAt: 1,
       flushInterval: 0,
     }

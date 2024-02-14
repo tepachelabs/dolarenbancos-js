@@ -37,6 +37,7 @@ jobs:
           push: true
           tags: ${{ env.IMAGE_URL }}
           build-args: |
+            POSTHOG_KEY=${{ vars.NEXT_PUBLIC_POSTHOG_KEY }}
             NEXT_PUBLIC_POSTHOG_KEY=${{ vars.NEXT_PUBLIC_POSTHOG_KEY }}
             DATABASE_URL=${{ secrets.DATABASE_URL }}
             TOKEN_BMX=${{ secrets.TOKEN_BMX }}
