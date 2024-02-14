@@ -1,3 +1,5 @@
+export const revalidate = 10
+
 import { log } from '@logtail/next'
 import Link from 'next/link'
 import { PostHog } from 'posthog-node'
