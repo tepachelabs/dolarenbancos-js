@@ -53,7 +53,7 @@ const section = cva({
       },
       compact: {
         paddingTop: '2rem',
-        paddingBottom: '0',
+        paddingBottom: '2rem',
       },
       fullPage: {
         paddingTop: '2rem',

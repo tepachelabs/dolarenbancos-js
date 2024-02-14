@@ -1,5 +1,6 @@
 import { log } from '@logtail/next'
 import Link from 'next/link'
+import { PostHog } from 'posthog-node'
 
 import { Caption } from '~/components/atoms/caption.component'
 import { FeaturedCard } from '~/components/atoms/featured-card.component'
@@ -8,6 +9,7 @@ import { MicroDashboard } from '~/components/micro-dashboard'
 import { PageLayout } from '~/components/page-layout'
 import { PricesTable } from '~/components/prices-table'
 import { ResetButton } from '~/components/reset-button'
+import { SammyBanner } from '~/components/sammy-banner'
 import { WeeklyPriceChart } from '~/components/weekly-price-chart'
 import { ApplicationProvider } from '~/lib/application.context-provider'
 import { CalculatorResultProvider } from '~/lib/calculator-result.context-provider'
@@ -15,6 +17,14 @@ import { Prices } from '~/lib/types'
 import { getBaseUrl } from '~/lib/utils'
 
 const disclaimer = 'Actualizado con información pública. Las cantidades son datos de referencia solamente.'
+
+const posthog = new PostHog(process.env.NEXT_PUBLIC_POSTHOG_KEY!!,
+  {
+    host: process.env.NEXT_PUBLIC_POSTHOG_HOST || 'https://app.posthog.com',
+    flushAt: 1,
+    flushInterval: 0,
+  }
+)
 
 interface Data {
   today: Prices,
@@ -33,6 +43,18 @@ export default async function Home () {
           <Section size='compact'>
             <MicroDashboard weeklyReport={ data.week }/>
           </Section>
+
+          {
+            await posthog.isFeatureEnabled('sammy_banner', 'ff') ? (
+              <Section
+                id="sammy"
+                title=""
+                backgroundColor="primaryLight"
+              >
+                <SammyBanner />
+              </Section>
+            ) : null
+          }
 
           <Section
             id="precios"
