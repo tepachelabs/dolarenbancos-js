@@ -1,6 +1,6 @@
 {
   "name": "dolarenbancos",
-  "version": "0.1.49",
+  "version": "0.1.50",
   "private": true,
   "scripts": {
     "prepare": "panda codegen && husky install",
@@ -20,6 +20,7 @@
     "husky": "^8.0.3",
     "next": "^14.1",
     "posthog-js": "^1.100",
+    "posthog-node": "^3.6.2",
     "react": "^18",
     "react-chartjs-2": "^5.2.0",
     "react-dom": "^18",

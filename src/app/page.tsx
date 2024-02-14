@@ -1,6 +1,6 @@
 import { log } from '@logtail/next'
 import Link from 'next/link'
-import { posthog } from 'posthog-js'
+import { PostHog } from 'posthog-node'
 
 import { Caption } from '~/components/atoms/caption.component'
 import { FeaturedCard } from '~/components/atoms/featured-card.component'
@@ -17,6 +17,14 @@ import { Prices } from '~/lib/types'
 import { getBaseUrl } from '~/lib/utils'
 
 const disclaimer = 'Actualizado con información pública. Las cantidades son datos de referencia solamente.'
+
+const posthog = new PostHog(process.env.NEXT_PUBLIC_POSTHOG_KEY!!,
+  {
+    host: process.env.NEXT_PUBLIC_POSTHOG_HOST || 'https://app.posthog.com',
+    flushAt: 1,
+    flushInterval: 0,
+  }
+)
 
 interface Data {
   today: Prices,
@@ -37,7 +45,7 @@ export default async function Home () {
           </Section>
 
           {
-            posthog.isFeatureEnabled('sammy_banner') ? (
+            await posthog.isFeatureEnabled('sammy_banner', 'ff') ? (
               <Section
                 id="sammy"
                 title=""
