@@ -23,15 +23,19 @@ interface Data {
   week: Record<string, Prices>
 }
 
-export default async function Home () {
-  const posthog = new PostHog(process.env.POSTHOG_KEY!!,
-    {
-      host: 'https://app.posthog.com',
-      flushAt: 1,
-      flushInterval: 0,
-    }
-  )
+const posthog = new PostHog(process.env.POSTHOG_KEY!!,
+  {
+    host: 'https://app.posthog.com',
+    flushAt: 1,
+    flushInterval: 0,
+  }
+)
 
+if (posthog) {
+  log.info('... feli')
+}
+
+export default async function Home () {
   const data = await getPrices()
   const todayPrices = data.today
   const { banxico } = todayPrices
