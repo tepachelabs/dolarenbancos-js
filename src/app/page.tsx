@@ -2,7 +2,6 @@ export const revalidate = 5
 
 import { log } from '@logtail/next'
 import Link from 'next/link'
-import { PostHog } from 'posthog-node'
 
 import { Caption } from '~/components/atoms/caption.component'
 import { FeaturedCard } from '~/components/atoms/featured-card.component'

@@ -1,3 +1,4 @@
+import {log} from '@logtail/next'
 import {PostHog} from 'posthog-node'
 
 const posthog = new PostHog(process.env.POSTHOG_KEY!!,
@@ -18,6 +19,8 @@ export const getFeatureFlagStatus = async (): Promise<FeatureFlagStatus> => {
       sammy: await posthog.isFeatureEnabled('sammy_banner', 'ff'),
     }
   } catch (error) {
+    // @ts-ignore
+    log.error(error)
     return {
       sammy: false,
     }
