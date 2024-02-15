@@ -15,6 +15,7 @@ import { SammyBanner } from '~/components/sammy-banner'
 import { WeeklyPriceChart } from '~/components/weekly-price-chart'
 import { ApplicationProvider } from '~/lib/application.context-provider'
 import { CalculatorResultProvider } from '~/lib/calculator-result.context-provider'
+import { FeatureFlagStatus } from '~/lib/ff'
 import { Prices } from '~/lib/types'
 import { getBaseUrl } from '~/lib/utils'
 
@@ -23,10 +24,6 @@ const disclaimer = 'Actualizado con información pública. Las cantidades son da
 interface Data {
   today: Prices,
   week: Record<string, Prices>
-}
-
-interface FeatureFlagStatus {
-  sammy?: boolean;
 }
 
 export default async function Home () {
@@ -112,7 +109,7 @@ async function getFeatureFlagsStatus (): Promise<FeatureFlagStatus>{
     const ff = await fetch(`${ getBaseUrl() }/api/ff`, commonFetchProps)
 
     if (!ff.ok) {
-      throw new Error('Could not fetch ffs 1')
+      throw new Error('Could not fetch ffs')
     }
 
     return ff.json()
