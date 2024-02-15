@@ -25,16 +25,12 @@ interface Data {
   week: Record<string, Prices>
 }
 
-const posthog = new PostHog(process.env.POSTHOG_KEY!!,
-  {
-    host: 'https://app.posthog.com',
-    flushAt: 1,
-    flushInterval: 0,
-  }
-)
+interface FeatureFlagStatus {
+  sammy: boolean;
+}
 
 export default async function Home () {
-  const isSammyBannerActive = await getSammyBannerStatus()
+  const featureFlags = await getFeatureFlagsStatus()
 
   const data = await getPrices()
   const todayPrices = data.today
@@ -49,7 +45,7 @@ export default async function Home () {
           </Section>
 
           {
-            isSammyBannerActive ? (
+            featureFlags.sammy ? (
               <Section
                 id="sammy"
                 title=""
@@ -108,8 +104,16 @@ export default async function Home () {
   )
 }
 
-async function getSammyBannerStatus (){
-  return await posthog.isFeatureEnabled('sammy_banner', 'ff')
+async function getFeatureFlagsStatus (): Promise<FeatureFlagStatus>{
+  try {
+    const ff = await fetch(`${ getBaseUrl() }/api/ff`)
+
+    return ff.json()
+  } catch (error) {
+    // @ts-ignore
+    log.error(error)
+    throw new Error('Could not fetch sammy ff')
+  }
 }
 
 async function getPrices (): Promise<Data> {
