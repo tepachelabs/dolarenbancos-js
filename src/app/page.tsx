@@ -1,4 +1,4 @@
-export const revalidate = 10
+export const revalidate = 5
 
 import { log } from '@logtail/next'
 import Link from 'next/link'
@@ -34,6 +34,8 @@ const posthog = new PostHog(process.env.POSTHOG_KEY!!,
 )
 
 export default async function Home () {
+  const isSammyBannerActive = await getSammyBannerStatus()
+
   const data = await getPrices()
   const todayPrices = data.today
   const { banxico } = todayPrices
@@ -47,7 +49,7 @@ export default async function Home () {
           </Section>
 
           {
-            await posthog.isFeatureEnabled('sammy_banner', 'ff') ? (
+            isSammyBannerActive ? (
               <Section
                 id="sammy"
                 title=""
@@ -104,6 +106,10 @@ export default async function Home () {
       </CalculatorResultProvider>
     </ApplicationProvider>
   )
+}
+
+async function getSammyBannerStatus (){
+  return await posthog.isFeatureEnabled('sammy_banner', 'ff')
 }
 
 async function getPrices (): Promise<Data> {
