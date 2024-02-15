@@ -1,3 +1,4 @@
+export const dynamic = 'force-static'
 export const revalidate = 5
 
 import { log } from '@logtail/next'
