@@ -8,6 +8,8 @@ const posthog = new PostHog(process.env.POSTHOG_KEY!!,
   }
 )
 
+export const dynamic = 'force-dynamic'
+
 export async function GET () {
   return new Response(
     JSON.stringify({ sammy: await posthog.isFeatureEnabled('sammy_banner', 'ff') }),

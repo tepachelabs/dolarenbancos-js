@@ -26,7 +26,7 @@ interface Data {
 }
 
 interface FeatureFlagStatus {
-  sammy: boolean;
+  sammy?: boolean;
 }
 
 export default async function Home () {
@@ -106,13 +106,22 @@ export default async function Home () {
 
 async function getFeatureFlagsStatus (): Promise<FeatureFlagStatus>{
   try {
-    const ff = await fetch(`${ getBaseUrl() }/api/ff`)
+    // takes data from cache if available
+    const commonFetchProps = { next: { revalidate: 10 } }
+
+    const ff = await fetch(`${ getBaseUrl() }/api/ff`, commonFetchProps)
+
+    if (!ff.ok) {
+      throw new Error('Could not fetch ffs 1')
+    }
 
     return ff.json()
   } catch (error) {
     // @ts-ignore
     log.error(error)
-    throw new Error('Could not fetch sammy ff')
+    return {
+      sammy: false,
+    }
   }
 }
 
